@@ -1,0 +1,168 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2023-09-13 17:15:49
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2023-09-14 14:22:25
+ * @Description: https://www.jianshu.com/p/931c0f20cdf9
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>deviceorientation</title>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .garden {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        border: 5px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+
+      .ball {
+        position: absolute;
+        top: 90px;
+        left: 90px;
+        width: 20px;
+        height: 20px;
+        background: green;
+        border-radius: 100%;
+      }
+      .permissionBtn {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="request"></div>
+    <div class="garden">
+      <div class="ball"></div>
+    </div>
+
+    <pre class="output"></pre>
+    <div id="tip"></div>
+  </body>
+  <script>
+    const vConsole = new window.VConsole();
+    const requestBtn = document.getElementById("request");
+    const ball = document.querySelector(".ball");
+    const garden = document.querySelector(".garden");
+    const output = document.querySelector(".output");
+    const parentWidth = garden.clientWidth;
+    const parentHeight = garden.clientHeight;
+    const maxX = parentWidth - ball.clientWidth;
+    const maxY = parentHeight - ball.clientHeight;
+
+    const tip = document.getElementById("tip");
+    console.log(11, maxX, maxY, garden);
+    // 首次进入IOS 13.3+需要授权
+    if (typeof DeviceMotionEvent !== "undefined") {
+      console.log("DeviceMotionEvent is not defined");
+      request.innerHTML =
+        "<button class='permissionBtn'>点击DeviceMotionEvent授权</button>";
+    } else {
+      window.addEventListener("deviceorientation", handleOrientation); // 这个事件主要是监听并接收设备方向变化信息
+    }
+
+    // 按钮授权
+    const handlePermission = () => {
+      console.log("handlePermission");
+      if (
+        typeof DeviceMotionEvent !== "undefined" &&
+        typeof DeviceMotionEvent.requestPermission === "function"
+      ) {
+        // (optional) Do something before API request prompt.
+        DeviceMotionEvent.requestPermission()
+          .then((response) => {
+            console.log(response);
+            // (optional) Do something after API prompt dismissed.
+            if (response == "granted") {
+              window.addEventListener("devicemotion", (e) => {
+                window.addEventListener("deviceorientation", handleOrientation);
+              });
+            }
+          })
+          .catch(console.error);
+      } else {
+        console.log("handlePermission DeviceMotionEvent is not defined");
+      }
+    };
+    requestBtn.addEventListener("click", handlePermission);
+
+    // 方位变化
+    function handleOrientation(event) {
+      console.log(event);
+      let x = event.beta; // 表示设备在x轴上的旋转角度、它描述的是设备由前向后旋转的情况 [-180,180]
+      let y = event.gamma; // 表示设备在y轴上的旋转角度、它描述的是设备由左向右旋转的情况 [-90,90]
+      let z = event.alpha; // 表示设备沿 Z 轴旋转的角度 [ 0~360]
+
+      output.innerHTML = "beta : " + x + "\n";
+      output.innerHTML += "gamma: " + y + "\n";
+      output.innerHTML += "alpha: " + z + "\n";
+
+      // Because we don't want to have the device upside down
+      // We constrain the x value to the range [-90,90]
+      if (x > 90) {
+        x = 90;
+      }
+      if (x < x - 90) {
+        x = -90;
+      }
+
+      // To make computation easier we shift the range of
+      // x and y to [0,180]
+      x += 90;
+      y += 90;
+      console.log(99, x, y);
+      // 10 is half the size of the ball
+      // It center the positioning point to the center of the ball
+      ball.style.top = (maxX * x) / (parentWidth - 50) - 10 + "px";
+      ball.style.left = (maxY * y) / (parentHeight - 50) - 10 + "px";
+    }
+
+    // 重力感应
+    // const handleMotion = (event) => {
+    //   console.log("handleMotion", event);
+    // };
+    // window.addEventListener("devicemotion", handleMotion); // 这个事件主要是用来监听设备在位置和方向上的加速度变化信息
+
+    // function loadMotion() {
+    //   const o = new Orienter();
+
+    //   o.onOrient = function (obj) {
+    //     console.log(99, maxX);
+    //     ball.style.top = (maxX * obj.b) / (parentWidth - 50) - 10 + "px";
+    //     ball.style.left = (maxY * obj.g) / (parentHeight - 50) - 10 + "px";
+    //     tip.innerHTML =
+    //       "beta:" +
+    //       obj.b +
+    //       "<br>" +
+    //       "gamma:" +
+    //       obj.g +
+    //       "<br>" +
+    //       "alpha:" +
+    //       obj.a +
+    //       "<br>" +
+    //       "longitude:" +
+    //       obj.lon +
+    //       "<br>" +
+    //       "latitude:" +
+    //       obj.lat +
+    //       "<br>" +
+    //       "direction:" +
+    //       obj.dir;
+    //   };
+    //   o.on();
+    // }
+  </script>
+</html>
