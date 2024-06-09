@@ -1,0 +1,16 @@
+{
+  "name": "4koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello-koa.js",
+  "dependencies": {
+    "koa": "^2.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

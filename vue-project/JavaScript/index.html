@@ -1,0 +1,28 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-08-05 16:13:51
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-05-22 07:54:47
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    const str = "A";
+    const code = str.charCodeAt();
+    const codeStr = String.fromCharCode(code);
+    console.log(code, codeStr);
+
+    const str1 = "17621481287";
+    const encodedData = encodeURIComponent(btoa(str1)); // 编码字符串
+    const decodedData = atob(decodeURIComponent(encodedData)); // 解码字符串
+    console.log(encodedData);
+    console.log(decodedData);
+  </script>
+</html>

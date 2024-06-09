@@ -1,0 +1,15 @@
+{
+  "name": "1rpc",
+  "version": "1.0.0",
+  "description": "<!--  * @Author: TerryMin  * @Date: 2022-05-19 16:19:10  * @LastEditors: TerryMin  * @LastEditTime: 2022-05-19 16:21:10  * @Description: file not -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "net": "^1.0.2"
+  }
+}

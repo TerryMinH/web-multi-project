@@ -1,0 +1,56 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-10-01 11:16:53
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2022-10-01 11:46:42
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue 设计与实现</title>
+  </head>
+  <body>
+    <div>操作按钮: <button id="runtimeBtn">运行时 按钮</button></div>
+    <div id="div">Vue Hello!</div>
+  </body>
+  <script>
+    const divEle = document.getElementById("div");
+    const runtimeBtnEle = document.getElementById("runtimeBtn");
+    function Render(obj, root) {
+      const el = document.createElement(obj.tag);
+      if (typeof obj.children === "string") {
+        const text = document.createTextNode(obj.children);
+        el.appendChild(text);
+      } else {
+        obj.children.forEach((child) => Render(child, root));
+      }
+      root.appendChild(el);
+    }
+
+    const obj = {
+      tag: "div",
+      children: [
+        { tag: "div", children: "hello world" },
+        { tag: "div", children: "hello create div" },
+      ],
+    };
+
+    /**
+     * 运行时:纯JS操作运行生成HTML
+     * 
+     * 纯编译:把HTML标签和用户输入的内容 完全通过JS创建一一对应的标签，直接插入渲染到页面。
+     * 
+     * 运行时+编译时:指把HTML template模板 转译成对应的 JS对象格式的树状结构 然后通过Render函数渲染到页面
+     * 
+     * **/ 
+    runtimeBtnEle.addEventListener("click", () => {
+      Render(obj, divEle);
+    });
+
+
+  </script>
+</html>

@@ -1,0 +1,87 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2023-02-16 14:02:59
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2023-02-16 14:26:15
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水波纹</title>
+    <style>
+      .w {
+        position: absolute;
+        top: calc((100% - 50px) / 2);
+        left: calc((100% - 50px) / 2);
+        width: 50px;
+        height: 50px;
+        border-radius: 500px;
+        background: url("http://consumer-img.huawei.com/content/dam/huawei-cbg-site/greate-china/cn/mkt/homepage/section4/home-s4-watch2-pro-banner.jpg")
+          fixed center center;
+      }
+      .w0 {
+        z-index: 2;
+        background-size: auto 106%;
+        animation: w 1s forwards;
+      }
+      .w1 {
+        z-index: 3;
+        background-size: auto 102%;
+        animation: w 1s 0.2s forwards;
+      }
+      .w2 {
+        z-index: 4;
+        background-size: auto 104%;
+        animation: w 1s 0.4s forwards;
+      }
+
+      
+      .w3 {
+        z-index: 5;
+        background-size: auto 101%;
+        animation: w 1s 0.5s forwards;
+      }
+    
+      .w4 {
+        z-index: 6;
+        background-size: auto 102%;
+        animation: w 1s 0.8s forwards;
+      }
+
+      .w5 {
+        z-index: 7;
+        background-size: auto 100%;
+        animation: w 1s 1s forwards;
+      }
+     
+      @keyframes w {
+        0% {
+          top: calc((100% - 50px) / 2);
+          left: calc((100% - 50px) / 2);
+          width: 50px;
+          height: 50px;
+        }
+
+        100% {
+          top: calc((100% - 500px) / 2);
+          left: calc((100% - 500px) / 2);
+          width: 500px;
+          height: 500px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w w5"></div>
+    <div class="w w4"></div>
+    <div class="w w3"></div>
+    <div class="w w2"></div>
+    <div class="w w1"></div>
+    <div class="w w0"></div>
+  </body>
+  <script></script>
+</html>

@@ -1,0 +1,69 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-09-10 14:02:25
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2022-09-15 18:02:22
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM 操作</title>
+    <style>
+      .img {
+        width: 200px;
+        height: 100px;
+        transition: transform 0.3s;
+      }
+
+      .img:hover {
+        transform: scale(2) rotate(0deg);
+      }
+      .animations {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: relative;
+        animation: mymove 5s normal;
+      }
+      @keyframes mymove {
+        from {
+          left: 0px;
+        }
+        to {
+          left: 200px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="animations"></div>
+    <div>
+      <img
+        src="https://pic2.zhimg.com/v2-c03cf61d33fcc18ba334c4041c0be557_250x0.jpg?source=172ae18b"
+        alt=""
+        class="img"
+      />
+    </div>
+    <div id="div1">
+      <p id="x1">JavaScript</p>
+      <p>HTML</p>
+    </div>
+    <button onclick="myFunction()">点我</button>
+  </body>
+  <script>
+    const demoEle = document.getElementById("div1");
+    const childEle = document.getElementById("x1");
+    const newNode = document.createElement("p");
+
+    newNode.innerHTML = "this is new html";
+
+    function myFunction() {
+      demoEle.insertBefore(newNode, childEle);
+    }
+  </script>
+</html>

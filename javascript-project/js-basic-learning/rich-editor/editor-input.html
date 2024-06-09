@@ -1,0 +1,128 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-09-02 13:40:10
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2022-09-07 09:51:15
+ * @Description: http://tcatche.site/2018/01/broswer_common_form_event
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>富文本示例</title>
+    <style>
+      .container {
+        width: 80vw;
+        height: 50vh;
+        resize: none;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tool-bar">
+      <button onclick="backFn()">撤销</button>
+      <button onclick="redoFn()">重做</button>
+      <input type="file" accept="image/*" id="inputFile" />
+      <img src="" alt="" id="imgUpload" />
+      <!-- <button onclick="uploadImage()">图片上传</button> -->
+    </div>
+    <!-- <div class="container" contenteditable id="input"></div> -->
+    <textarea class="container" type="text" id="input"></textarea>
+  </body>
+  <script>
+    let count = 0; // 输入元素内容次数
+    let inputEle = window.document.getElementById("input"); // 展示容器
+    let fileEle = window.document.getElementById("inputFile"); // 文件元素
+    let str = []; // 存储内容容器
+    let redoStr = [];
+    let isNotChineseFirst = true; // 标识一次输入是否第一次回撤
+    let isHasChinese = false; // 是否有汉字录入
+
+    // 处理汉字完整输入问题
+    function inputListener(ele, callback) {
+      let inputing = false;
+      ele.addEventListener("compositionstart", function (e) {
+        inputing = true;
+        isHasChinese = true; // 有汉字录入
+      });
+      ele.addEventListener("compositionend", function (e) {
+        inputing = false;
+        callback(e);
+      });
+      ele.addEventListener("input", function (e) {
+        if (inputing) return;
+        count++;
+        callback(e);
+      });
+    }
+
+    inputListener(inputEle, function (e) {
+      str.push(e.target.value);
+      redoStr = str;
+      console.log(count, str);
+    });
+
+    // 撤销
+    function backFn() {
+      console.log(count, str);
+      // 没有汉字录入 撤销取数组倒数第二项
+      if (!isHasChinese && isNotChineseFirst && count !== 0) {
+        count--;
+        isNotChineseFirst = false;
+      }
+
+      if (count === 0) {
+        // 重置
+        inputEle.value = "";
+        str = [];
+        isNotChineseFirst = true;
+        isHasChinese = false;
+        return;
+      }
+      count--;
+      inputEle.value = str[count];
+    }
+
+    // 重做
+    function redoFn() {
+      console.log(redoStr, count);
+      if (!!redoStr) {
+        if (count < redoStr.length) {
+          inputEle.value = redoStr[count];
+          str = redoStr;
+          count++;
+        }
+      }
+    }
+
+    fileEle.addEventListener("change", (e) => {
+      console.log(e);
+      console.log(e.target.files);
+      const file = e.target.files[0];
+      if (file) {
+        // 方法一
+        const imgSrc = URL.createObjectURL(file);
+        document.getElementById("imgUpload").src = imgSrc;
+        const img = document.createElement("IMG");
+        img.src = imgSrc;
+        inputEle.appendChild(img);
+
+        // 方法二
+        // const reader = new FileReader();
+        // reader.readAsDataURL(file);
+        // reader.addEventListener(
+        //   "load",
+        //   () => {
+        //     const imgTag = `<img src=${reader.result} alt="展示图片">`;
+        //     inputEle.appendChild(imgTag);
+        //     // document.getElementById("imgUpload").src = reader.result;
+        //   },
+        //   false
+        // );
+      }
+    });
+  </script>
+</html>

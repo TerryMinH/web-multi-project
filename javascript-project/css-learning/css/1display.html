@@ -1,0 +1,52 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2021-03-12 14:46:49
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2023-01-10 14:00:13
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+      }
+
+      .div {
+        border: 1px solid red;
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>Image to Use</p>
+    <img
+      src="https://img.cmvideo.cn/publish/noms/2022/12/26/1O405POVUQT1F.jpg"
+      alt="The Scream"
+      id="scream"
+      width="750px"
+      height="640px"
+    />
+
+    <canvas
+      id="myCanvas"
+      width="800"
+      height="700"
+      style="border: 1px solid #d3d3d3"
+    ></canvas>
+  </body>
+  <script>
+    const myCanvas = document.getElementById("myCanvas");
+    const ctx = myCanvas.getContext("2d");
+    const img = document.getElementById("scream");
+    img.onload = function () {
+      ctx.drawImage(img, 10, 10);
+    };
+  </script>
+</html>

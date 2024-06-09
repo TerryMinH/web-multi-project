@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>实现多个标题的吸顶</title>
+    <style type="text/css">
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      ul {
+        width: 100%;
+      }
+      li {
+        height: 100px;
+        line-height: 100px;
+        font-size: 18px;
+        width: 100%;
+        color: white;
+        margin: 10px;
+        list-style: none;
+        border-radius: 5px;
+        border: 1px solid #191970;
+        background: #4169e1;
+        text-align: center;
+      }
+      div {
+        width: 100%;
+        height: 30px;
+        color: white;
+        padding-left: 20px;
+        background: #dc143c;
+      }
+      .box {
+        height: 80px;
+        line-height: 80px;
+        font-size: 40px;
+        text-align: center;
+      }
+      .box1 {
+        position: fixed;
+        top: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button>按钮</button>
+    <ul id="container">
+      <h1>实现多个标题的吸顶</h1>
+      <section>
+        <div class="box">header1</div>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </section>
+
+      <!--设置多个如header1的子列表，窗口可以进行滚动，此处省略-->
+      <section>
+        <div class="box">header2</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+      <section>
+        <div class="box">header3</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+      <section>
+        <div class="box">header4</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+      <section>
+        <div class="box">header5</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+      <section>
+        <div class="box">header6</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+      <section>
+        <div class="box">header7</div>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </section>
+    </ul>
+  </body>
+
+  <script type="text/javascript">
+    const arr1 = [1, 2];
+    const arr2 = [11, 22];
+    const arr3 = [3, 4];
+    const months = ["Jan", "Mar", "Apr", "May"];
+
+    // 在索引 1 处添加一个元素
+    const months2 = months.toSpliced(1, 0, "Feb");
+    console.log(months2);
+    console.log(months);
+
+    // 创建一个8-byte的ArrayBuffer
+    var b = new ArrayBuffer(8);
+    console.log(b);
+    // 创建一个b的引用，类型是Int32，起始位置在0，结束位置为缓冲区尾部
+    var v1 = new Int32Array(b);
+    console.log(v1);
+    // 创建一个b的引用，类型是Uint8，起始位置在2，结束位置为缓冲区尾部
+    var v2 = new Uint8Array(b, 2);
+    console.log(v2);
+    // 创建一个b的引用，类型是Int16，起始位置在2，总长度为2
+    var v3 = new Int16Array(b, 2, 2);
+    console.log(v3);
+    // 数组去重 
+  </script>
+</html>

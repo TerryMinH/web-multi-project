@@ -1,0 +1,89 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-10-15 07:34:20
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2023-03-26 10:46:53
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.3设计一个完善的响应式系统 对象每个属性触发一一对应</title>
+  </head>
+  <body>
+    <button onclick="setFn()">设置数据值</button>
+    <div id="div"></div>
+  </body>
+  <script>
+    const divEle = document.getElementById("div");
+
+    let activeEffect;
+    const effect = (fn) => {
+      activeEffect = fn;
+      fn();
+    };
+
+    // 存储副作用函数的桶
+    const bucket = new WeakMap(); // 收集每个对象下面每个属性对应的数组依赖
+
+    // 原始数据
+    const data = { text: "hello world", name: "zhangsan" };
+
+    // 追踪器
+    const track = (target, key) => {
+      if (!activeEffect) return;
+      let depsMap = bucket.get(target);
+      if (!depsMap) {
+        bucket.set(target, (depsMap = new Map()));
+      }
+      let deps = depsMap.get(key);
+      if (!deps) {
+        depsMap.set(key, (deps = new Set()));
+      }
+      deps.add(activeEffect);
+    };
+
+    // 触发器
+    const trigger = (target, key) => {
+      const depsMap = bucket.get(target);
+      if (!depsMap) return;
+      const effects = depsMap.get(key);
+      effects && effects.forEach((fn) => fn());
+    };
+
+    const obj = new Proxy(data, {
+      get(target, key) {
+        track(target, key);
+        return target[key];
+      },
+      set(target, key, newValue) {
+        target[key] = newValue;
+        trigger(target, key);
+      },
+    });
+
+    effect(() => {
+      console.log("effect run");
+      divEle.innerText = obj.text;
+    });
+
+    const setFn = () => {
+      obj.text = "Hello Vue3";
+
+      setTimeout(() => {
+        obj.notExist = "hello vue3";
+      }, 2000);
+    };
+
+    const setFn2 = () => {
+      obj.text = "Hello Vue3";
+
+      setTimeout(() => {
+        obj.notExist = "hello vue3";
+      }, 2000);
+    };
+  </script>
+</html>

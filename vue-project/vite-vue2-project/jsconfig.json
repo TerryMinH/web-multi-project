@@ -1,0 +1,16 @@
+/*
+ * @Author: TerryMin
+ * @Date: 2023-02-16 11:25:59
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2023-02-16 11:27:24
+ * @Description: file not
+ */
+{
+  "compilerOptions": {
+    "baseUrl": "./", // 解析非相对模块的基础地址，默认是当前目录
+    "paths": {
+      // 路径映射，相对于baseUrl
+      "@/*": ["src/*"]
+    }
+  }
+}

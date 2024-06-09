@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": ["plugin:vue-libs/recommended"],
+  "globals": {
+    "__DEV__": true,
+    "__VUE_PROD_DEVTOOLS__": true
+  },
+  "rules": {
+    "indent": ["off", "tab"],
+    "quotes": ["off", "double"],
+    "semi": ["off", "always"],
+    "comma-dangle": ["off", "only-multiline"],
+    "space-before-function-paren": ["off", "never"]
+  }
+}

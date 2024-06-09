@@ -1,0 +1,76 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2020-02-24 08:50:17
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2022-09-30 09:31:14
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>函数节流模式</title>
+  </head>
+
+  <body>
+    函数防抖： <input type="text" id="inputId" />
+  </body>
+
+  <script>
+    let elem = document.getElementById("inputId");
+
+    //  防抖函数: 在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时
+    /**
+     * @func: func
+     * @descripition: 示例 let DebounceFn = debounce(() => {console.log('debounce')});
+     * @param {*} fn
+     * @param {*} delay
+     */    
+    const debounce = (fn, delay = 1 * 1000) => {
+      let timer;
+      return (...args) => {
+        console.log('debounce');
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, args);
+        }, delay);
+      };
+    };
+
+    let DebounceFn = debounce((e, content) => {
+      console.log(e.target.value, content);
+    });
+
+    elem.addEventListener("keyup", function (e) {
+      DebounceFn(e, "debounce");
+    });
+
+    // 节流函数: 规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。
+    // const throttle =  (fn, delay = 1 * 1000)=> {
+    //   console.log(this, delay);
+    //   let timer;
+    //   return (...args) => {
+    //     console.log(89);
+    //     if (timer) {
+    //       return;
+    //     }
+    //     timer = setTimeout(() => {
+    //       fn.apply(this, args);
+    //       timer = null;
+    //     }, delay);
+    //   };
+    // };
+
+    // let testThrottleFn = throttle((e, content) => {
+    //   console.log(e, content);
+    // }); // 节流函数
+
+    // document.onmousemove = function (e) {
+    //   testThrottleFn(e, "throttle");
+    // };
+  </script>
+</html>

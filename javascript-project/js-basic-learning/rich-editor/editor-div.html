@@ -1,0 +1,215 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-09-02 13:40:10
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2022-09-08 15:15:23
+ * @Description: https://blog.csdn.net/weixin_40629244/article/details/104642683
+-->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      #edit {
+        height: 500px;
+        width: 500px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="edit" contenteditable></div>
+    <input type="text" id="emojiInput" />
+    <button id="sendEmoji">发送表情</button>
+    <button id="rangeBtn">Range按钮</button>
+    <div>
+      <strong>211</strong><strong>44</strong><strong>21551</strong>
+    </div>
+  </body>
+  <script>
+    var sendEmoji = document.getElementById("sendEmoji");
+    // 获取编辑框对象
+    var edit = document.getElementById("edit");
+    // 获取输入框对象
+    var emojiInput = document.getElementById("emojiInput");
+
+    var rangeBtn = document.getElementById("rangeBtn");
+    // 定义最后光标对象
+    var lastEditRange;
+    // 获取选定对象
+    var selection = getSelection();
+
+    // 编辑框点击事件
+    document.getElementById("edit").onclick = function () {
+      // 设置最后光标对象
+      lastEditRange = selection.getRangeAt(0);
+    };
+
+    // 编辑框按键弹起事件
+    document.getElementById("edit").onkeyup = function () {
+      // console.log(selection);
+      // 设置最后光标对象
+      lastEditRange = selection.getRangeAt(0);
+    };
+
+    rangeBtn.onclick = function () {
+      console.log(selection.toString());
+      console.log(selection);
+      // console.log(selection.getRangeAt(0));
+      /* 在一个 HTML 文档中选中所有加粗的文本。 */
+
+      var strongs = document.getElementsByTagName("strong");
+      console.log(strongs);
+      var s = window.getSelection();
+      console.log(s.rangeCount);
+      if (s.rangeCount > 0) s.removeAllRanges();
+
+      for (var i = 0; i < strongs.length; i++) {
+        var range = document.createRange();
+        range.selectNode(strongs[i]);
+        console.log(strongs[i],range);
+        s.addRange(range);
+      }
+    };
+
+    // 表情点击事件
+    document.getElementById("sendEmoji").onclick = function () {
+      // 编辑框设置焦点
+      edit.focus();
+      // 判断是否有最后光标对象存在
+      if (lastEditRange) {
+        // 存在最后光标对象，选定对象清除所有光标并添加最后光标还原之前的状态
+        selection.removeAllRanges();
+        selection.addRange(lastEditRange);
+      }
+      console.log("sendEmoji", lastEditRange, selection);
+      // 判断选定对象范围是编辑框还是文本节点
+      if (selection.anchorNode.nodeName != "#text") {
+        console.log(99);
+        // 如果是编辑框范围。则创建表情文本节点进行插入
+        var emojiText = document.createTextNode(emojiInput.value);
+        console.log(edit.childNodes);
+        if (edit.childNodes.length > 0) {
+          // 如果文本框的子元素大于0，则表示有其他元素，则按照位置插入表情节点
+          for (var i = 0; i < edit.childNodes.length; i++) {
+            if (i == selection.anchorOffset) {
+              edit.insertBefore(emojiText, edit.childNodes[i]);
+            }
+          }
+        } else {
+          // 否则直接插入一个表情元素
+          edit.appendChild(emojiText);
+        }
+
+        // 创建新的光标对象
+        var range = document.createRange();
+
+        // 光标对象的范围界定为新建的表情节点
+        range.selectNodeContents(emojiText);
+        // 光标位置定位在表情节点的最大长度
+        range.setStart(emojiText, emojiText.length);
+        // 使光标开始和光标结束重叠
+        range.collapse(true);
+        // // 清除选定对象的所有光标对象
+        selection.removeAllRanges();
+        // // 插入新的光标对象
+        selection.addRange(range);
+      } else {
+        // 如果是文本节点则先获取光标对象
+        var range = selection.getRangeAt(0);
+        // 获取光标对象的范围界定对象，一般就是textNode对象
+        var textNode = range.startContainer;
+        // 获取光标位置
+        var rangeStartOffset = range.startOffset;
+        console.log(rangeStartOffset, emojiInput.value);
+        // 文本节点在光标位置处插入新的表情内容
+        textNode.insertData(rangeStartOffset, emojiInput.value);
+        // 光标移动到到原来的位置加上新内容的长度
+        range.setStart(textNode, rangeStartOffset + emojiInput.value.length);
+
+        // 光标开始和光标结束重叠
+        range.collapse(true);
+        // // 清除选定对象的所有光标对象
+        selection.removeAllRanges();
+        // // 插入新的光标对象
+        selection.addRange(range);
+      }
+      // 无论如何都要记录最后光标对象
+      lastEditRange = selection.getRangeAt(0);
+    };
+  </script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>在可编辑div中定位和设置光标</title>
+    <style>
+      #editor {
+        height: 500px;
+        width: 500px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="editor" contenteditable></div>
+    <input type="text" id="htmlInput" />
+    <button id="insertHtml">插入HTML元素</button>
+  </body>
+  <script>
+    var editor = document.getElementById("editor");
+    var selection = window.getSelection();
+    let startOffset = 0;
+    editor.addEventListener("input", (e) => {
+      console.log(e.target.innerText);
+      console.log(e.target);
+      const eleRange = selection.getRangeAt(0);
+      startOffset = eleRange.startOffset;
+      console.log(startOffset);
+    });
+
+    document.getElementById("insertHtml").onclick = function () {
+      var html = document.getElementById("htmlInput").value;
+      editor.focus();
+      console.log(window.getSelection);
+
+      if (window.getSelection) {
+        console.log(selection.getRangeAt(0));
+        if (selection.getRangeAt && selection.rangeCount) {
+          var range = selection.getRangeAt(0);
+          console.log(range);
+          range.deleteContents();
+          var element = document.createElement("div");
+          element.innerHTML = html;
+
+          var node;
+          var lastNode;
+          var fragment = document.createDocumentFragment();
+          while ((node = element.firstChild)) {
+            lastNode = fragment.appendChild(node);
+          }
+
+          range.insertNode(fragment);
+          console.log(lastNode);
+          if (lastNode) {
+            range = range.cloneRange();
+            console.log(range,startOffset);
+            range.setStartAfter(lastNode);
+            range.collapse(false);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          }
+        }
+      } else if (document.selection && document.selection.type != "Control") {
+        editor.focus();
+        var range = document.selection.createRange();
+        range.pasteHTML(html);
+        editor.focus();
+      }
+    };
+  </script>
+</html>

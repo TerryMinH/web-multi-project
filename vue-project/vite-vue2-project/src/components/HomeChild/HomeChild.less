@@ -1,0 +1,29 @@
+.app-content{
+	margin-bottom:25px;
+	border:1px solid #999;
+}
+.demo-1 {
+  display: flex;
+  align-items: flex-start;
+}
+
+@width: 400px;
+@height: 200px;
+@color: #999;
+
+.content-test {
+  width: @width;
+  height: @height;
+  background-color: @color;
+}
+.common-content(@width,@height,@color) {
+  width: @width;
+  height: @height;
+  background-color: @color;
+}
+.width-test {
+  .common-content(100px, 100px, #666);
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+}

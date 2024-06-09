@@ -1,0 +1,119 @@
+{
+  "cfg": [{
+          "host": ["static.miguvideo.com", "local.miguvideo.com"],
+          "root": "/Users/terrymin/Desktop/mg-project/migustatic",
+          "reg": "v_[0-9]{14}(_[0-9a-z]{6})*/"
+      }
+  ],
+  "proxy": [
+      {
+          "target": "http://webupload.miguvideo.com/gateway",
+          "path": "/gatewaySlow"
+      },
+      {
+           "target": "http://webapi.miguvideo.com/gateway",
+          "path": "/api"
+      },
+      {
+          "target": "http://36.155.98.104/vms-worldcup/v2/program/match-list",
+          "path": "/gateway/vms-worldcup/v2/program/match-list"
+      },
+      {
+          "target": "http://36.155.98.104/vms-worldcup/match/balltypedata",
+          "path": "/gateway/vms-worldcup/match/balltypedata"
+      },
+      {
+          "target": "https://jadeite.migu.cn/search/v3/open-search/",
+          "path": "/search/v3/open-search/"
+      },
+      {
+          "target": "http://v.miguvideo.com",
+          "path": "/6666666"
+      },
+      {
+          "target": "https://webapi.miguvideo.com/gateway",
+          "path": "/gateway"
+      },
+      {
+          "target": "https://webapi.miguvideo.com",
+          "path": "/ngx"
+      },
+      {
+          "target": "http://yk.miguvideo.com",
+          "path": "/video"
+      },
+      {
+          "target": "http://117.131.17.174:8083/gatewayTest",
+          "path": "/gatewayTest"
+      },
+      {
+          "target": "http://m.miguvideo.com/gateway",
+          "path": "/gateway"
+      },
+      {
+          "target": "http://m.miguvideo.com/mgs/player",
+          "path": "/mgs/player"
+      },
+      {
+          "target": "http://www.miguvideo.com/gateway",
+          "path": "/w"
+      },
+      {
+          "target": "http://m.miguvideo.com/mgs",
+          "path": "/mgs"
+      },
+      {
+          "target": "http://www.miguvideo.com/",
+          "path": "/www"
+      },
+      {
+          "target": "http://m.miguvideo.com/gateway",
+          "path": "/m"
+      },
+      {
+          "target": "http://117.131.17.174:8083/gatewayTest",
+          "path": "/test"
+      },
+      {
+          "target": "http://117.131.17.222:8089/userCenterLogin",
+          "path": "/new"
+      },
+      {
+          "target": "http://m.miguvideo.com/gateway",
+          "path": "/gatewayPre"
+      },
+      {
+          "target": "http://117.131.17.174:8083/gatewayTest",
+          "path": "/lg"
+      },
+      {
+          "target": "http://webapi.miguvideo.com",
+          "path": "/agent"
+      },
+      {
+          "target": "http://www.migucloud.com",
+          "path": "/wMiguCloud"
+      },
+      {
+          "target": "http://api.migucloud.com",
+          "path": "/miguCloud"
+      },
+      {
+          "target": "http://www.miguvideo.com",
+          "path": "/findByTips"
+      },
+      {
+          "target": "http://www.miguvideo.com/gateway",
+          "path": "/apis"
+      },
+      {
+          "target": "http://webapi.miguvideo.com/gk-management",
+          "path": "/gk-management"
+      },
+      {
+          "target": "https://www.miguvideo.com",
+          "path": "/ngvod2"
+      }
+  ]
+}
+

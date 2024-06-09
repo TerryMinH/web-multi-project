@@ -1,0 +1,44 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2023-02-02 09:54:11
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-01-05 11:01:00
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+      animation-name: test;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+    }
+    @keyframes test {
+      50% {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: skyblue;
+      }
+    }
+  </style>
+  <body>
+    <button onclick="operation('running')">开始</button>
+    <button onclick="operation('paused')">停止</button>
+    <div class="box"></div>
+
+    <script>
+      function operation(mode) {
+        document.querySelector("div").style.animationPlayState = mode;
+      }
+    </script>
+  </body>
+</html>
