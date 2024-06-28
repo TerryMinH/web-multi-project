@@ -1,0 +1,35 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-06-19 16:55:26
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-06-21 10:14:36
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>菜鸟教程(runoob.com)</title>
+    <script>
+      document.title = "源title";
+      function openWin() {
+        myWindow = window.open("", "", "width=200,height=100");
+        myWindow.document.write("<p>这是我的窗口</p>");
+        myWindow.focus();
+        myWindow.document.title = "新窗口";
+        console.log(myWindow.document.title);
+        console.log(myWindow.opener.document.title);
+        myWindow.opener.document.write("<p>这个是源窗口!</p>");
+      }
+      window.onpageshow=function(event){
+        console.log(event.persisted);
+      }
+      window.onload=function(event){
+        console.log(event);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="打开我的窗口" onclick="openWin()" />
+  </body>
+</html>
