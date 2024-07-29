@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2021-12-11 15:38:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-02-08 13:44:25
+ * @LastEditTime: 2024-07-29 14:49:54
  * @Description: file not
  */
 const { log } = require("console");
@@ -15,7 +15,7 @@ const moduleObj = require("./util-index");
 
 // 将目录解析成绝对路径
 const resolvePath = (dir) => {
-  console.log(__dirname);
+  console.log("resolvePath==>", __dirname);
   console.log(path.resolve(__dirname, dir));
 };
 // resolvePath('./indexjs');
@@ -25,7 +25,7 @@ const handlePathApi = () => {
   /**
    * https://www.jb51.net/article/179721.htm
    * **/
-  const _extname=path.extname('index.js'); // 从最后一个'.'到字符串的末尾。如果最后一个部分没有'.'，或者路径是以'.'开头，则返回空字符串
+  const _extname = path.extname("index.js"); // 从最后一个'.'到字符串的末尾。如果最后一个部分没有'.'，或者路径是以'.'开头，则返回空字符串
 
   const _basename = path.basename("index.js", ".js"); // 返回路径的最后一个部分，即文件名。参数ext为需要截掉的后缀内容
 
@@ -53,11 +53,14 @@ const handleFileRead = () => {
     console.log(err, data);
   });
 
+  console.log(bufSync);
+  console.log(dataSync);
   return {
     bufSync,
     dataSync,
   };
 };
+// handleFileRead();
 
 const handleFileWrite = () => {
   fs.writeFileSync("./dataBase/1.js", "const a='Hello world JavaScript!'");

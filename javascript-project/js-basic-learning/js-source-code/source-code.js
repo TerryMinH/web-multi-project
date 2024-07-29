@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-09-30 09:20:56
  * @LastEditors: TerryMin
- * @LastEditTime: 2022-09-30 11:16:58
+ * @LastEditTime: 2024-06-30 09:36:26
  * @Description: file not
  */
 
@@ -69,5 +69,6 @@ const sayHi = (age, sex) => {
 };
 // sayHi.newApply(person, [25, "男"]);
 
-
-
+const sayHello =  (age, sex)=> {
+  console.log(this.name, age, sex);
+};
