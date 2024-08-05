@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-05-31 09:09:32
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-07-29 14:31:42
+ * @LastEditTime: 2024-07-30 10:12:16
  * @Description: file not
 -->
 
@@ -10,7 +10,7 @@
 
 一 path 模块
 
-1. path: path 是 nodeJS 的一个内置模块，可以直接在其他 js 文件中导入改模块
+1. path: path 是 nodeJS 的一个内置模块，可以直接在其他 js 文件中导入该模块
 
 ```js
 var path = require("path");
