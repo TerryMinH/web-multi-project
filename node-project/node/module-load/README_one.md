@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-20 15:34:07
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-03 14:01:26
+ * @LastEditTime: 2024-08-20 13:54:36
  * @Description: file not
 -->
 
@@ -65,7 +65,7 @@ pkg.foo(); // 正常执行
 3.  CJS 与 ESM 不同点:(https://segmentfault.com/a/1190000043720379)
 
 - 加载方式：CommonJS 使用同步加载方式，即遇到 require 就执行代码，并等待结果返回后再继续执行；而 ESM 使用异步加载方式，它是通过 Promise 的方式异步加载模块，遇到 import 不会阻止程序继续执行。
-- CJS 输出是值的浅拷贝；ESM 输出的是值的引用，被输出模块的内部的改变会影响引用的改变。(https://zhuanlan.zhihu.com/p/33843378?group_id=947910338939686912)
+- CJS 输出是值的浅拷贝；ESM 输出的是值的引用，被输出模块的内部的改变会影响引用的改变。
 - CJS 中模块的执行需要用函数包起来，并指定一些常用的值,所以可以在 CJS 模块里直接用 **filename、**dirname。而 ESM 的标准中不包含这方面的实现,既无法使用这些变量。
 - CJS this 指向当前模块，ESM this 指向 undefined
 
@@ -91,3 +91,5 @@ pkg.foo(); // 正常执行
 - 默认情况下，浏览器同步加载 JavaScript 脚本，即渲染引擎遇到 < script>标签就会停下来，等到脚本执行完毕再继续向下渲染。如果是外部脚本，还必须加入脚本下载的时间。(如果脚本体积很大就会“卡死”)
 - < script>标签打开 defer 或 async 属性，脚本就会异步加载。defer 是“渲染完再执行”，async 是“下载完就执行”
 - 浏览器加载 ES6 模块时也使用< script>标签，但是要加入 type=”module”属性。对于带有 type=”module”的< script>，浏览器都是异步加载的，不会造成浏览器堵塞，即等到整个页面渲染完再执行模块脚本，等同于打开了< script>标签的 defer 属性。
+
+3. [不同模块演进关系](https://blog.csdn.net/cookcyq__/article/details/131497598)

@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "start": "node src/index.js"
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "exceljs": "^4.4.0",
+    "fs-extra": "^11.2.0"
   }
 }
