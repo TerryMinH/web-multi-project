@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-04-03 07:36:22
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-13 10:56:23
+ * @LastEditTime: 2024-08-27 11:42:29
  * @Description: file not
 -->
 
@@ -16,8 +16,9 @@
   重启 whistle： - w2 restart
   关闭 whistle： - w2 stop
 
-1. [whistle 搜索过滤抓包数据的方法](https://github.com/avwo/help/issues/13)
-2. Proxy SwitchyOmega:插件作用：如果我们有多个代理，可以通过这个插件进行快速切换。我理解和 switch 的功能差不多
+1. Proxy SwitchyOmega:插件作用：如果我们有多个代理，可以通过这个插件进行快速切换。我理解和 switch 的功能差不多
+2. [whistle 搜索过滤抓包数据的方法](https://github.com/avwo/help/issues/13)
+3. [使用whistle对 android 抓包配置](https://blog.csdn.net/weixin_43973415/article/details/130772449)
 
 ## Charles:
 
