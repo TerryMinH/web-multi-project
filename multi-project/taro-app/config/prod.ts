@@ -2,10 +2,11 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 23:15:30
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-05 23:21:15
+ * @LastEditTime: 2024-09-12 07:45:30
  * @Description: file not
  */
 import type { UserConfigExport } from "@tarojs/cli";
+
 export default {
   mini: {},
   h5: {
