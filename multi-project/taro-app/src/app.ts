@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 23:15:30
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-09-12 07:39:14
+ * @LastEditTime: 2024-09-13 09:25:11
  * @Description: file not
  */
 import { PropsWithChildren } from 'react'
@@ -12,8 +12,8 @@ import './app.less'
 function App({ children }: PropsWithChildren<any>) {
 
   useLaunch(() => {
-    console.log(children)
-    console.log(process.env.TARO_ENV);
+    // console.log(children)
+    // console.log(process.env.TARO_ENV);
   })
 
   // children 是将要会渲染的页面
