@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-20 15:34:07
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-09-14 10:02:35
+ * @LastEditTime: 2024-09-14 11:15:10
  * @Description: file not
 -->
 
@@ -104,3 +104,4 @@ pkg.foo(); // 正常执行
 ```js
 例如，一个使用 TypeScript 的项目可能会安装 @types 命名空间下的类型定义文件，这些文件用于提供 TypeScript 对特定模块的类型信息。
 ```
+- (node_module扁平化代码组织方式)[https://mp.weixin.qq.com/s/Oaq9JTSOHwO_sziNWESV1g]
