@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-20 15:34:07
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-20 13:54:36
+ * @LastEditTime: 2024-09-14 10:02:35
  * @Description: file not
 -->
 
@@ -93,3 +93,14 @@ pkg.foo(); // 正常执行
 - 浏览器加载 ES6 模块时也使用< script>标签，但是要加入 type=”module”属性。对于带有 type=”module”的< script>，浏览器都是异步加载的，不会造成浏览器堵塞，即等到整个页面渲染完再执行模块脚本，等同于打开了< script>标签的 defer 属性。
 
 3. [不同模块演进关系](https://blog.csdn.net/cookcyq__/article/details/131497598)
+
+## NPM
+
+[npm 包发布](https://www.kancloud.cn/outsider/clitool/313178)
+[npm 包管理机制](https://zhuanlan.zhihu.com/p/97737201)
+
+- 以 @ 开头的文件或文件夹在 Node.js 项目中通常用于表示命名空间或组织范围的模块，有助于组织、区分和管理不同的模块和项目变体。
+
+```js
+例如，一个使用 TypeScript 的项目可能会安装 @types 命名空间下的类型定义文件，这些文件用于提供 TypeScript 对特定模块的类型信息。
+```

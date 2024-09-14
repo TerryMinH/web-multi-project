@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-02-19 09:42:11
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-06-21 16:38:12
+ * @LastEditTime: 2024-09-13 16:53:55
  * @Description: file not
 -->
 <!DOCTYPE html>
@@ -33,37 +33,28 @@
     </div>
   </body>
   <script>
-    const mobile = "17621491297";
-    const encodedData = encodeURIComponent(window.btoa(mobile)); // 编码字符串
-    const decodedData = window.atob(decodeURIComponent(encodedData)); // 解码字符串
-    console.log(encodedData);
-    console.log(decodedData);
-
-    // 多维数据 => 一维数组
-    let arr = [
-      [0, 1],
-      [2, 3],
-      [4, [5, 6, 7]],
-      [8, [9, [10, 11]]],
-    ];
-    const newArr = (value) => {
-      return value.reduce(
-        (pre, current, index, arr) =>
-          pre.concat(Array.isArray(current) ? newArr(current) : current),
-        []
+    function MyClass() {
+      this.a = 1;
+    }
+    MyClass.prototype.b = 2;
+    const instance = new MyClass();
+    console.log(instance);
+    function isConstructorOrProto(obj, key) {
+      return (
+        (key === "constructor" && typeof obj[key] === "function") ||
+        key === "__proto__"
       );
-    };
-    console.log(newArr(arr));
-
-    const arr1 = [1, 2, 2, 3, 4, 5, 4];
-    const result = arr1.reduce((pre, curr, index, arr) => {
-      console.log(pre, curr, index);
-      if (!pre.includes(curr)) {
-        return pre.concat(curr);
-      }else{
-        return pre
+    }
+    function processObject(obj) {
+      for (const key in obj) {
+        console.log("key==>", key);
+        if (!isConstructorOrProto(obj, key)) {
+          // 处理非构造函数和非 __proto__ 属性
+          console.log(key, obj[key]);
+        }
       }
-    }, []);
-    console.log(result);
+    }
+
+    processObject(instance);
   </script>
 </html>

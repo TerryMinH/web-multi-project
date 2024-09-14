@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "echarts": "^5.5.1",
-    "exceljs": "^4.4.0",
-    "fs-extra": "^11.2.0"
+    "minimist": "^1.2.8"
   }
 }

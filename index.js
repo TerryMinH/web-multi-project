@@ -2,39 +2,25 @@
  * @Author: TerryMin
  * @Date: 2024-07-29 17:58:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-29 16:09:35
+ * @LastEditTime: 2024-09-13 17:37:36
  * @Description: file not
  */
 
-const callbackUrl = "http://36.155.98.130/mgyy/site/prd/index.html";
-const WHITE_RULES = [
-  /^https?:\/\/movie\.miguvideo\.com$/,
-  /^https?:\/\/36.155.98.130$/,
-  /^https?:\/\/36\.155\.98\.130\/mgyy\/.*$/,
-];
+function hasKey(obj, keys) {
+  var o = obj;
+  keys.slice(0, -1).forEach(function (key) {
+    o = o[key] || {};
+  });
+  console.log(o);
+  var key = keys[keys.length - 1];
+  return key in o;
+}
 
-const isLegal = WHITE_RULES.some((rule) => {
-  try {
-    const originName = new URL(callbackUrl).origin;
-    return rule.test(originName);
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-});
-// console.log('isLegal==>',isLegal);
+const obj1 = {
+  name: `terry`,
+  age: 18,
+  address: `beijing`,
+};
+const arr1 = ["name", "age", "address"];
 
-const str = "aabbcc";
-const result = str.replace(/aa/g, "DD");
-// console.log(result);
-
-const paths = [
-  "\\/mgs\\/msite|website",
-  "\\/m\\/home",
-  "\\/m\\/detail",
-  "\\/m\\/liveDetail",
-  "\\/m\\/vertical",
-  "\\/p\\/",
-];
-const reg = new RegExp(paths.join("|"));
-console.log(reg);
+console.log(hasKey(obj1, arr1));
