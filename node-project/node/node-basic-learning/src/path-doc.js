@@ -2,8 +2,8 @@
  * @Author: TerryMin
  * @Date: 2021-12-11 15:38:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-07-29 14:49:54
- * @Description: file not
+ * @LastEditTime: 2024-09-18 09:56:43
+ * @Description: fs path模块
  */
 const { log } = require("console");
 const fs = require("fs");
