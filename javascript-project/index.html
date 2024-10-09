@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-02-19 09:42:11
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-09-13 16:53:55
+ * @LastEditTime: 2024-09-22 10:06:07
  * @Description: file not
 -->
 <!DOCTYPE html>
@@ -26,13 +26,22 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container" onclick="handle()">
       <div class="div">11</div>
       <div class="div">22</div>
       <div class="div">33</div>
     </div>
   </body>
   <script>
+    const interval = setInterval(() => {
+      console.log(111);
+    },1000);
+    
+    function handle() {
+      console.log(2);
+      clearInterval(interval);
+    }
+
     function MyClass() {
       this.a = 1;
     }
