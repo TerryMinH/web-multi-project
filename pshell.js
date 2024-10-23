@@ -3,13 +3,13 @@
  * @Author: TerryMin
  * @Date: 2024-06-09 10:45:57
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-06-17 17:46:57
+ * @LastEditTime: 2024-10-23 13:57:39
  * @Description: file not
  */
 'use strict';
 
-var name = process.argv[2] || 'Auto-commit';
-var mark = process.argv[3] || 'Vue';
+var name = process.argv[2] || 'default commit';
+var mark = process.argv[3] || 'default add';
 var shell = require("shelljs/global");
 
 if (!which('git')) {
