@@ -8,4 +8,3 @@
 const a = null;
 const b = 0;
 const result = a?? b;
-console.log(result); // 输出 10
