@@ -1,30 +1,87 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-10-23 13:44:16
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-12-25 19:50:26
+ * @Description: file not
+-->
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .barrage-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    .container {
-      width: 100%;
-    }
+      .barrage {
+        width: 150px;
+        height: 30px;
+        background-color: lightblue;
+        text-align: center;
+        cursor: pointer;
+      }
 
-    .left {
-      float: left;
-      width: 100px;
-      height: 30px;
-      border: 1px solid black;
-    }
-  </style>
-</head>
+      .popup-layer {
+        width: 200px;
+        height: 100px;
+        background-color: white;
+        border: 1px solid gray;
+        position: absolute;
+        display: none;
+        z-index: 1; /* 确保悬浮层在其他元素之上 */
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="container">
-    <div class="left"></div>
-    ewrqwqwqwq
-  </div>
-</body>
+  <body>
+    <div class="barrage-container">
+      <div class="barrage" data-info="这是弹幕1的详细信息">弹幕1</div>
+      <div class="barrage" data-info="这是弹幕2的详细信息">弹幕2</div>
+      <div class="barrage" data-info="这是弹幕3的详细信息">弹幕3</div>
+      <!-- 可以添加更多弹幕元素 -->
+    </div>
+    <div class="popup-layer"></div> <!-- 悬浮层元素 -->
+  </body>
+  <script>
+    // 获取所有弹幕元素
+    const barrages = document.querySelectorAll(".barrage");
+    // 获取悬浮层元素
+    const popupLayer = document.querySelector(".popup-layer");
 
+    barrages.forEach((barrage) => {
+      barrage.addEventListener("mouseenter", function (event) {
+        // 先隐藏所有可能显示的悬浮层（避免重叠）
+        popupLayer.style.display = "none";
+        // 显示悬浮层
+        popupLayer.style.display = "block";
+        // 获取弹幕元素的位置信息
+        const rect = barrage.getBoundingClientRect();
+        // 设置悬浮层的位置，使其出现在弹幕元素旁边（这里示例为出现在右侧）
+        popupLayer.style.left = rect.right + "px";
+        popupLayer.style.top = rect.top + "px";
+        // 根据弹幕元素的data-info属性更新悬浮层内容
+        popupLayer.innerHTML = barrage.dataset.info;
+        // 为悬浮层添加mouseenter和mouseleave事件监听器，实现鼠标移入移出悬浮层的交互
+        popupLayer.addEventListener("mouseenter", function () {
+          // 当鼠标移入悬浮层时，保持悬浮层显示，可进行后续交互操作
+          popupLayer.style.display = "block";
+        });
+        popupLayer.addEventListener("mouseleave", function () {
+          // 当鼠标移出悬浮层时，隐藏悬浮层
+          popupLayer.style.display = "none";
+        });
+      });
+      barrage.addEventListener("mouseleave", function () {
+        // 当鼠标移出弹幕元素时，隐藏悬浮层
+        popupLayer.style.display = "none";
+      });
+    });
+  </script>
 </html>

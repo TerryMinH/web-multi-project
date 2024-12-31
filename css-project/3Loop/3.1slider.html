@@ -1,41 +1,58 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-10-23 13:44:16
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-11-20 10:28:08
+ * @Description: file not
+-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>鼠标移1</title>
+    <style lang="">
+      .bullet-color-list {
+        width: 240px;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        border: 1px solid red;
+      }
+      /* .bullet-color-list::-webkit-scrollbar {
+          display: none;
+        } */
+      .bullet-color-item {
+          /* width: 60px; */
+          flex: 0 0 60px;
+          height: 20px;
+          background-color: #abcdef;
+          border-radius: 15px;
+          cursor: pointer;
+          /* position: relative; */
+          margin-right: 20px;
+        }
+        .bullet-color-vip {
+            width: 17px;
+            height: 12px;
+            position: absolute;
+            top: -2px;
+            right: 0;
+            background: url("./img/1.jpg") center center /
+              100% no-repeat;
+            background-size: 100%;
+          }
+    </style>
+    
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>滑动条导航栏</title>
-  <style type="text/css">
-    li {
-      border-bottom: 2px solid #000;
-    }
-
-    li::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      border-bottom: 2px solid #000;
-    }
-
-    li:hover::before {
-      width: 100%;
-    }
-  </style>
-</head>
-
-<body>
-  <ul>
-    <li>不可思议的CSS</li>
-    <li>导航栏</li>
-    <li>光标小下划线跟随</li>
-    <li>PURE CSS</li>
-    <li>Nav Underline</li>
-  </ul>
-</body>
-<script>
-
-</script>
-
+  <body>
+    <div class="bullet-color-list">
+      <div class='bullet-color-item'>11</div>
+      <div class='bullet-color-item'>2</div>
+      <div class='bullet-color-item'>3</div>
+      <div class='bullet-color-item'>4</div>
+      <div class='bullet-color-item'>5</div>
+      <div class='bullet-color-item'>6</div>
+    </div>
+  </body>
 </html>

@@ -1,52 +1,68 @@
 <!--
  * @Author: TerryMin
- * @Date: 2021-03-12 14:46:49
+ * @Date: 2024-10-23 13:44:16
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-01-10 14:00:13
+ * @LastEditTime: 2024-12-26 13:34:11
  * @Description: file not
 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      .container {
-        display: flex;
+    <title>点赞晃动效果</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- 引入外部CSS样式表，可先为空 -->
+    <style lang="">
+      .double-triangle {
+        width: 0;
+        height: 0;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 100px solid blue;
+        position: relative;
       }
-
-      .div {
-        border: 1px solid red;
-        flex: 1;
+      .double-triangle::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 40px solid transparent;
+        border-right: 40px solid transparent;
+        border-bottom: 80px solid white;
+        position: absolute;
+        top: 10px;
+        left: -40px;
       }
     </style>
   </head>
 
   <body>
-    <p>Image to Use</p>
-    <img
-      src="https://img.cmvideo.cn/publish/noms/2022/12/26/1O405POVUQT1F.jpg"
-      alt="The Scream"
-      id="scream"
-      width="750px"
-      height="640px"
-    />
-
-    <canvas
-      id="myCanvas"
-      width="800"
-      height="700"
-      style="border: 1px solid #d3d3d3"
-    ></canvas>
+    <div class="double-triangle" id="barrage1" data-info="弹幕1"></div>
+    <!-- <div class="barrage" id="barrage2" data-info="弹幕2">这是一条弹幕2</div>
+    <div class="barrage" id="barrage3" data-info="弹幕3">这是一条弹幕3</div> -->
   </body>
   <script>
-    const myCanvas = document.getElementById("myCanvas");
-    const ctx = myCanvas.getContext("2d");
-    const img = document.getElementById("scream");
-    img.onload = function () {
-      ctx.drawImage(img, 10, 10);
-    };
+    const body = document.querySelector("body");
+    const popup = document.createElement("div");
+    popup.classList.add("popup");
+    body.appendChild(popup);
+    const barrages = document.querySelectorAll(".barrage");
+
+    barrages.forEach((barrage) => {
+      barrage.addEventListener("mouseenter", function (event) {
+        // 先隐藏当前显示的悬浮层
+        popup.style.display = "none";
+        // 显示悬浮层并设置位置
+        popup.style.display = "block";
+        const rect = barrage.getBoundingClientRect();
+        popup.style.left = rect.right + "px";
+        popup.style.top = rect.top + "px";
+        // 更新悬浮层内容
+        popup.innerHTML = barrage.dataset.info;
+      });
+      barrage.addEventListener("mouseleave", function () {
+        // 隐藏悬浮层
+        popup.style.display = "none";
+      });
+    });
   </script>
 </html>

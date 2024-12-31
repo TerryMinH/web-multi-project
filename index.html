@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>纯css 实现字体描边</title>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background: #999;
+      }
+
+      p {
+        margin: auto;
+        position: relative;
+        font-size: 64px;
+        letter-spacing: 6px;
+        font-weight: bold;
+        -webkit-text-stroke: 1px #000;
+        filter: url(#dilate);
+        color:#fff;
+      }
+    </style>
+  </head>
+  <body>
+    <p>文字加粗CSS</p>
+
+    <svg width="0" height="0">
+      <filter id="dilate">
+        <feMorphology
+          in="SourceAlpha"
+          result="DILATED"
+          operator="dilate"
+          radius="3"
+        ></feMorphology>
+        <feFlood flood-color="#111" flood-opacity="1" result="flood"></feFlood>
+        <feComposite
+          in="flood"
+          in2="DILATED"
+          operator="in"
+          result="OUTLINE"
+        ></feComposite>
+
+        <feMerge>
+          <feMergeNode in="OUTLINE" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </svg>
+  </body>
+</html>

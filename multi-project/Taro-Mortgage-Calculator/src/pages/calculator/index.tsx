@@ -13,7 +13,7 @@ import {
   KeyboardAwareScrollView,
   SafeAreaView,
   BoxShadow,
-  StatusBar
+  StatusBar,
 } from "@components";
 import HouseLoanComputeHeader from "./compute-header";
 import { TitleTpl } from "./title-tpl";
@@ -77,7 +77,7 @@ export default class HouseLoanCompute extends Component<any, any> {
         // 商贷利率方式
         commercialLoanWay: 0,
         // 商贷金额
-        commerceTotalPirce: 0
+        commerceTotalPirce: 0,
       },
       // 默认值
       defaultValue: {},
@@ -88,7 +88,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       // 安卓上 手动输入时 隐藏计算按钮
       btnOpacity: 1,
       // 安卓状态栏
-      backgroundColor: "#fff"
+      backgroundColor: "#fff",
     };
   }
 
@@ -98,7 +98,8 @@ export default class HouseLoanCompute extends Component<any, any> {
   }
 
   async componentDidShow() {
-    const { title = "等额本息" } = await getStorageData("USER_LOAN_WAY") || {};
+    const { title = "等额本息" } =
+      (await getStorageData("USER_LOAN_WAY")) || {};
     this.setState({ userLoanWay: title });
   }
 
@@ -107,13 +108,8 @@ export default class HouseLoanCompute extends Component<any, any> {
    * 需要在每次表单值改变后重新调用
    */
   getRenderList = () => {
-    const {
-      params,
-      options,
-      loanLrpType,
-      commerceLoanRateNew,
-      way
-    } = this.state;
+    const { params, options, loanLrpType, commerceLoanRateNew, way } =
+      this.state;
     const commerceLoanRateEqua = `${params.loanLrp * 100}% + ${
       params.commercialLoanBasePoint
     }‱ = `;
@@ -130,8 +126,8 @@ export default class HouseLoanCompute extends Component<any, any> {
         downPayRateCustom: params.downPayRate,
         loanLrpType,
         commerceLoanRateEqua,
-        commerceLoanRateNewUnit
-      })
+        commerceLoanRateNewUnit,
+      }),
     });
   };
 
@@ -148,11 +144,11 @@ export default class HouseLoanCompute extends Component<any, any> {
       commerceLoanInFiveYearRate = [],
       commerceLoanInOneYearRate = [],
       accumulatFundRate = [],
-      accumulatFundInFiveYearRate = []
+      accumulatFundInFiveYearRate = [],
     } = options;
     downPayRate.splice(0, 0, {
       value: -1,
-      label: "手动输入"
+      label: "手动输入",
     });
     this.handleDownPaySelectLabel(params.houseTotal, downPayRate);
     params.loanAmount = Math.ceil(
@@ -175,7 +171,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     options.commerceLoanRate = [
       ...commerceLoanRate,
       ...commerceLoanInFiveYearRate,
-      ...commerceLoanInOneYearRate
+      ...commerceLoanInOneYearRate,
     ];
     // 处理公积金利率 关联 公积金年限
     accumulatFundRate.forEach((rate: any) => {
@@ -189,7 +185,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     });
     options.accumulatFundRate = [
       ...accumulatFundRate,
-      ...accumulatFundInFiveYearRate
+      ...accumulatFundInFiveYearRate,
     ];
     const commerceLoanRateNew = formatFloat(
       defaultData.loanLrp + params.commercialLoanBasePoint / 10000,
@@ -199,7 +195,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       {
         ...OPTION,
         commerceLoanRateNew,
-        params: { ...params, ...defaultData }
+        params: { ...params, ...defaultData },
       },
       () => {
         this.getRenderList();
@@ -242,7 +238,7 @@ export default class HouseLoanCompute extends Component<any, any> {
           params,
           btnOpacity: isInput ? 0 : 1,
           // -1 标识手动输入
-          keyboardHeight: isInput ? 0 : -1
+          keyboardHeight: isInput ? 0 : -1,
         },
         this.getRenderList
       );
@@ -252,16 +248,16 @@ export default class HouseLoanCompute extends Component<any, any> {
     // 切换公积金年限 修改默认值
     if (data.key === "accumulatFundYear") {
       params.accumulatFundRate =
-        selectObj.value > 5
+        selectObj.value as number > 5
           ? params.accumulatOutFiveFundRate
           : params.accumulatFundInFiveYearRate;
     }
     // 切换商贷年限 修改默认值
     if (data.key === "commerceLoanYear") {
       params.commerceLoanRate =
-        selectObj.value > 5
+        selectObj.value as number > 5
           ? params.commerceOutFiveLoanRate
-          : selectObj.value > 1
+          : selectObj.value as number > 1
           ? params.commerceLoanInFiveYearRate
           : params.commerceLoanInOneYearRate;
     }
@@ -269,14 +265,14 @@ export default class HouseLoanCompute extends Component<any, any> {
     let loanLrpTypeObj = {};
     if (data.key === "loanLrp") {
       loanLrpTypeObj = {
-        loanLrpType: selectObj.label.indexOf("最新") > -1 ? 1 : 0
+        loanLrpType: selectObj.label.indexOf("最新") > -1 ? 1 : 0,
       };
     }
 
     this.setState(
       {
         params,
-        ...loanLrpTypeObj
+        ...loanLrpTypeObj,
       },
       this.getRenderList
     );
@@ -300,7 +296,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       }
     });
     this.setState({
-      options
+      options,
     });
   };
 
@@ -369,7 +365,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       if (this.isFirstChange || data.key !== "commerceTotalPirce") {
         Taro.showToast({
           title: `当前城市公积金最高可贷${accumulatLoanLimit}万`,
-          icon: "none"
+          icon: "none",
         });
         params.commerceTotalPirce =
           parseInt(params.loanAmount) - accumulatLoanLimit;
@@ -381,7 +377,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     this.setState(
       {
         params,
-        ...baseParams
+        ...baseParams,
       },
       this.getRenderList
     );
@@ -421,7 +417,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       {
         [key]: index,
         showResult: false,
-        ...obj
+        ...obj,
       },
       this.getRenderList
     );
@@ -431,12 +427,14 @@ export default class HouseLoanCompute extends Component<any, any> {
    * 页面跳转
    * @param path 跳转路径
    */
-  goPage = (path: string, data: object = {}) => () => {
-    setGlobalData("COMPUTE_RESULT", data);
-    Taro.navigateTo({
-      url: `/pages/calculator/${path}/index`
-    });
-  };
+  goPage =
+    (path: string, data: object = {}) =>
+    () => {
+      setGlobalData("COMPUTE_RESULT", data);
+      Taro.navigateTo({
+        url: `/pages/calculator/${path}/index`,
+      });
+    };
 
   /**
    * 监听键盘出现事件
@@ -447,7 +445,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     console.log(endCoordinates);
     this.setState({
       btnOpacity: 0,
-      keyboardHeight: endCoordinates.height
+      keyboardHeight: endCoordinates.height,
     });
   };
 
@@ -458,7 +456,7 @@ export default class HouseLoanCompute extends Component<any, any> {
   onKeyboardDidHide = (_frames: Record<string, any>) => {
     this.setState({
       keyboardHeight: -1,
-      btnOpacity: 1
+      btnOpacity: 1,
     });
   };
 
@@ -471,7 +469,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     const valueNumbe = parseInt(value, 10);
     // 输入范围0-99
     this.setState({
-      downPayRateCustom: valueNumbe
+      downPayRateCustom: valueNumbe,
     });
   };
 
@@ -485,7 +483,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     if (!(value > 0 && value <= 99)) {
       this.setState({
         btnOpacity: 1,
-        keyboardHeight: -1
+        keyboardHeight: -1,
       });
       return;
     }
@@ -503,7 +501,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       );
       downPayRate.splice(insertIndex + 1, 0, {
         value: realValue,
-        label: `${downPayRateCustom}%`
+        label: `${downPayRateCustom}%`,
       });
     }
     params.downPayRate = realValue;
@@ -517,7 +515,7 @@ export default class HouseLoanCompute extends Component<any, any> {
         options,
         params,
         btnOpacity: 1,
-        keyboardHeight: -1
+        keyboardHeight: -1,
       },
       () => {
         this.handleDownPaySelectLabel(params.houseTotal);
@@ -535,7 +533,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     if (accumulatTotalPirce > accumulatLoanLimit) {
       Taro.showToast({
         title: `当前城市公积金最高可贷${accumulatLoanLimit}万`,
-        icon: "none"
+        icon: "none",
       });
       params.accumulatTotalPirce = accumulatLoanLimit;
       return;
@@ -545,7 +543,7 @@ export default class HouseLoanCompute extends Component<any, any> {
     if (amount > accumulatLoanLimit) {
       Taro.showToast({
         title: `当前城市公积金最高可贷${accumulatLoanLimit}万`,
-        icon: "none"
+        icon: "none",
       });
       params.accumulatTotalPirce = accumulatLoanLimit;
       params.commerceTotalPirce =
@@ -559,12 +557,12 @@ export default class HouseLoanCompute extends Component<any, any> {
       loanAmount,
       accumulatTotalPirce,
       commerceTotalPirce,
-      accumulatLoanLimit
+      accumulatLoanLimit,
     } = params;
     if (loanAmount === 0) {
       Taro.showToast({
         title: `贷款金额不能为0`,
-        icon: "none"
+        icon: "none",
       });
       return false;
     }
@@ -574,14 +572,14 @@ export default class HouseLoanCompute extends Component<any, any> {
     ) {
       Taro.showToast({
         title: `商贷金额和公积金贷款金额之和必须等于贷款总额`,
-        icon: "none"
+        icon: "none",
       });
       return false;
     }
     if (loanType === 2 && loanAmount > accumulatLoanLimit) {
       Taro.showToast({
         title: `当前城市公积金最高可贷${accumulatLoanLimit}万`,
-        icon: "none"
+        icon: "none",
       });
       return false;
     }
@@ -589,13 +587,8 @@ export default class HouseLoanCompute extends Component<any, any> {
   };
 
   getTip = (showMonthlyPay = true) => {
-    const {
-      params,
-      loanType,
-      loanLrpType,
-      commerceLoanRateNew,
-      userLoanWay
-    } = this.state;
+    const { params, loanType, loanLrpType, commerceLoanRateNew, userLoanWay } =
+      this.state;
     const {
       commerceLoanYear,
       accumulatFundYear,
@@ -604,7 +597,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       commerceTotalPirce,
       commerceLoanRate,
       loanAmount,
-      downPayRate
+      downPayRate,
     } = params;
     const downPayRateStr = `首付${formatFloat(downPayRate * 100, 2)}%`;
     const accumulatStr = `公积金贷${
@@ -624,9 +617,10 @@ export default class HouseLoanCompute extends Component<any, any> {
         ? [commerceStr]
         : [accumulatStr];
     const loanWayStr = `${userLoanWay || "等额本息"}`;
-    const tip = (showMonthlyPay
-      ? [downPayRateStr, ...loanStr, loanWayStr]
-      : [downPayRateStr, ...loanStr]
+    const tip = (
+      showMonthlyPay
+        ? [downPayRateStr, ...loanStr, loanWayStr]
+        : [downPayRateStr, ...loanStr]
     ).join("、");
     return tip;
   };
@@ -635,16 +629,11 @@ export default class HouseLoanCompute extends Component<any, any> {
     if (this.loading) return;
     if (!this.checkParams()) return;
     Taro.showLoading({
-      title: "计算中..."
+      title: "计算中...",
     });
 
-    const {
-      params,
-      loanType,
-      loanLrpType,
-      commerceLoanRateNew,
-      userLoanWay
-    } = this.state;
+    const { params, loanType, loanLrpType, commerceLoanRateNew, userLoanWay } =
+      this.state;
     const {
       commerceLoanYear,
       accumulatFundYear,
@@ -653,7 +642,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       loanAmount,
       commerceTotalPirce,
       commerceLoanRate,
-      houseTotal
+      houseTotal,
     } = params;
     const res: any = await equalInterestCalc({
       totalPrice: houseTotal,
@@ -663,14 +652,14 @@ export default class HouseLoanCompute extends Component<any, any> {
       accumulatFundYear,
       accumulatFundRate,
       accumulatTotalPirce: loanType === 2 ? loanAmount : accumulatTotalPirce,
-      commerceTotalPirce: loanType === 1 ? loanAmount : commerceTotalPirce
+      commerceTotalPirce: loanType === 1 ? loanAmount : commerceTotalPirce,
     });
     try {
       const tip = this.getTip(false);
       this.computeResult = {
         ...res,
         loanAmount,
-        tip
+        tip,
       };
       const backgroundColor = "#12B983";
       this.setState({
@@ -678,17 +667,17 @@ export default class HouseLoanCompute extends Component<any, any> {
         showResult: true,
         equalInterestPayMonth: res.equalInterest.payMonth,
         equalPrincipalPayMonth: res.equalPrincipal.payMonth,
-        backgroundColor
+        backgroundColor,
       });
       Taro.setNavigationBarColor({
         frontColor: "#ffffff",
-        backgroundColor
+        backgroundColor,
       });
       IS_RN
         ? this.scroll.scrollTo({ x: 0, animation: true })
         : Taro.pageScrollTo({
             scrollTop: 0,
-            duration: 300
+            duration: 300,
           });
       const list: any = (await getStorageData("LOAN_HISTORY")) || [];
       const historyList = [
@@ -714,13 +703,13 @@ export default class HouseLoanCompute extends Component<any, any> {
           firstPay:
             userLoanWay === "等额本息"
               ? res.equalInterest.payMonth
-              : res.equalPrincipal.payMonth
+              : res.equalPrincipal.payMonth,
         },
-        ...list
+        ...list,
       ];
       await Taro.setStorage({
         key: "LOAN_HISTORY",
-        data: historyList.slice(0, 10)
+        data: historyList.slice(0, 10),
       });
     } catch (e) {
       console.log(e);
@@ -744,7 +733,7 @@ export default class HouseLoanCompute extends Component<any, any> {
       equalInterestPayMonth,
       equalPrincipalPayMonth,
       showResult,
-      backgroundColor
+      backgroundColor,
     } = this.state;
     const { houseTotal, downPayRate } = params;
     return (
@@ -757,7 +746,7 @@ export default class HouseLoanCompute extends Component<any, any> {
             <View
               className="keyboard-box"
               style={{
-                bottom: isAndroid() ? 0 : keyboardHeight
+                bottom: isAndroid() ? 0 : keyboardHeight,
               }}
             >
               <Text className="keyboard-box-text">请输入</Text>
@@ -778,7 +767,7 @@ export default class HouseLoanCompute extends Component<any, any> {
                   focus
                   style={{
                     // @ts-ignore 针对安卓文字显示不全
-                    paddingVertical: 0
+                    paddingVertical: 0,
                   }}
                   onInput={this.downPayRateHandle}
                   onBlur={this.downPayRateConfirm}
@@ -853,7 +842,7 @@ export default class HouseLoanCompute extends Component<any, any> {
           shadowColor="#000"
           shadowOffset={{
             width: 0,
-            height: -1
+            height: -1,
           }}
           shadowOpacity={0.1}
           shadowRadius={1}

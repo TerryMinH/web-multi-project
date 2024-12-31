@@ -1,66 +1,51 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-10-23 13:44:16
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2024-12-05 09:42:25
+ * @Description: file not
+-->
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      #box {
+        /* width: 113px;
+          height: 25px;
+          font-size: 18px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #e5e5e5;
+          line-height: 25px;
+          background: linear-gradient(
+            90deg,
+            #ffbfc9 0%,
+            #ff9ebf 51%,
+            #ff72ac 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent; */
+        font-size: 30px;
+        background-image: linear-gradient(
+            90deg,
+            #ffbfc9 0%,
+            #ff9ebf 51%,
+            #ff72ac 100%
+          );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>遮罩层</title>
-  <style>
-    .mock {
-      position: fixed;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
-      background-color: rgba(0, 0, 0, .5);
-      display: none;
-    }
+  <body>
+    <div id="box">测试阿发</div>
+    <button id="moveButton">移动方块</button>
 
-    .model {
-      position: absolute;
-      padding-top: 50px;
-      width: 50%;
-      height: 50%;
-      text-align: center;
-      z-index: 1000;
-      background-color: #fff;
-      transform: translate(40%, 40%);
-      border-radius: 10px;
-    }
-
-    .div2 {
-      width:100px;
-      height:200px;
-      border:1px solid red;
-      transform:translate(100px,200px);
-    }
-  </style>
-</head>
-
-<body>
-  <input type="button" value="显示遮罩层" onclick="showMock();">
-
-  <div id="mock" class="mock">
-    <div id="model" class="model">
-      <input type="button" value="关闭" onclick="closeMock();">
-    </div>
-  </div>
-
-  <div class="div2">transform test</div>
-</body>
-
-<script>
-  var mock = document.getElementById("mock");
-
-  function showMock() {
-    mock.style.display = "block";
-  }
-  function closeMock() {
-    console.log(23);
-    mock.style.display = "none";
-  }
-
-</script>
-
+    <script>
+     document.cookie = "sessionToken=abc123; max - age=60"; // 设置过期时间为1小时（3600秒）后
+    </script>
+  </body>
 </html>
