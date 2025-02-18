@@ -2,13 +2,12 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-05-14 10:38:44
+ * @LastEditTime: 2025-02-15 14:52:28
  * @Description: file not
 -->
 
 # Typescript
 
-- [typescript](https://typescript.bootcss.com/)
 - [typescript 基础学习](https://juejin.cn/post/7124117404187099172#heading-58)
 - [TS 基本概念总结](https://juejin.cn/post/7088304364078497800#heading-4)
 
@@ -104,6 +103,7 @@ const d: Intersetion = {
 5. 接口 与 type(类型别名) 区别：(https://juejin.cn/post/6844904114925600776)
 
 - type 会给一个类型起个新名字。 type 有时和 interface 很像，但是可以作用于原始值（基本类型），联合类型，元组以及其它任何你需要手写的类型
+- interface 接口是对象的状态(属性)和行为(方法)的抽象(描述)
 
 - 都允许扩展：interface 用 extends 来实现扩展;type 使用 & 实现扩展
 - 不同点：type 可以声明基本数据类型别名/联合类型/元组等，而 interface 不行; interface 能够合并声明，而 type 不行
@@ -132,7 +132,7 @@ console.log(baz); // 输出：0
 
 1. 泛型理解:
 
-- 泛型:定义函数，接口或者类的时候，不预先定义好具体的类型，而在使用的时候在指定类型的一种特性
+- 泛型:定义函数、方法、接口或者类的时候，不预先定义好具体的类型，而在使用的时候在指定类型的一种特性
 - 使用方式:泛型通过<>的形式进行表述，可以声明:函数、接口、类.
 - 注意事项：泛型无法约束类的静态成员。
 

@@ -64,3 +64,22 @@ function shellSort(arr) {
   return arr;
 }
 // console.log(shellSort(arr));
+Function.prototype.myApply = function (context, paramter) {
+  if (typeof context === "object") {
+    context = context || windows;
+  } else {
+    context = Object.create(null);
+  }
+  const fn = Symbol();
+  context[fn] = this;
+  console.log(11,paramter);
+  paramter ? context[fn](...paramter) : context[fn]();
+  delete context[fn];
+};
+function sayHi(age, sex) {
+  console.log(this.name, age, sex);
+}
+const person = {
+  name: "terrymin",
+};
+sayHi.myApply(person,[25,'男']);

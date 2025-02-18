@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:00:27
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-14 18:05:57
+ * @LastEditTime: 2025-02-15 14:43:11
  * @Description: file not
  */
 type stringKey = Record<string, boolean>;
@@ -26,4 +26,4 @@ const averageData1: Pick<AveragingTeamType, "seasonList"> = {
 
 const averageData2: Array<SeasonDataExtraItemType> = [];
 
-// console.log(averageData1, averageData2);
+console.log(averageData1, averageData2);

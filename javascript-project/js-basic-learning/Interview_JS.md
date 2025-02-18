@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-15 11:34:34
+ * @LastEditTime: 2025-02-18 09:14:50
  * @Description: file not
 -->
 
@@ -15,7 +15,7 @@
 1.  2024.12.27 通知被裁（2025.2.28 正式离职）
 2.  从现在开始、合理规划好每一天的时间、保持危机意识
 3.  年前主要准备面试题和熟悉面试流程:
-    - 2.10 到 2.12 准备面试题
+    - 2.10 到 2.12 准备面试题(1.11回家、2.09回上海)
     - 2.13 投简历面试
     - 2.28 拿离职证明
 
@@ -27,7 +27,7 @@
    window.onload 是在整个页面(包括文档内容、样式表、脚本、图片等所有外部资源)完全加载完成后才会触发
    DOMContentLoaded 是在浏览器已经完成 HTML 文档解析、构建好 DOM 树之后就会触发。
 
-[Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
+2. [Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
 
 ### JavaScript
 
@@ -39,7 +39,7 @@
    微任务执行完毕后，从任务队列中取出一个宏任务执行。
    重复上述过程。
    1.2 任务队列（Task Queue）:
-   也称为宏任务队列（Macrotask Queue），存放的是宏任务，如 setTimeout、setInterval、I/O 操作、UI 渲染等。
+   也称为宏任务队列（Macrotask Queue），存放的是宏任务，如 script脚本、setTimeout、setInterval、I/O 操作、UI 渲染等。
    微任务队列（Microtask Queue）：存放的是微任务，如 Promise.then、MutationObserver、queueMicrotask 等。
 
    ```js
