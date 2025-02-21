@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-18 09:14:50
+ * @LastEditTime: 2025-02-18 11:36:52
  * @Description: file not
 -->
 
@@ -15,7 +15,7 @@
 1.  2024.12.27 通知被裁（2025.2.28 正式离职）
 2.  从现在开始、合理规划好每一天的时间、保持危机意识
 3.  年前主要准备面试题和熟悉面试流程:
-    - 2.10 到 2.12 准备面试题(1.11回家、2.09回上海)
+    - 2.10 到 2.12 准备面试题(1.11 回家、2.09 回上海)
     - 2.13 投简历面试
     - 2.28 拿离职证明
 
@@ -39,7 +39,7 @@
    微任务执行完毕后，从任务队列中取出一个宏任务执行。
    重复上述过程。
    1.2 任务队列（Task Queue）:
-   也称为宏任务队列（Macrotask Queue），存放的是宏任务，如 script脚本、setTimeout、setInterval、I/O 操作、UI 渲染等。
+   也称为宏任务队列（Macrotask Queue），存放的是宏任务，如 script 脚本、setTimeout、setInterval、I/O 操作、UI 渲染等。
    微任务队列（Microtask Queue）：存放的是微任务，如 Promise.then、MutationObserver、queueMicrotask 等。
 
    ```js
@@ -77,5 +77,13 @@
    事件代理（ Event Delegation ），又称之为事件委托。“事件代理”即是把原本需要绑定的事件委托给父元素，让父元素担当事件监听的职务。事件代理的原理是 DOM 元素的事件冒泡。使用事件代理的好处是可以提高性能。
    可以大量节省内存占用，减少事件注册，比如在 table 上代理所有 td 的 click 事件就非常棒。
    可以实现当新增子对象时无需再次对其绑定。
+
+4. 说说什么是原型链?
+
+   - 定义: 原型链是 JavaScript 中实现继承的一种主要方式。在 JavaScript 里，每个对象都有一个内部属性 [[Prototype]]（在浏览器环境下可以通过 **proto** 属性访问），它指向该对象的原型对象。而这个原型对象同样也有自己的原型对象，以此类推，直到最顶层的原型对象 Object.prototype，其 [[Prototype]] 为 null。这种通过 [[Prototype]] 属性层层相连形成的链条就被称作原型链。
+   - 原理:当访问一个对象的属性或方法时，JavaScript 引擎首先会在该对象本身查找，如果找不到，就会顺着原型链向上，在其原型对象中查找，若还未找到，会继续在原型对象的原型对象中查找，如此递归，直至找到该属性或方法，或者到达原型链的顶端（即 Object.prototype 且其 [[Prototype]] 为 null），此时返回 undefined。
+   - 作用:实现继承,避免代码重复，提高代码的复用性和可维护性。代码复用：多个对象可以共享原型对象上的属性和方法，减少内存开销。
+
+5. [JS 继承的几种方式](https://www.cnblogs.com/terrymin/p/14630479.html)
 
 ### ES6 与 Typescript

@@ -1,85 +1,105 @@
-function bubbleSort(arr) {
-  for (var i = 0; i < arr.length - 1; i++) {
-    for (var j = 0; j < arr.legnth - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        var temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
-      }
-    }
-  }
-  return arr;
-}
+/*
+ * @Author: TerryMin
+ * @Date: 2024-10-23 13:44:20
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-02-21 16:33:27
+ * @Description: file not
+ */
 
-var arr = [3, 1, 2, 4, 8, 5, 10, 9];
-function quickSort(arr) {
-  if (arr.length == 0) {
-    return [];
-  }
+// 编写一个函数，将arr1和arr2合并，并按照id排序，如果id相同则取time较大的那个对象，如果id不同则保留arr1和arr2中的对象。
+// 输入数据 arr1，arr2
+const arr1 = [
+  {
+    id: 1,
+    name: "allen",
+    time: "3",
+  },
+  {
+    id: 2,
+    name: "alice",
+    time: "1",
+  },
+  {
+    id: 9,
+    name: "Bun",
+    time: "1",
+  },
+  {
+    id: 3,
+    name: "Bun",
+    time: "1",
+  },
+];
+const arr2 = [
+  {
+    id: 1,
+    name: "bob",
+    time: "4",
+  },
+  {
+    id: 2,
+    name: "Nick",
+    time: "2",
+  },
+  {
+    id: 4,
+    name: "Mark",
+    time: "2",
+  },
+  {
+    id: 5,
+    name: "Frank",
+    time: "6",
+  },
+];
 
-  var cIndex = Math.floor(arr.length / 2);
-  var c = arr.splice(cIndex, 1);
-  var l = [];
-  var r = [];
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] < c) {
-      l.push(arr[i]);
+// 输出结果 res
+// const res = [
+//     {
+//         id: 1,
+//         name: 'bob',
+//         time: '4'
+//     },
+//     {
+//         id: 2,
+//         name: 'Nick',
+//         time: '2'
+//     },
+//     {
+//         id: 3,
+//         name: 'Bun',
+//         time: '1'
+//     },
+//     {
+//         id: 4,
+//         name: 'Mark',
+//         time: '2'
+//     },
+//     {
+//         id: 5,
+//         name: 'Frank',
+//         time: '6'
+//     },
+// ]
+
+function mergeArr(arrOne, arrTwo) {
+  const mergedArr = [...arrOne, ...arrTwo];
+  mergedArr.sort((item1, item2) => item1.id - item2.id);
+  // console.log(mergedArr);
+  let mergeUnqArr = [];
+  for (let i = 0; i < mergedArr.length - 1; i++) {
+    let multiItemArr = mergedArr.filter((item) => mergedArr[i].id === item.id);
+    console.log(multiItemArr);
+    if (multiItemArr.length) {
+      mergeUnqArr.push(multiItemArr[multiItemArr.length - 1]);
     } else {
-      r.push(arr[i]);
+      mergeUnqArr.push(mergedArr[i]);
     }
   }
-  return quickSort(l).concat(c, quickSort(r));
+  console.log(mergeUnqArr);
+  return mergeUnqArr;
 }
-
-function insertSort(arr) {
-  var len = arr.length;
-  var preIndex, current;
-  for (var i = 1; i < len; i++) {
-    preIndex = i - 1;
-    current = arr[i];
-    while (preIndex >= 0 && arr[preIndex] > current) {
-      arr[preIndex + 1] = arr[preIndex];
-      preIndex--;
-    }
-    arr[preIndex + 1] = current;
-  }
-  return arr;
-}
-
-function shellSort(arr) {
-  var len = arr.length;
-  console.log(len);
-  for (var gap = Math.floor(len / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    console.log(gap);
-    for (var i = gap; i < len; i++) {
-      var j = i;
-      var current = arr[i];
-      while (j - gap >= 0 && current < arr[j - gap]) {
-        arr[j] = arr[j - gap];
-        j = j - gap;
-      }
-      arr[j] = current;
-    }
-  }
-  return arr;
-}
-// console.log(shellSort(arr));
-Function.prototype.myApply = function (context, paramter) {
-  if (typeof context === "object") {
-    context = context || windows;
-  } else {
-    context = Object.create(null);
-  }
-  const fn = Symbol();
-  context[fn] = this;
-  console.log(11,paramter);
-  paramter ? context[fn](...paramter) : context[fn]();
-  delete context[fn];
-};
-function sayHi(age, sex) {
-  console.log(this.name, age, sex);
-}
-const person = {
-  name: "terrymin",
-};
-sayHi.myApply(person,[25,'男']);
+// mergeArr(arr1,arr2)
+const result = arr1.reduce((accumulator, current, currentIndex, array) => {
+  console.log(accumulator, current);
+});

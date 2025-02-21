@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-08-05 20:18:58
+ * @LastEditTime: 2025-02-20 14:48:34
  * @Description: file not
 -->
 
@@ -542,6 +542,41 @@ class MyPromise {
 [JS 面向对象编程相关概念](https://blog.csdn.net/qq_45466204/article/details/115177241)：类相当于实例的原型
 
 1. 私有属性与方法：只能**在类的内部**访问的属性和方法。**通过#声明**。
+
+```js
+class IncreasingCounter {
+  #count = 0; // 私有属性
+  get value() {
+    console.log("Getting the current value!");
+    return this.#count;
+  }
+  increment() {
+    this.#count++;
+  }
+  // 私有方法
+  #sum() {
+    return this.#a + this.#b;
+  }
+}
+```
+
 2. 静态属性与方法：不需要实例化创建子对象，就可以用类型名直接调用的属性与方法。如 ES5 中 isArray()方法。ES6 class 中**通过 static 关键字**声明，表示**该方法不会被实例继承**，而是直接通过**类来调用**。**继承的子类**可以调用。
+
+```js
+class Foo {
+  // 静态方法
+  static classMethod() {
+    return "hello";
+  }
+}
+Foo.classMethod(); // 'hello'
+var foo = new Foo();
+foo.classMethod(); // TypeError: foo.classMethod is not a function
+
+// 静态属性
+Foo.prop = 1;
+Foo.prop; // 1
+```
+
 3. 实例属性与方法：通过继承**父类构造函数**中的属性与方法
 4. 公有属性与方法：属于这个类的所有对象（原型对象）都可以访问到的属性和方法

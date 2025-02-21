@@ -2,11 +2,55 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-18 09:00:56
+ * @LastEditTime: 2025-02-21 10:58:47
  * @Description: file not
 -->
 
-# Vue & React & 小程序
+# [Vue](https://cn.vuejs.org/)
+
+## Vue
+
+- [手写 Vue-router 核心原理](https://cloud.tencent.com/developer/article/1880448)
+
+- Vue2 和 Vue3 有哪些区别？
+
+      1 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑
+      2 响应式系统:
+      vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
+      vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
+      3 语言支持变更: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松
+      4 构建工具:Vue2 主要使用的是 webpack 打包工具,Vue3 使用的是 Vite
+
+- ref 与 reactive 区别？
+
+      1 ref 定义的是基本数据类型
+      2 ref 通过 Object.defineProperty()的 get 和 set 实现数据劫持
+      3 ref 操作数据.value，读取时不需要.value
+      4 reactive 定义对象或数组数据类型
+      5 reactive 通过 Proxy 实现数据劫持
+      6 reactive 操作和读取数据不需要.value
+
+- Vue 数据更新机制？
+  Vue.js 的异步更新机制主要基于以下几个步骤：
+
+      1.  数据变化检测：Vue.js 通过 Object.defineProperty 或 Proxy 来监听数据变化，当数据发生变化时，会触发 setter 方法。
+      2.  依赖收集：当 setter 方法被触发时，将当前依赖的数据属性和对应的 watcher 对象存储起来。
+      3.  异步队列：Vue.js 将数据变化的更新操作放入异步队列中，等待事件循环周期结束再统一执行。
+      4.  DOM 更新：在事件循环周期结束之后，Vue.js 会执行异步队列中的更新操作，从而更新 DOM。
+
+  优势与劣势:
+  优势:
+
+      1.  提高性能：通过减少 DOM 操作的次数，提高页面性能。
+      2.  避免闪烁：在数据更新时，不会立即更新 DOM，从而避免页面闪烁。
+      3.  批量更新：在事件循环周期结束之后，Vue.js 会执行异步队列中的所有更新操作，从而提高更新效率。
+
+  劣势:
+
+      1.  复杂度增加：异步更新机制使得 Vue.js 的内部实现更加复杂。
+      2.  难以调试：在开发过程中，由于异步更新的存在，可能导致一些难以调试的问题。
+
+5. [Vue 生命周期](https://cn.vuejs.org/guide/essentials/lifecycle)
 
 ## 如何进行前端性能优化?
 
@@ -48,49 +92,9 @@
    4.2 防抖与节流
    4.3 使用 Web Workers:对于一些耗时的计算任务，可以将其放到 Web Workers 中执行，避免阻塞主线程。Web Workers 可以在后台线程中独立运行，不会影响页面的渲染和交互。
 
-## Vue
+### 性能优化专题
 
-1. [手写 Vue-router 核心原理](https://cloud.tencent.com/developer/article/1880448)
-
-2. Vue2 和 Vue3 有哪些区别？
-
-   - 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑
-   - 响应式系统:
-     vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
-     vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
-   - 语言支持变更: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松
-   - 构建工具:Vue2 主要使用的是 webpack 打包工具,Vue3 使用的是 Vite
-
-3. ref 与 reactive 区别？
-
-   - ref 定义的是基本数据类型
-   - ref 通过 Object.defineProperty()的 get 和 set 实现数据劫持
-   - ref 操作数据.value，读取时不需要.value
-   - reactive 定义对象或数组数据类型
-   - reactive 通过 Proxy 实现数据劫持
-   - reactive 操作和读取数据不需要.value
-
-4. Vue 数据更新机制？
-   Vue.js 的异步更新机制主要基于以下几个步骤：
-
-   - 数据变化检测：Vue.js 通过 Object.defineProperty 或 Proxy 来监听数据变化，当数据发生变化时，会触发 setter 方法。
-   - 依赖收集：当 setter 方法被触发时，将当前依赖的数据属性和对应的 watcher 对象存储起来。
-   - 异步队列：Vue.js 将数据变化的更新操作放入异步队列中，等待事件循环周期结束再统一执行。
-   - DOM 更新：在事件循环周期结束之后，Vue.js 会执行异步队列中的更新操作，从而更新 DOM。
-
-   优势与劣势:
-   优势:
-
-   - 提高性能：通过减少 DOM 操作的次数，提高页面性能。
-   - 避免闪烁：在数据更新时，不会立即更新 DOM，从而避免页面闪烁。
-   - 批量更新：在事件循环周期结束之后，Vue.js 会执行异步队列中的所有更新操作，从而提高更新效率。
-
-   劣势:
-
-   - 复杂度增加：异步更新机制使得 Vue.js 的内部实现更加复杂。
-   - 难以调试：在开发过程中，由于异步更新的存在，可能导致一些难以调试的问题。
-
-5. 微前端了解么？
+1. 微前端了解么？
    [微前端架构](https://blog.csdn.net/mmc123125/article/details/143559240#)
    5.1 微前端解决的问题:解决不同产品之间集成困难、可以达到与技术栈无关、独立开发、独立部署
    5.2 微前端与传统项目区别:
@@ -101,5 +105,5 @@
 
    - 可扩展性和灵活性:传统单体式前端项目由于各个功能模块紧密耦合，当需要添加新的功能或对现有功能进行扩展时，可能需要对整个项目的代码进行大规模修改，扩展性较差。微前端架构具有较高的可扩展性，当需要添加新的功能时，可以开发一个新的微前端应用并集成到现有系统中，无需对其他微应用进行修改。
 
-6. 模块联邦(Module Federation)
+2. 模块联邦(Module Federation)
    [ Module Federation 2.0 构建下一代微前端架构](https://segmentfault.com/a/1190000045448357)

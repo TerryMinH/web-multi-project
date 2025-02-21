@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-09-18 13:50:26
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-09-28 15:49:00
+ * @LastEditTime: 2025-02-21 16:22:54
  * @Description: file not
  */
 // 计数排序
@@ -40,17 +40,67 @@ let countingSort = function (arr, flag = 0) {
 let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
 // console.log(countingSort(arr));
 
-const insertSort = (arr) => {
-  const len = arr.length;
-  for (let i = 1; i < len; i++) {
-    let key = arr[i];
-    let j = i - 1;
-    while (j >= 0 && arr[j] > arr[i]) {
-      arr[j + 1] = arr[j];
-      j--;
+function bubbleSort(arr) {
+  for (var i = 0; i < arr.length - 1; i++) {
+    for (var j = 0; j < arr.legnth - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
     }
-    arr[j + 1] = key;
   }
   return arr;
-};
-console.log(insertSort(arr));
+}
+
+function quickSort(arr) {
+  if (arr.length == 0) {
+    return [];
+  }
+
+  var cIndex = Math.floor(arr.length / 2);
+  var c = arr.splice(cIndex, 1);
+  var l = [];
+  var r = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] < c) {
+      l.push(arr[i]);
+    } else {
+      r.push(arr[i]);
+    }
+  }
+  return quickSort(l).concat(c, quickSort(r));
+}
+
+function insertSort(arr) {
+  var len = arr.length;
+  var preIndex, current;
+  for (var i = 1; i < len; i++) {
+    preIndex = i - 1;
+    current = arr[i];
+    while (preIndex >= 0 && arr[preIndex] > current) {
+      arr[preIndex + 1] = arr[preIndex];
+      preIndex--;
+    }
+    arr[preIndex + 1] = current;
+  }
+  return arr;
+}
+
+function shellSort(arr) {
+  var len = arr.length;
+  console.log(len);
+  for (var gap = Math.floor(len / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    console.log(gap);
+    for (var i = gap; i < len; i++) {
+      var j = i;
+      var current = arr[i];
+      while (j - gap >= 0 && current < arr[j - gap]) {
+        arr[j] = arr[j - gap];
+        j = j - gap;
+      }
+      arr[j] = current;
+    }
+  }
+  return arr;
+}

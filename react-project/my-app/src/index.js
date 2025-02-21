@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-09-19 16:52:15
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-10-01 17:24:57
+ * @LastEditTime: 2025-02-20 15:34:12
  * @Description: file not
  */
 import React from 'react';
@@ -13,9 +13,10 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
