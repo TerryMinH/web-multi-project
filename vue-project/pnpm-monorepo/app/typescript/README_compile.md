@@ -2,8 +2,8 @@
  * @Author: TerryMin
  * @Date: 2022-12-26 13:58:25
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-05-14 10:16:46
- * @Description: file not
+ * @LastEditTime: 2025-02-23 09:07:22
+ * @Description: ts文件动态编译: tsc index.ts --watch
 -->
 
 # typescript 编译原理

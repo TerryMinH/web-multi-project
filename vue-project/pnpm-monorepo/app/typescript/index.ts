@@ -1,29 +1,34 @@
 /*
  * @Author: TerryMin
- * @Date: 2022-08-19 11:00:27
+ * @Date: 2024-06-09 10:08:43
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-15 14:43:11
+ * @LastEditTime: 2025-02-23 09:43:08
  * @Description: file not
  */
-type stringKey = Record<string, boolean>;
-const accessDict: stringKey = {
-  create: false, // 创建
-  receive: false, // 接收
-};
+abstract class Vehicle {
+  abstract start(): void;
+}
 
-export type SeasonDataExtraItemType = {
-  isActiveB: string;
-};
+class Car extends Vehicle {
+  start(): void {
+    console.log("汽车启动");
+  }
+}
+class Motorcycle extends Vehicle {
+  start(): void {
+    console.log("摩托车启动");
+  }
+}
 
-export type AveragingTeamType = {
-  seasonList: Array<SeasonDataExtraItemType>;
-  moduleName?: string;
-};
+function startVehicle(vehicle: Vehicle) {
+  vehicle.start();
+}
+const car = new Car();
+const motorcycle = new Motorcycle();
+startVehicle(car);
+startVehicle(motorcycle);
 
-const averageData1: Pick<AveragingTeamType, "seasonList"> = {
-  seasonList: [],
-};
+// 定义一个数组
+const numbers: number[] = [1, 2, 3];
 
-const averageData2: Array<SeasonDataExtraItemType> = [];
-
-console.log(averageData1, averageData2);
+type Instance1=typeof numbers

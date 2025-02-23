@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-15 14:52:28
+ * @LastEditTime: 2025-02-23 09:53:21
  * @Description: file not
 -->
 
@@ -102,12 +102,39 @@ const d: Intersetion = {
 
 5. 接口 与 type(类型别名) 区别：(https://juejin.cn/post/6844904114925600776)
 
-- type 会给一个类型起个新名字。 type 有时和 interface 很像，但是可以作用于原始值（基本类型），联合类型，元组以及其它任何你需要手写的类型
+- type 会给一个类型起个新名字。 type 有时和 interface 很像，但是可以作用于原始值（基本类型），联合类型，元组以及其它任何你自定义的类型
 - interface 接口是对象的状态(属性)和行为(方法)的抽象(描述)
 
 - 都允许扩展：interface 用 extends 来实现扩展;type 使用 & 实现扩展
 - 不同点：type 可以声明基本数据类型别名/联合类型/元组等，而 interface 不行; interface 能够合并声明，而 type 不行
 - 公共的用 interface 实现，不能用 interface 实现的再用 type 实现。
+
+```ts
+1. 作用于原始值（基本类型）
+// 为 string 类型创建别名
+type UserName = string;
+// 使用别名定义变量
+const username: UserName = "JohnDoe";
+
+2. 作用于联合类型
+// 定义联合类型别名
+type StringOrNumber = string | number;
+// 使用别名定义变量
+const value1: StringOrNumber = "hello";
+const value2: StringOrNumber = 123;
+
+3. 作用于元组
+// 定义元组类型别名
+type PersonInfo = [string, number];
+// 使用别名定义元组变量
+const person: PersonInfo = ["Alice", 30];
+
+4. 作用于其它自定义类型
+// 定义函数类型别名
+type AddFunction = (a: number, b: number) => number;
+// 使用别名定义函数
+const add: AddFunction = (a, b) => a + b;
+```
 
 6. ts 操作符
 
@@ -127,6 +154,13 @@ console.log(baz); // 输出：0
 ```js
  x! 将从 x 值域中排除 null 和 undefined
 ```
+
+7. abstract 抽象类
+
+   - 定义通用结构和行为
+   - 强制子类实现特定方法
+   - 实现多态性
+   - 代码复用和分层设计
 
 ## [泛型使用](https://juejin.cn/post/7064351631072526350)
 
@@ -165,7 +199,7 @@ const myPrint: Iprint<number> = print;
 
 ## [ts 高级类型](https://juejin.cn/post/6985296521495314445#heading-28)
 
-- typeof : 获取变量或属性的类型,一般和其他类型操作符搭配使用
+- typeof(类型保护) : 获取变量或属性的类型,一般和其他类型操作符搭配使用
 
 1. 总结:使用 typeof 操作符来获取变量 res 的类型，结果与第一种（对象字面量形式的类型）相同 注意：typeof 只能用来查询变量或属性的类型，无法查询其他形式的类型（比如，函数调用的类型） -[文档](https://ts.yayujs.com/)
 
@@ -266,6 +300,7 @@ type FunctionReturnType = ReturnType<FunctionType>; // boolean | string
   typeof:用于判断 number，string，boolean 或 symbol 四种类型；
   instanceof:用于判断一个实例是否属于某个类,instanceof 的右侧要求是一个构造函数
   in:用于判断一个属性/方法是否属于某个对象
+  is:类型谓词
 
 ```ts
 // typeof 示例
@@ -399,7 +434,7 @@ type Person = {
   gender: string;
 };
 
-// 3 Pick从某个类型中挑出一些属性出来
+// 3 Pick从某个对象类型中挑出一些属性出来
 type P1 = Pick<Person, "name" | "age">; // { name: string; age: number; }
 
 // 4 Omit 与Pick相反，Omit<T,K> 从T中取出除去K的其他所有属性
