@@ -2,21 +2,23 @@
  * @Author: TerryMin
  * @Date: 2023-09-18 13:50:26
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-26 11:00:14
+ * @LastEditTime: 2025-02-26 16:55:38
  * @Description: file not
  */
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) {
-      return mid;
-    } else if (arr[mid] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
+function grayArithmetic() {}
+
+function maxSubArray(arr) {
+  const n = arr.length;
+  const dp = new Array(n);
+  dp[0] = arr[0];
+  let maxSum = dp[0];
+
+  for (let i = 0; i < n; i++) {
+    // 前多项和相加如果没有特定某项大,则从特定某项开始重新计算
+    dp[i] = Math.max(dp[i - 1] + arr[i], arr[i]);
+    maxSum = Math.max(maxSum, dp[i]);
   }
-  return -1;
+  return maxSum;
 }
+const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+console.log(maxSubArray(nums));
