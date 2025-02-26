@@ -2,39 +2,31 @@
  * @Author: TerryMin
  * @Date: 2024-10-01 17:25:59
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-10-01 17:49:20
+ * @LastEditTime: 2025-02-24 11:10:04
  * @Description: file not
  */
 import React from "react";
 
-class MyChild extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-    };
-  }
+// 定义一个普通的函数组件
+const MyComponent = (props) => {
+  console.log(111);
+  return <div>{props.message}</div>;
+};
 
-  handleClick() {
-    // 函数如果找不到调用者，最后就会在顶层对象中调用，也就是this会指向window对象，但由于使用了ES6语法，ES6语法默认采用严格模式，严格模式下，this不会指向window，而是undefined，所以才会报错。
-    console.log(this); // 如果不绑定 this，这里的 this 可能是 undefined 或其他意外的值
-    // this.setState({ count: this.state.count + 2 });
-  }
+// 使用 React.memo 包装组件
+const MemoizedComponent = React.memo(MyComponent);
 
-  render() {
-    console.log(this);
-    return (
+// 在其他组件中使用包装后的组件
+const ClassComponent = () => {
+  const [count, setCount] = React.useState(0);
+
+  return (
       <div>
-        <h1>MyChild</h1>
-        <p>Count: {this.state.count}</p>
-        {/* 虽然没有调用者，但由于使用了箭头函数，箭头函数内部的this就是定义时上层作用域的this，handleClick上层作用域是类的构造函数，那么handleClick的this就是构造函数的this，也就是指向Demo类的实例，所以能够正常执行 */}
-        <button onClick={() => this.handleClick()}>class点击</button>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Increment
-        </button>
+          <button onClick={() => setCount(count + 1)}>增加计数{count}</button>
+          {/* 传递 props */}
+          {/* <MemoizedComponent message="Hello, React!" /> */}
+          <MyComponent message="Hello, React!" />
       </div>
-    );
-  }
-}
-
-export default MyChild;
+  );
+};
+export { ClassComponent };

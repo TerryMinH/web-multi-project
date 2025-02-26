@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-22 11:04:53
+ * @LastEditTime: 2025-02-25 10:54:40
  * @Description: file not
  */
 
@@ -58,3 +58,34 @@ Array.prototype.filter1 = function (fn) {
   }
   return newArr;
 };
+
+// 防抖
+function debounce(callback, delay) {
+  let timeId;
+  return function () {
+    let context = this,
+      arg = arguments;
+    if (timeId) {
+      clearTimeout(timeId);
+    }
+    timeId = setTimeout(() => {
+      callback.apply(context, arg);
+    }, delay);
+  };
+}
+
+// 节流 单位时间只能执行一次
+function throttle(callback, delay) {
+  let timeId;
+  return function () {
+    let context = this,
+      arg = arguments;
+    if (timeId) {
+      return;
+    }
+    timeId = setTimeout(() => {
+      callback.apply(context, arg);
+      clearTimeout(timeId);
+    }, delay);
+  };
+}

@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-21 11:31:29
+ * @LastEditTime: 2025-02-24 11:26:12
  * @Description: file not
 -->
 
@@ -30,11 +30,16 @@
       2.  useEffect:是在 render 渲染结束后执行
       3.  useLayoutEffect:在 DOM 更新之后执行(即浏览器重绘 (repaints) 前执行)
       4.  useReducer:也是一种管理 state 的 hook，可作为 useState 替代方案。当状态管理逻辑变得更复杂时，通常会建议使用 useReducer 而非 useState。
-      5.  useCallback:缓存的是一个函数，是对一个单独的 props 值进行缓存
+      5.  useCallback:缓存的是一个函数，确保函数的引用在多次渲染之间保持不变。
       6.  useMemo:缓存的是一个值
       7.  useRef：可以创建一个可变 ref 对象，这个对象在组件的整个生命周期内不会改变，可以用来存储一些不应该因为状态变化而变化的值或函数。
+      8. React.memo:React 提供的一个高阶组件（Higher-Order Component，HOC），主要用于优化函数组件的性能，避免不必要的渲染。适用 纯展示组件和 频繁渲染的组件。
 
 - 自定义 Hooks 处理过哪些问题？
+
+      1.  权限 Hooks
+      2.  表格分页 Hooks
+      3.  弹窗 Hooks
 
 - React 生命周期方法有哪些？
   [生命周期图谱](https://cloud.tencent.com/developer/article/2204517)
@@ -76,6 +81,10 @@
 - [React 合成事件](https://vue3js.cn/interview/React/SyntheticEvent.html)
 
       1. React 基于浏览器的事件机制自身实现了一套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等
+
+- React 状态管理
+
+      1.状态管理解决问题:一 就是解决跨层级组件通信问题; 二 就是对一些全局公共状态的缓存。
 
 ## React 与 Vue 对比
 

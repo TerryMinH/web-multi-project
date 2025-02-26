@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 14:30:58
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-21 17:31:21
+ * @LastEditTime: 2025-02-26 11:16:09
  * @Description: file not
 -->
 <!DOCTYPE html>
@@ -18,120 +18,30 @@
     </ul>
   </body>
   <script>
-    // 编写一个函数，将arr1和arr2合并，并按照id排序，如果id相同则取time较大的那个对象，如果id不同则保留arr1和arr2中的对象。
-    // 输入数据 arr1，arr2
-    const arr1 = [
-      {
-        id: 1,
-        name: "allen",
-        time: "3",
-      },
-      {
-        id: 2,
-        name: "alice",
-        time: "1",
-      },
-      {
-        id: 9,
-        name: "Bun",
-        time: "1",
-      },
-      {
-        id: 3,
-        name: "Bun",
-        time: "1",
-      },
-    ];
-    const arr2 = [
-      {
-        id: 1,
-        name: "bob",
-        time: "4",
-      },
-      {
-        id: 2,
-        name: "Nick",
-        time: "2",
-      },
-      {
-        id: 4,
-        name: "Mark",
-        time: "2",
-      },
-      {
-        id: 5,
-        name: "Frank",
-        time: "6",
-      },
-    ];
+    let nums = [3, 2, 4, 9, 10, 6, 12, 5, 2, 77, 8, 1],
+      target = 6;
+    const sortArr = nums.sort((a, b) => a - b);
+    console.log(sortArr);
 
-    // 输出结果 res
-    // const res = [
-    //     {
-    //         id: 1,
-    //         name: 'bob',
-    //         time: '4'
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Nick',
-    //         time: '2'
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'Bun',
-    //         time: '1'
-    //     },
-    //     {
-    //         id: 4,
-    //         name: 'Mark',
-    //         time: '2'
-    //     },
-    //     {
-    //         id: 5,
-    //         name: 'Frank',
-    //         time: '6'
-    //     },
-    // ]
-
-    function mergeAndSort(arr1, arr2) {
-      const mergeArr = [...arr1, ...arr2];
-      let idMap = {};
-      mergeArr.forEach((item) => {
-        const { id, time } = item;
-        if (!idMap[id]) {
-          idMap[id] = item;
+    function binarySearch(arr, target) {
+      let left = 0;
+      let right = arr.length - 1;
+      console.log("right", right);
+      while (left <= right) {
+        console.log("right", left, right);
+        let mid = Math.floor((left + right) / 2);
+        console.log(mid);
+        if (arr[mid] === target) {
+          return mid;
+        } else if (arr[mid] < target) {
+          left = mid + 1;
         } else {
-          if (idMap[id].time < time) {
-            idMap[id] = item;
-          }
+          right = mid - 1;
         }
-      });
-      const resultArr = Object.values(idMap);
-      resultArr.sort((a, b) => a.id - b.id);
-      return resultArr;
+      }
+      return -1;
     }
-    // console.log(mergeAndSort(arr1, arr2));
 
-    setTimeout(() => {
-      console.log(1);
-    }, 0);
-    new Promise((resolve, reject) => {
-      console.log(2);
-      for (let i = 0; i < 10000; i++) {
-        i === 9999 && resolve();
-      }
-      console.log(3);
-    }).then(() => {
-      console.log(4);
-    });
-    console.log(5);
-    
-    Array.prototype.reduce = function (reducer, initVal) {
-      for (let i = 0; i < this.length; i++) {
-        initVal = reducer(initVal, this[i], i, this);
-      }
-      return initVal;
-    };
+    console.log(binarySearch(sortArr, target));
   </script>
 </html>

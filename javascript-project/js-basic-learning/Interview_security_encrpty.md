@@ -2,11 +2,17 @@
  * @Author: TerryMin
  * @Date: 2024-04-14 06:54:55
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-01-06 11:08:03
+ * @LastEditTime: 2025-02-25 14:18:06
  * @Description: file not
 -->
 
-## JS 加解密 [Https加密原理](https://www.cnblogs.com/terrymin/p/15735083.html)
+# JS 安全加密
+
+## 常见网络攻击类型
+
+- [XSS 与 CSRF 的区别](https://www.cnblogs.com/terrymin/p/15344052.html)
+
+## JS 加解密 [Https 加密原理](https://www.cnblogs.com/terrymin/p/15735083.html)
 
 - encodeURI、decodeURI 与 encodeURIComponent、decodeURIComponent
 
