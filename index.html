@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 14:30:58
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-26 16:59:06
+ * @LastEditTime: 2025-02-28 08:43:42
  * @Description: file not
 -->
 <!DOCTYPE html>
@@ -51,6 +51,61 @@
       return maxSum;
     }
     const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-    console.log(maxSubArray(nums));
+    // console.log(maxSubArray(nums));
+
+    // 归并排序
+    function mergeSort(arr) {
+      // 分解步骤：如果数组长度小于等于 1，直接返回
+      if (arr.length <= 1) {
+        return arr;
+      }
+
+      // 找到数组的中间位置
+      const mid = Math.floor(arr.length / 2);
+      console.log(arr, mid);
+
+      // 递归地对左右子数组进行排序
+      const left = mergeSort(arr.slice(0, mid));
+      const right = mergeSort(arr.slice(mid));
+
+      // 合并步骤：将排好序的左右子数组合并
+      return merge(left, right);
+    }
+    function merge(left, right) {
+      console.log("merge==>", left, right);
+      let result = [];
+      let leftIndex = 0;
+      let rightIndex = 0;
+
+      // 比较左右子数组的元素，将较小的元素依次放入结果数组
+      while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+          result.push(left[leftIndex]);
+          leftIndex++;
+        } else {
+          result.push(right[rightIndex]);
+          rightIndex++;
+        }
+      }
+      let arr1 = result
+        .concat(left.slice(leftIndex))
+        .concat(right.slice(rightIndex));
+
+      console.log("arr1==>", arr1);
+      // 将剩余的元素添加到结果数组
+      return arr1;
+    }
+
+    mergeSort(nums);
+
+    // function rob(arr) {
+    //   let len = arr.length;
+    //   if (len === 2) return Math.max(arr[0], arr[1]);
+    //   let sumMax = 0;
+    //   for (let i = 0; i < len; i++) {
+    //     sumMax = sumMax + Math.max(arr[i] + arr[i + 2], arr[i]);
+    //   }
+    //   return sumMax;
+    // }
   </script>
 </html>

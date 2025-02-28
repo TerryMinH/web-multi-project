@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-25 10:54:40
+ * @LastEditTime: 2025-02-28 08:36:31
  * @Description: file not
  */
 
@@ -46,7 +46,7 @@ const sum2 = arr2.MyReducer((acc, current, index) => {
   acc = acc + current.id;
   return acc;
 }, 0);
-console.log(11, sum1, sum2);
+// console.log(11, sum1, sum2);
 
 Array.prototype.filter1 = function (fn) {
   if (typeof fn !== "function") {
@@ -89,3 +89,8 @@ function throttle(callback, delay) {
     }, delay);
   };
 }
+const array1 = [1, 2, 3];
+const arr3 = array1.slice(5); // 1,2,3
+const arr4 = array1.slice(-1); // 3
+const arr5 = array1.slice(-5); // 1,2,3
+console.log(arr3, arr4, arr5, array1);

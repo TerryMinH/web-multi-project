@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-02-23 10:32:36
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-04-11 16:44:48
+ * @LastEditTime: 2025-02-28 20:28:34
  * @Description: https://juejin.cn/post/7137562715676999710
  */
 import { defineAsyncComponent } from "vue";
@@ -20,11 +20,13 @@ export default (app) => {
   const REG = /(?<=libs-component\/).*?(?=.vue)/gi;
   for (const path in context) {
     const component = path.match(REG);
-    component[0] &&
-      app.component(
-        component[0],
-        defineAsyncComponent(() => import(/* @vite-ignore */ `${path}`))
-      );
+    if (component) {
+      component[0] &&
+        app.component(
+          component[0],
+          defineAsyncComponent(() => import(/* @vite-ignore */ `${path}`))
+        );
+    }
   }
 };
 

@@ -2,11 +2,11 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-25 20:57:54
+ * @LastEditTime: 2025-02-26 20:35:12
  * @Description: file not
 -->
 
-# [Vue](https://cn.vuejs.org/)
+# [Vue](https://cn.vuejs.org/)+[Vite](https://vitejs.cn/vite3-cn/)
 
 ## Vue
 
@@ -65,6 +65,13 @@
       3.  虚拟 DOM 实现原理的差异:
         3.1 React 使用递归的方式来创建和更新虚拟 DOM 树,React 的 Diff 算法采用了深度优先遍历的方式。
         3.2 Vue 采用了基于响应式原理的细粒度更新机制,Vue 在初始化时会对数据进行劫持，当数据发生变化时，Vue 会自动追踪到哪些 DOM 节点依赖于这些数据，并只更新这些受影响的节点。
+
+- Vue 中 <KeepAlive>组件缓存原理?
+
+  1. <KeepAlive> 通过维护一个缓存对象,获取组件的名称作为缓存标识,在组件切换时对组件实例进行缓存和复用，同时利用特殊的生命周期钩子来管理组件的激活和失活状态，从而实现了组件的高效缓存和性能优化。
+  2. 组件激活与失活:
+     2.1 deactivated：当组件从活跃状态变为不活跃状态（即被切换走）时，会触发 deactivated 钩子。此时组件实例不会被销毁，而是被缓存起来。
+     2.2 activated：当组件从缓存中重新被激活（即再次被切换回来）时，会触发 activated 钩子。这样可以在组件重新显示时执行一些特定的操作。
 
 - 前端性能优化方式:
 

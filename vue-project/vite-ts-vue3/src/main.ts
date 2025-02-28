@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-11-14 14:02:39
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-11-14 14:24:42
+ * @LastEditTime: 2025-02-28 20:29:08
  * @Description: file not
  */
 import { createApp, defineAsyncComponent } from "vue";
@@ -11,7 +11,7 @@ import ElementPlus from "element-plus";
 import components from "@/components/index";
 import "./style.css";
 import App from "./App.vue";
-import plugin from "./plugins/plugin-child.js";
+import plugin from "./plugins/plugin-child";
 
 const app = createApp(App);
 // console.log(app);
