@@ -2,11 +2,11 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-23 09:53:21
+ * @LastEditTime: 2025-02-28 21:02:27
  * @Description: file not
 -->
 
-# Typescript
+# [Typescript](https://www.typescriptlang.org/)
 
 - [typescript 基础学习](https://juejin.cn/post/7124117404187099172#heading-58)
 - [TS 基本概念总结](https://juejin.cn/post/7088304364078497800#heading-4)

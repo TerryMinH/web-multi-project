@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-04-26 10:00:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-11-14 14:37:55
+ * @LastEditTime: 2025-03-01 14:41:18
  * @Description: file not
 -->
 <template>
@@ -11,21 +11,34 @@
     <button @click="changeBtn('2')">按钮2</button>
     <ChildComponent :address="'中国'"></ChildComponent>
   </div>
+  <div class="container">
+    <p>{{ address.street }}</p>
+    <p>{{ address.city }}</p>
+  </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, toRefs, toRef, computed } from "vue";
+import { ref, reactive, onMounted, toRefs, customRef, toRef, computed } from "vue";
 import ChildComponent from "./ChildComponent.vue";
 
 let obj = { name: "alice", age: 12 };
 let newObj = toRef(obj, "name");
+const state = reactive({
+  address: {
+    street: '123 Main St',
+    city: 'Anytown'
+  }
+});
 
-onMounted(() => {});
+const { address } = toRefs(state);
+
+onMounted(() => { });
+
 
 const changeBtn = (type) => {
   switch (type) {
     case "1":
-      // msg.value = "terrymin";
+      state.address.city = "terrymin";
       break;
     case "2":
       newObj.value = "Tom";
@@ -38,5 +51,9 @@ const changeBtn = (type) => {
 <style scoped>
 h1 {
   color: v-bind(color);
+}
+
+.container {
+  border: 1px solid;
 }
 </style>
