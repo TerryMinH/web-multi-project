@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-05 09:45:02
+ * @LastEditTime: 2025-03-04 19:11:59
  * @Description: file not
  */
 
@@ -139,6 +139,8 @@ function fibonaccMemo(n, memo = {}) {
   return memo[n];
 }
 // console.log(array1.myFill(0, 1, 2));
+
+// 提取最长字符串
 // let longestCommonPrefix = function (str) {
 //   if (str.length === 0) return "";
 //   let res = str[0];
@@ -157,4 +159,48 @@ function fibonaccMemo(n, memo = {}) {
 //   }
 //   return res;
 // };
-const strArr = ["aaafsd", "aaaawwewer", "aaaddfff"];
+// const strArr = ["aaafsd", "aaaawwewer", "aaaddfff"];
+
+// 千分位
+let thousandSeparator = function (num) {
+  let numStr = num.toString();
+  let result = numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return result;
+};
+// 测试示例
+// console.log(thousandSeparator2(1234567.45)); // 输出: 1,234,567
+
+// 文件批量下载 有一组下载链接urls,每次支持limitN次同时下载，下载完成后执行done函数
+function batchDownload(urls, limitN, done) {
+  let queue = [...urls],
+    activeCount = 0;
+  async function download() {
+    if (queue.length === 0 && activeCount === 0) {
+      return done();
+    }
+    if (activeCount >= limitN || queue === 0) {
+      return;
+    }
+    const url = queue.shift();
+    console.log(url, activeCount);
+    activeCount++;
+    try {
+      const response = await fetch(url);
+      console.log(response);
+      const blob = await response.bob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = url;
+      link.click();
+      URL.revokeObjectURL(link.href);
+      activeCount--;
+      download();
+    } catch (error) {
+      console.log(`下载${url}出错`);
+    }
+  }
+
+  for (let i = 0; i < Math.min(limitN, urls.length); i++) {
+    download();
+  }
+}
