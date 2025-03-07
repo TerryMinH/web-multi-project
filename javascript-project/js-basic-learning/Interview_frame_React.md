@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-05 09:26:47
+ * @LastEditTime: 2025-03-07 14:04:33
  * @Description: file not
 -->
 
@@ -27,8 +27,8 @@
 - [常用 Hooks](https://juejin.cn/post/7118937685653192735)
 
       1.  useState:用于定义和保存元件中状态(state)
-      2.  useEffect:是在 render 渲染结束后执行
-      3.  useLayoutEffect:在 DOM 更新之后执行(即浏览器重绘 (repaints) 前执行)
+      2.  useEffect:是异步执行的。在 React 完成 DOM 更新、浏览器绘制页面之后，才会执行 useEffect 中的回调函数
+      3.  useLayoutEffect:是同步执行的。它会在 React 完成 DOM 更新，但浏览器还未绘制页面之前执行。也就是说，useLayoutEffect 的回调函数会阻塞浏览器的渲染，直到回调函数执行完毕，浏览器才会进行页面绘制。(对应componentDidMount 和 componentDidUpdate )
       4.  useReducer:也是一种管理 state 的 hook，可作为 useState 替代方案。当状态管理逻辑变得更复杂时，通常会建议使用 useReducer 而非 useState。
       5.  useCallback:缓存的是一个函数，确保函数的引用在多次渲染之间保持不变。
       6.  useMemo:缓存的是一个值

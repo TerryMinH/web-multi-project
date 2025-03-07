@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-04 11:03:11
+ * @LastEditTime: 2025-03-06 18:45:05
  * @Description: file not
 -->
 
@@ -133,3 +133,12 @@
       安全性要求高：由于 WebSocket 连接是持久的，一旦被攻击，可能会导致数据泄露或服务中断，因此需要加强安全防护。
 
 ## Nodejs
+
+- CommonJS 与 ES6 Module 规范的区别：
+
+  1.  CommonJS 是同步加载，ESM 是异步加载；(由于 CommonJS 是用于服务器端的模块体系，需要加载的模块都在本地，所以采用同步加载也不会出问题，但是 ESM 用于浏览器端时，可能涉及到一些异步请求，所以需要采用异步加载。)
+  2.  CommonJS 模块是运行时加载，ES6 Modules 是编译时输出接口。
+  3.  ES6 Modules 中没有这些顶层变量：arguments、require、module、exports、filename、dirname。
+  4.  CommonJS 输出是值的浅拷贝；ES6 Modules 输出的是值的引用，被输出模块的内部的改变会影响引用的改变。
+  5.  CommonJs 导入的模块路径可以是一个表达式，因为它使用的是 require()方法；而 ES6 Modules 只能是字符串。
+  6.  CommonJSthis 指向当前模块，ES6 Modulesthis 指向 undefined。

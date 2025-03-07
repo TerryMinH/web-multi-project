@@ -3,34 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Object URL Example</title>
+    <title>Network Status Detection</title>
+    <style lang=""></style>
   </head>
 
   <body>
-    <input type="file" id="fileInput" />
-    <img id="imageDisplay" alt="Selected Image" />
-
+    <p id="status">Checking network status...</p>
     <script>
-      const fileInput = document.getElementById("fileInput");
-      const imageDisplay = document.getElementById("imageDisplay");
-
-      fileInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          const objectURL = URL.createObjectURL(file);
-          console.log(objectURL);
-          imageDisplay.src = objectURL;
-        }
-      });
-      // 创建包含文本数据的 Blob
-      const text = "Hello, World!";
-      const blob = new Blob([text], { type: "text/plain" });
-      const newBlob = blob.slice(0, 5); // 提取前 5 个字节
-      const reader = new FileReader();
-      reader.onload = function () {
-        console.log(reader.result); // 输出 'Hello'
+      function object(o) {
+        function F() {}
+        //F.prototype={name:'ccdida',friends:['shelly','Bob']}
+        F.prototype = o;
+        // new F()
+        //F是个构造函数，返回F的实例：1.this此时用不上 2.将实例的__proto__指向F.prototype.
+        //即返回了一个实例，其__proto__指向{name:'ccdida',friends:['shelly','Bob']}
+        return new F();
+      }
+      var person = {
+        name: "ccdida",
+        friends: ["shelly", "Bob"],
       };
-      reader.readAsText(newBlob);
+      var person1 = object(person);
+      var person2 = object(person);
+      //object函数相当于实现了Object.Create的功能
+      console.log(person1.__proto__ === person); //true
+      person2.friends.push("shlimy");
+      console.log(person1); // ["shelly", "Bob", "shlimy"]
+
+      const statusElement = document.getElementById("status");
+
+      function updateStatus() {
+        if (navigator.onLine) {
+          statusElement.textContent = "Network is online";
+        } else {
+          statusElement.textContent = "Network is offline";
+        }
+      }
+
+      var name = "window";
+      var person = {
+        name: "person",
+        sayName: function () {
+          console.log(this.name);
+        },
+      };
+      function sayName() {
+        var sss = person.sayName;
+        sss(); // window
+        person.sayName(); // person
+        person.sayName(); // person
+        (b = person.sayName)(); // window
+      }
+      sayName();
     </script>
   </body>
 </html>
