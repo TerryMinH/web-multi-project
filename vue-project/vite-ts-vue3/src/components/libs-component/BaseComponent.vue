@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-04-26 10:00:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-01 14:41:18
+ * @LastEditTime: 2025-03-08 16:42:53
  * @Description: file not
 -->
 <template>
@@ -14,11 +14,12 @@
   <div class="container">
     <p>{{ address.street }}</p>
     <p>{{ address.city }}</p>
+    <CustomEle />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, toRefs, customRef, toRef, computed } from "vue";
+import { ref, reactive, onMounted, toRefs, h, toRef, computed } from "vue";
 import ChildComponent from "./ChildComponent.vue";
 
 let obj = { name: "alice", age: 12 };
@@ -29,6 +30,8 @@ const state = reactive({
     city: 'Anytown'
   }
 });
+
+const CustomEle = h('div', [h('div', { class: 'mg-class' }, 'div hello'), h('span', 'span hello')])
 
 const { address } = toRefs(state);
 
@@ -55,5 +58,9 @@ h1 {
 
 .container {
   border: 1px solid;
+}
+
+::v-deep .mg-class {
+  color: red;
 }
 </style>

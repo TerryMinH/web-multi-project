@@ -10,51 +10,23 @@
   <body>
     <p id="status">Checking network status...</p>
     <script>
-      function object(o) {
-        function F() {}
-        //F.prototype={name:'ccdida',friends:['shelly','Bob']}
-        F.prototype = o;
-        // new F()
-        //F是个构造函数，返回F的实例：1.this此时用不上 2.将实例的__proto__指向F.prototype.
-        //即返回了一个实例，其__proto__指向{name:'ccdida',friends:['shelly','Bob']}
-        return new F();
-      }
-      var person = {
-        name: "ccdida",
-        friends: ["shelly", "Bob"],
-      };
-      var person1 = object(person);
-      var person2 = object(person);
-      //object函数相当于实现了Object.Create的功能
-      console.log(person1.__proto__ === person); //true
-      person2.friends.push("shlimy");
-      console.log(person1); // ["shelly", "Bob", "shlimy"]
-
-      const statusElement = document.getElementById("status");
-
-      function updateStatus() {
-        if (navigator.onLine) {
-          statusElement.textContent = "Network is online";
-        } else {
-          statusElement.textContent = "Network is offline";
+      class Foo {
+        // 静态方法
+        static classMethod() {
+          return "hello";
+        }
+        static classMethod1() {
+          return "hello TerryMin";
+        }
+        say() {
+          console.log(this);
+          console.log(Foo);
+          console.log(Foo.classMethod1());
         }
       }
-
-      var name = "window";
-      var person = {
-        name: "person",
-        sayName: function () {
-          console.log(this.name);
-        },
-      };
-      function sayName() {
-        var sss = person.sayName;
-        sss(); // window
-        person.sayName(); // person
-        person.sayName(); // person
-        (b = person.sayName)(); // window
-      }
-      sayName();
+      // Foo.classMethod(); // 'hello'
+      var foo = new Foo();
+      foo.say(); // TypeError: foo.classMethod is not a function
     </script>
   </body>
 </html>

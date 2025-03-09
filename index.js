@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-07 10:01:54
+ * @LastEditTime: 2025-03-08 10:30:32
  * @Description: file not
  */
 function object(o) {
@@ -21,6 +21,26 @@ var person = {
 var person1 = object(person);
 var person2 = object(person);
 //object函数相当于实现了Object.Create的功能
-console.log(person1.__proto__ === person); //true
+// console.log(person1.__proto__ === person); //true
 person2.friends.push("shlimy");
-console.log(person1); // ["shelly", "Bob", "shlimy"]
+// console.log(person1); // ["shelly", "Bob", "shlimy"]
+
+class Foo {
+  // 静态方法
+  static classMethod() {
+    return "hello";
+  }
+  static classMethod1() {
+    return "hello TerryMin";
+  }
+  say(){
+    console.log(Foo.classMethod1());
+  }
+}
+// Foo.classMethod(); // 'hello'
+var foo = new Foo();
+foo.say(); // TypeError: foo.classMethod is not a function
+
+// // 静态属性
+// Foo.prop = 1;
+// Foo.prop; // 1

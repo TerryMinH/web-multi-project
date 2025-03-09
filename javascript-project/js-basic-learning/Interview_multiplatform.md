@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-05 09:17:22
+ * @LastEditTime: 2025-03-09 08:56:33
  * @Description: file not
 -->
 
@@ -36,6 +36,7 @@
 
 - 小程序生命周期
   小程序的生命周期包括应用生命周期和页面生命周期，它们分别描述了小程序应用整体以及单个页面从创建到销毁的整个过程:
+
   1.  应用生命周期(在 app.js 文件中进行监听):
       1.1 onLaunch(options): 小程序初始化时触发，全局只触发一次。获取用户信息,版本更新。
       1.2 onShow(options): 小程序启动或从后台进入前台时触发。options 包含小程序的启动参数。
@@ -48,3 +49,65 @@
       2.3 onReady:在页面初次渲染完成后触发，适合进行页面交互操作。
       2.4 onHide:页面隐藏时触发，比如跳转到其他页面或者小程序进入后台。
       2.5 onUnload
+  3.  不同生命周期区别:
+      3.1 onHide 与 onUnload 区别:
+      3.1.1 onHide 适用于页面临时隐藏时进行一些资源的临时暂停操作，以便在页面再次显示时能快速恢复
+      3.1.2 onUnload 适用于页面销毁时进行资源的彻底清理，避免内存泄漏和资源浪费。
+
+- 小程序之间跳转
+
+  1.  小程序跳转到另外一个小程序: wx.navigateToMiniProgram
+
+      ```js
+      wx.navigateToMiniProgram({
+        appId: "目标小程序的appId", // 必须填写
+        path: "pages/index/index", // 可选，跳转目标页面路径（默认首页）
+        extraData: { key: "value" }, // 可选，传递给目标小程序的数据
+        envVersion: "release", // 目标小程序版本（develop/trial/release）
+        success(res) {
+          console.log("跳转成功");
+        },
+      });
+      ```
+
+  2.  H5 页面跳转到小程序页面:
+      2.1 引入 JS-SDK, 使用微信开放标签 wx-open-launch-weapp
+      2.2 通过微信小程序的 web-view 中转
+
+      ```js
+      <web-view id="web-view-id" src="your_h5_url"></web-view>;
+
+      function jumpToMiniProgram() {
+        window.postMessage({
+          type: "jumpToMiniProgram",
+          appId: "target_appId",
+          path: "pages/index/index",
+        });
+      }
+
+      Page({
+        onLoad() {
+          this.webViewContext = this.selectComponent("#web-view-id");
+          this.webViewContext.onMessage((e) => {
+            if (e.data[0].type === "jumpToMiniProgram") {
+              wx.navigateToMiniProgram({
+                appId: e.data[0].appId,
+                path: e.data[0].path,
+                success() {
+                  console.log("跳转成功");
+                },
+                fail(err) {
+                  console.error("跳转失败", err);
+                },
+              });
+            }
+          });
+        },
+      });
+      ```
+
+- H5 小程序分享
+
+  1.  在微信小程序中分享 H5 页面:在 onShareAppMessage 配置分享信息
+  2.  在公众号中分享 H5 页面:前端引入并配置 JS-SDK,设置分享到朋友圈和好友的信息。
+  3.  在原生 app 中分享:通过调用原生 app api 分享

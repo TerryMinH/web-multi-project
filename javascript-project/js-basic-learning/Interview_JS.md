@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-07 09:51:13
+ * @LastEditTime: 2025-03-08 11:10:10
  * @Description: file not
 -->
 
@@ -230,6 +230,81 @@
   3.  重复声明：
       3.1 var：可以在同一作用域内使用 var 重复声明同一个变量，后面的声明会覆盖前面的声明。
       3.2 let 和 const：在统一作用域内，let 和 const 不允许重复声明同一个变量，否则会抛出 SyntaxError。
+
+- 取消网络请求
+
+  1. AbortController 是浏览器提供的一个 Web API，用于在 Fetch API 和 XMLHttpRequest 中取消请求
+
+  ```js
+  // 创建一个AbortController实例
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  fetch("https://example.com/api/data", { signal })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => {
+      if (error.name === "AbortError") {
+        console.log("请求已被取消");
+      } else {
+        console.log("请求出错", error);
+      }
+    });
+
+  // 在需要取消请求的地方调用
+  controller.abort();
+  ```
+
+  2. 使用 XMLHttpRequest 的 abort 方法
+
+  ```js
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://example.com/api/data", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+      } else {
+        console.log("请求出错");
+      }
+    }
+  };
+  xhr.send();
+
+  // 在需要取消请求的地方调用
+  xhr.abort();
+  ```
+
+  3. Axios 中取消请求:axios 取消网络请求的原理是通过 CancelToken 注册取消回调，在需要时触发回调来中断请求，并通过不同的请求适配器实现具体的取消操作。
+     底层实现:
+     3.1 浏览器环境中: XMLHttpRequest 适配器
+     3.2 Node 环境中:http 适配器,使用 http 模块发起请求时，cancel 函数会调用 request.destroy() 方法来取消请求。request.destroy() 会关闭底层的 TCP 连接，从而终止请求。
+
+  ```js
+  import axios from "axios";
+
+  // 创建取消令牌源
+  const source = axios.CancelToken.source();
+
+  // 发起请求并传入取消令牌
+  axios
+    .get("https://api.example.com/data", {
+      cancelToken: source.token,
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      if (axios.isCancel(error)) {
+        console.log("请求已取消:", error.message);
+      } else {
+        console.error("请求出错:", error);
+      }
+    });
+
+  // 取消请求
+  source.cancel("用户取消了请求");
+  ```
 
 ## 常见场景题
 
