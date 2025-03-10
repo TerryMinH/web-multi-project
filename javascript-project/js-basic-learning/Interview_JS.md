@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-08 11:10:10
+ * @LastEditTime: 2025-03-10 09:59:33
  * @Description: file not
 -->
 
@@ -69,6 +69,16 @@
   3.  ID 选择器:通过元素的 id 属性来选择元素，ID 名前需要加上 #。一个 HTML 文档中，每个元素的 id 应该是唯一的
   4.  属性选择器:根据元素的属性或属性值来选择元素。
   5.  伪类选择器:用于选择处于特定状态的元素，如链接的不同状态、元素的第一个子元素等。伪类名前需要加上 :。
+
+      ```js
+      /**
+       * 1. 链接伪类选择器: :link：用于选择未被访问过的链接,:visited：用于选择已经被访问过的链接等
+        2. 结构伪类选择器: :first-child：选择父元素的第一个子元素。
+        3. 目标伪类选择器: :target：选择当前活动的目标元素，通常与 URL 中的锚点（# 后面的部分）相关
+        4. 表单伪类选择器: :disabled，:checked：选择被选中的表单元素等
+      **/
+      ```
+
   6.  伪元素选择器:用于选择元素的特定部分，如元素的第一个字母、第一行等。伪元素名前需要加上 ::。
 
   ```js
@@ -216,6 +226,12 @@
 
   1. this 绑定优先级：new 关键字 > 显式绑定 > 隐式绑定 > 默认绑定
   2. 间接函数引用：指的是通过变量、对象属性或数组元素等方式来引用函数，而不是直接使用函数名来调用函数。间接函数引用可能会改变 this 的指向，尤其是当函数从对象的方法赋值给变量或存储在数组中时，this 不再指向原对象。
+  3. this 指向：
+     3.1 普通函数调用：this 指向全局对象(严格模式下为 undefined)
+     3.2 方法调用：this 指向调用方法的对象
+     3.3 构造函数：this 指向实例
+     3.4 call、apply、bind：指向第一个参数
+     3.5 箭头函数：指向函数定义时的上下文，不随调用方法改变
 
 ## ES6 与 Typescript
 
@@ -344,7 +360,7 @@
       ```
 
   2.  断点续传:更适用于网络不稳定的场景，如移动网络环境。当网络中断后，用户不需要重新上传整个文件，只需继续上传未完成的部分，节省了时间和流量。例如，在手机端上传大型文件时，使用断点续传可以提高用户体验。
-  3.  流上传:大文件流上传采用的是流式处理的方式，它会将文件数据以流的形式逐块读取和发送，而不是一次性将整个文件加载到内存中。这样，内存中只需要存储当前正在处理的小块数据，大大减少了内存的占用，从而避免了因内存不足而导致的卡顿。
+  3.  流上传:大文件流上传使用 ReadableStream 读取文件内容方式，它会将文件数据以流的形式逐块读取和发送，而不是一次性将整个文件加载到内存中。这样，内存中只需要存储当前正在处理的小块数据，大大减少了内存的占用，从而避免了因内存不足而导致的卡顿。
   4.  三者区别:
       4.1 切片上传：更适合网络不稳定、文件非常大的场景，能够有效应对网络中断等问题，保证文件上传的完整性。例如，在云存储服务中，用户上传大型视频文件时，通常会采用切片上传的方式。
       4.2 断点续传：切片上传是实现断点续传的基础，断点续传通常依赖于切片上传的技术，因为只有将文件切片后，才能精确地记录上传进度并从断点处继续上传。例如，在手机端上传大型文件时，使用断点续传可以提高用户体验。
@@ -356,3 +372,59 @@
   2. 分块下载
   3. 断点续下
   4. HTTP Range 请求
+
+- 如何移动端适配
+
+  1. viewport 布局
+  2. 媒体查询(Media Queries)
+  3. 弹性布局（Flexbox 和 Grid）
+  4. Rem 或者 vh/vw 布局
+  5. 推荐:pxToRem 和弹性布局多种方式结合
+
+     ```js
+       <!DOCTYPE html>
+       <html lang="en">
+
+       <head>
+           <meta charset="UTF-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <style>
+               /* 初始化样式 */
+               html {
+                   font-size: 16px;
+               }
+
+               .box {
+                   width: 10rem;
+                   height: 10rem;
+                   background-color: #f0f0f0;
+               }
+           </style>
+           <script>
+               // 根据屏幕宽度动态设置根元素字体大小
+               function setRootFontSize() {
+                   const designWidth = 750; // 设计稿宽度
+                   const clientWidth = document.documentElement.clientWidth;
+                   const fontSize = (clientWidth / designWidth) * 100; // 以设计稿宽度为 750px，1rem 对应 100px 为例
+                   document.documentElement.style.fontSize = fontSize + 'px';
+               }
+
+               // 页面加载时设置根元素字体大小
+               window.addEventListener('load', setRootFontSize);
+               // 窗口大小改变时重新设置根元素字体大小
+               window.addEventListener('resize', setRootFontSize);
+           </script>
+       </head>
+
+       <body>
+           <div class="box"></div>
+       </body>
+
+       </html>
+     ```
+
+- 站点一键换肤
+  1. CSS 类名切换: 优点：实现简单，易于维护，不需要重新加载页面，切换速度快。缺点：如果主题样式较多，CSS 文件会变得庞大，且每个主题的样式需要手动编写。
+  2. CSS 变量: 在 CSS 中定义全局的 CSS 变量。优点：代码简洁，可维护性高，只需要修改变量的值就能实现主题切换。缺点：浏览器兼容性有一定要求
+  3. 动态加载 CSS 文件: 准备不同主题的 CSS 文件：创建多个不同主题的 CSS 文件，例如 default.css 和 dark.css。
+  4. SVG 图标换色: 如果站点中有 SVG 图标，也可以通过修改 SVG 的 fill 或 stroke 属性来实现图标颜色的切换，配合上述的换肤方式，使整个站点的换肤效果更加统一

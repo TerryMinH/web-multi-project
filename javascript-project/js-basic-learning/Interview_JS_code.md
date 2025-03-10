@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-08 10:55:59
+ * @LastEditTime: 2025-03-09 10:18:15
  * @Description: file not
 -->
 
@@ -122,7 +122,7 @@ func("boy");
 
 ## 函数防抖与节流
 
-1. 函数防抖(debounce)：指在一定时间内，只有最后一次点击才会触发相应的操作。如果在这个时间间隔内再次点击，会重新计时。 应用场景：
+1. 函数防抖(debounce)：指事件在触发 n 秒后再执行回调,如果在这个时间间隔内多次点击，会重新计时,只有最后一次有效。 应用场景：
 
 - 手机号、邮箱输入检测
 - 搜索框搜索输入（只需最后一次输入完后，再发送 Ajax 请求）
@@ -542,6 +542,10 @@ console.log(obj1, obj2);
    ```
 
 2. [ES5 方式手写通俗易懂 Promise 实现](https://juejin.cn/post/6856213486633304078#comment)
+   2.1 Promise.all() 要求所有 Promise 都成功才会成功，适用于需要所有异步操作都完成后再进行下一步处理的场景。
+   2.2 Promise.race() 只要有一个 Promise 完成就会结束，常用于实现超时控制等场景。
+   2.3 Promise.allSettled() 会等待所有 Promise 敲定，返回每个 Promise 的结果，适用于需要知道所有异步操作最终状态的场景。
+   2.4 Promise.any() 只要有一个 Promise 成功就会成功，适用于多个异步操作中只要有一个成功即可的场景。
 
 ## async/await
 

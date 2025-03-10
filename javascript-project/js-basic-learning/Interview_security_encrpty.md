@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-04-14 06:54:55
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-25 14:18:06
+ * @LastEditTime: 2025-03-10 11:23:26
  * @Description: file not
 -->
 
@@ -11,6 +11,25 @@
 ## 常见网络攻击类型
 
 - [XSS 与 CSRF 的区别](https://www.cnblogs.com/terrymin/p/15344052.html)
+  其他攻击方式：
+
+  1. SQL 注入攻击：
+     1.1 定义：攻击者通过在输入框或 URL 参数中注入恶意的 SQL 语句，破坏原有的 SQL 查询逻辑。
+     1.2 防范错失：
+     1.2.1 使用参数化查询：在执行 SQL 查询时，使用参数化查询，将用户输入作为参数传递给查询语句，而不是直接拼接在 SQL 语句中。
+     1.2.2 输入验证和过滤：对用户输入进行严格的验证和过滤，只允许合法的字符和格式。
+
+  2. 中间人攻击（MITM，Man - in - the - Middle Attack）
+     2.1 定义：攻击者拦截并篡改客户端和服务器之间的通信，获取敏感信息或执行恶意操作。例如，攻击者在公共无线网络中设置一个虚假的热点，拦截用户的网络请求。
+     2.2 防范措施：
+     2.2.1 使用 HTTPS：HTTPS 协议通过 SSL/TLS 加密通信，确保数据在传输过程中的安全性。在网站中使用 HTTPS 证书，对数据进行加密传输。
+     2.2.2 验证证书：客户端在建立 HTTPS 连接时，验证服务器的证书是否有效，防止连接到伪造的服务器。
+
+  3. 点击劫持（Clickjacking）
+     3.1 定义： 攻击者通过在一个透明的 iframe 中嵌入目标网站，然后在上面覆盖一个看似正常的页面，诱导用户在不知情的情况下点击 iframe 中的按钮或链接，执行恶意操作。
+     3.2 防范措施：
+     3.2.1 设置 X - Frame - Options 头：在服务器的 HTTP 响应头中设置 X - Frame - Options 头，限制页面是否可以被嵌入到 iframe 中。可以设置为 DENY 表示禁止任何网站嵌入，SAMEORIGIN 表示只允许同域名的网站嵌入。
+     3.2.2 使用 CSP 的 frame - ancestors 指令：通过设置 CSP 的 frame - ancestors 指令，限制页面可以被嵌入的来源。例如，Content - Security - Policy: frame - ancestors'self' 表示只允许同域名的网站嵌入。
 
 ## JS 加解密 [Https 加密原理](https://www.cnblogs.com/terrymin/p/15735083.html)
 
