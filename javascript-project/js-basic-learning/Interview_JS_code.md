@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-09 10:18:15
+ * @LastEditTime: 2025-03-11 10:19:31
  * @Description: file not
 -->
 
@@ -230,9 +230,9 @@ func("boy");
 
 ## 深拷贝与浅拷贝
 
-- 浅拷贝(浅克隆)：直接将存储在栈中的值赋值给对应变量，如果是基本数据类型，则直接赋值对应的值，如果是引用类型，则赋值的是地址。
-- 深拷贝(深克隆)：就是把数据赋值给对应的变量，从而产生一个与源数据不相关的新数据(数据地址已变化)。深拷贝，是拷贝对象各个层级的属性。
-- 深拷贝与浅拷贝区别：引用类型保存的是内存地址，浅拷贝操作的其实是共同的内存，所以深拷贝主要就是判断对象属性的变量类型，然后进行层层复制基本数据类型。
+- 浅拷贝：直接将存储在栈中的值赋值给对应变量，如果是基本数据类型，则直接赋值对应的值，如果是引用类型，则赋值的是地址。
+- 深拷贝：就是把数据赋值给对应的变量，从而产生一个与源数据不相关的新数据(数据地址已变化)。深拷贝，是拷贝对象各个层级的属性。
+- 深拷贝与浅拷贝区别：引用类型保存的是内存地址，浅拷贝操作的其实是共同的内存，所以深拷贝主要就是判断对象属性的变量类型，然后进行层层复制基本数据类型。(数据类型中堆与栈)[https://juejin.cn/post/6844903493925371917]
 
 1. 浅拷贝的方式：
    方式 1：数据直接赋值；
@@ -352,13 +352,13 @@ console.log(obj1, obj2);
        this._rejectedQueues = [];
        // 执行handle
        try {
-         handle(this._resolve.bind(this), this._reject.bind(this));
+         handle(this.#resolve.bind(this), this.#reject.bind(this));
        } catch (err) {
-         this._reject(err);
+         this.#reject(err);
        }
      }
-     // 添加resovle时执行的函数
-     _resolve(val) {
+     // class内中内部方法添加resovle时执行的函数
+     #resolve(val) {
        const run = () => {
          if (this._status !== PENDING) return;
          this._status = FULFILLED;
@@ -377,8 +377,8 @@ console.log(obj1, obj2);
            }
          };
          /* 如果resolve的参数为Promise对象，则必须等待该Promise对象状态改变后,
-             当前Promsie的状态才会改变，且状态取决于参数Promsie对象的状态
-           */
+              当前Promsie的状态才会改变，且状态取决于参数Promsie对象的状态
+            */
          if (val instanceof MyPromise) {
            val.then(
              (value) => {
@@ -399,7 +399,7 @@ console.log(obj1, obj2);
        setTimeout(run, 0);
      }
      // 添加reject时执行的函数
-     _reject(err) {
+     #reject(err) {
        if (this._status !== PENDING) return;
        // 依次执行失败队列中的函数，并清空队列
        const run = () => {
@@ -413,7 +413,7 @@ console.log(obj1, obj2);
        // 为了支持同步的Promise，这里采用异步调用
        setTimeout(run, 0);
      }
-     // 添加then方法
+     // 原型添加then方法
      then(onFulfilled, onRejected) {
        const { _value, _status } = this;
        // 返回一个新的Promise对象
@@ -474,9 +474,19 @@ console.log(obj1, obj2);
          }
        });
      }
-     // 添加catch方法
+     // 原型添加catch方法
      catch(onRejected) {
        return this.then(undefined, onRejected);
+     }
+     // 原型添加finally方法
+     finally(cb) {
+       return this.then(
+         (value) => MyPromise.resolve(cb()).then(() => value),
+         (reason) =>
+           MyPromise.resolve(cb()).then(() => {
+             throw reason;
+           })
+       );
      }
      // 添加静态resolve方法
      static resolve(value) {
@@ -528,15 +538,6 @@ console.log(obj1, obj2);
            );
          }
        });
-     }
-     finally(cb) {
-       return this.then(
-         (value) => MyPromise.resolve(cb()).then(() => value),
-         (reason) =>
-           MyPromise.resolve(cb()).then(() => {
-             throw reason;
-           })
-       );
      }
    }
    ```

@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-04-26 10:00:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-08 16:42:53
+ * @LastEditTime: 2025-03-10 16:39:23
  * @Description: file not
 -->
 <template>
@@ -35,7 +35,9 @@ const CustomEle = h('div', [h('div', { class: 'mg-class' }, 'div hello'), h('spa
 
 const { address } = toRefs(state);
 
-onMounted(() => { });
+onMounted(() => { 
+  console.log(this);
+});
 
 
 const changeBtn = (type) => {

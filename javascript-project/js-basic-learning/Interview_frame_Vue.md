@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-08 16:50:03
+ * @LastEditTime: 2025-03-10 16:04:57
  * @Description: file not
 -->
 
@@ -25,6 +25,29 @@
      2.2 reactive 基于 Proxy 实现响应式。它创建一个代理对象，拦截对原对象属性的访问和修改操作，当属性值发生变化时，会触发相应的更新机制，通知依赖该数据的组件进行重新渲染。
 
 - [Vue 生命周期](https://cn.vuejs.org/guide/essentials/lifecycle)
+
+- watch 与 watchEffect 区别
+
+  1.  watch 和 watchEffect 都用于响应式地监听数据的变化并执行相应的操作，但它们在使用方式、触发时机、依赖收集等方面存在一些区别。
+  2.  watch 显式依赖：watch 需要明确指定要监听的数据源，只有当指定的数据源发生变化时，回调函数才会被触发。惰性执行，可以传递 immediate: true 选项来让 watch 在组件初始化时立即执行一次回调。
+  3.  watchEffect 自动依赖收集：watchEffect 会自动收集回调函数中使用的所有响应式数据作为依赖，只要这些依赖中的任何一个发生变化，回调函数就会重新执行
+
+  ```js
+  <script setup>
+   import { ref, watchEffect } from 'vue';
+
+   const message = ref('');
+
+   watchEffect(() => {
+     console.log(`当前消息是: ${message.value}`);
+   });
+   watch(message, (newValue, oldValue) => {
+     console.log(`消息从 ${oldValue} 变为 ${newValue}`);
+   }, {
+     immediate: true
+   });
+   </script>
+  ```
 
 - Vue 中 <KeepAlive>组件缓存原理?
 
@@ -83,8 +106,8 @@
       vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
       vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
       3. 渲染性能Vue3:对虚拟 DOM 进行了优化，采用了静态提升、PatchFlag 等技术，减少了不必要的 diff 计算，提高了渲染性能，尤其是在处理大型组件树时性能提升明显。
-      4. 语言支持变更: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
-      5. 构建工具:Vue2 主要使用的是 webpack 打包工具,Vue3 使用的是 Vite
+      4. 更好的TypeScript支持: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
+      5. 生命周期钩子部分做了调整:Vue3大部分生命周期钩子仍然保留，但名称有所变化。例如，beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted。同时，在组合式 API 中，可以使用新的方式来使用生命周期钩子，如 onBeforeMount、onMounted 等
 
 - Vue Hooks 与 工具方法的区别
 
