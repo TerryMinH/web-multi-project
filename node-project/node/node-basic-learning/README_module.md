@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-20 15:34:07
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-13 15:51:54
+ * @LastEditTime: 2025-03-13 16:23:45
  * @Description: file not
 -->
 
@@ -205,13 +205,14 @@
 
 ## NPM
 
-[npm 包发布](https://www.kancloud.cn/outsider/clitool/313178)
-[npm 包管理机制](https://zhuanlan.zhihu.com/p/97737201)
+- npm 基本知识
 
-- 以 @ 开头的文件或文件夹在 Node.js 项目中通常用于表示命名空间或组织范围的模块，有助于组织、区分和管理不同的模块和项目变体。
+  1. [package.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-json)
+  2. [npm 包发布](https://www.kancloud.cn/outsider/clitool/313178)
+  3. (node_module 扁平化代码组织方式)[https://mp.weixin.qq.com/s/Oaq9JTSOHwO_sziNWESV1g]
+  4. [统一导出资源](https://blog.csdn.net/chengqige/article/details/121221779)
+  5. 以 @ 开头的文件或文件夹在 Node.js 项目中通常用于表示命名空间或组织范围的模块，有助于组织、区分和管理不同的模块和项目变体。
 
-```js
-例如，一个使用 TypeScript 的项目可能会安装 @types 命名空间下的类型定义文件，这些文件用于提供 TypeScript 对特定模块的类型信息。
-```
-
-- (node_module 扁平化代码组织方式)[https://mp.weixin.qq.com/s/Oaq9JTSOHwO_sziNWESV1g]
+  ```js
+  例如，一个使用 TypeScript 的项目可能会安装 @types 命名空间下的类型定义文件，这些文件用于提供 TypeScript 对特定模块的类型信息。
+  ```
