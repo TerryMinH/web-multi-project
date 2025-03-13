@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-11 10:19:31
+ * @LastEditTime: 2025-03-12 18:44:13
  * @Description: file not
 -->
 
@@ -283,7 +283,7 @@ function deepClone(obj) {
   let objClone = Array.isArray(obj) ? [] : {};
   if (obj && typeof obj === "object") {
     for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
         if (obj[key] && typeof obj[key] === "object") {
           objClone[key] = deepClone(obj[key]);
         } else {

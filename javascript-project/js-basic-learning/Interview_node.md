@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-10 11:04:17
+ * @LastEditTime: 2025-03-12 21:00:37
  * @Description: file not
 -->
 
@@ -15,8 +15,8 @@
   1.  Loader 与 Plugin 区别:
 
       1.1 作用不同:
-      1.1.1 Loader: webpack 默认只能打包处理 JS 文件，或者 JS 模块。但是像 CSS 模块和图片模块需要 loader 工具处理；loader 就是打包那些 webpack 默认打包不了的模块的工具。
-      1.1.2 Plugin：可以扩展 webpack 的功能，让 webpack 具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
+      1.1.1 Loader: 本质是一个函数,webpack 默认只能打包处理 JS 文件，或者 JS 模块。但是像 CSS 模块和图片模块需要 loader 工具处理；loader 就是打包那些 webpack 默认打包不了的模块的工具。
+      1.1.2 Plugin：本质是一个类,可以扩展 webpack 的功能，让 webpack 具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
 
       1.2 用法不同:
       1.2.1 Loader 在 module.rules 中配置，也就是说他作为模块的解析规则而存在。
@@ -28,6 +28,8 @@
   2. style-loader:通过注入\<style\>标签将 CSS 插入到 DOM 中
   3. css-loader:仅处理 css 的各种加载语法(@import 和 url()函数等),就像 js 解析 import/require() 一样
   4. less-loader:解析 less，转换为 css
+
+- webpack 打包原理
 
 - webpack 与 vite 区别？
 

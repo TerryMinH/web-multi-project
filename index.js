@@ -209,11 +209,13 @@ class MyPromise {
   }
 }
 
-const instance1 = new MyPromise((resolve, reject) => {
-  return setTimeout(() => {
-    resolve("myPromise");
-  }, 1000);
-});
-instance1.then((res) => {
-  console.log(res);
-});
+// const instance1 = new MyPromise((resolve, reject) => {
+//   return setTimeout(() => {
+//     resolve("myPromise");
+//   }, 1000);
+// });
+// instance1.then((res) => {
+//   console.log(res);
+// });
+
+
