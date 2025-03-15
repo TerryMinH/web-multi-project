@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-07 14:04:33
+ * @LastEditTime: 2025-03-13 17:04:11
  * @Description: file not
 -->
 
@@ -68,6 +68,19 @@
 - 高阶组件(HOC)
   [高阶组件在 vue 中的应用](https://juejin.cn/post/6844904094885216269)
   [吃透 React 高阶组件](https://juejin.cn/post/6940422320427106335#heading-25)
+
+- React 性能优化
+  rerender:React 是基于 Filber 调度
+
+  1. 不可变数据结构:immutable immer(Proxy 实现 控制更新的粒度)
+  2. 组件异步加载 React.lazy suppense
+  3. useMemo useCallback React.memo 组织一些不必要的更新 （performance 详细分析）
+
+  打包构建: terser tree-shaking 构建缓存
+  应用层面: transform 优化 reflow webworker
+  资源加载: 压缩 gzip、字体压缩、http2
+  策略缓存: 强缓存 协商缓存 策略缓存
+  首屏加载: nextjs prefetch
 
 - React 项目优化
   [React 优化建议](https://juejin.cn/post/6908895801116721160)

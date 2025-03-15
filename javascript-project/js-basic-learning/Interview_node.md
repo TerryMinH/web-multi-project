@@ -2,34 +2,13 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-12 21:00:37
+ * @LastEditTime: 2025-03-15 12:15:14
  * @Description: file not
 -->
 
 # Nodejs
 
 ## [webpack](https://webpack.js.org/)
-
-- webapck 中 plugins 和 loader 的区别?
-
-  1.  Loader 与 Plugin 区别:
-
-      1.1 作用不同:
-      1.1.1 Loader: 本质是一个函数,webpack 默认只能打包处理 JS 文件，或者 JS 模块。但是像 CSS 模块和图片模块需要 loader 工具处理；loader 就是打包那些 webpack 默认打包不了的模块的工具。
-      1.1.2 Plugin：本质是一个类,可以扩展 webpack 的功能，让 webpack 具有更多的灵活性。 在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
-
-      1.2 用法不同:
-      1.2.1 Loader 在 module.rules 中配置，也就是说他作为模块的解析规则而存在。
-      1.2.2 Plugin 在 plugins 中单独配置。 类型为数组，每一项是一个 plugin 的实例，参数都通过构造函数传入。
-
-- webpack 常用 loader?
-
-  1. url-loader:它与 file-loader 作用相似，也是处理图片的，只不过 url-loader 可以设置一个根据图片大小进行不同的操作，如果该图片大小大于指定的大小，则将图片进行打包资源，否则将图片转换为 base64 字符串合并到 js 文件里。
-  2. style-loader:通过注入\<style\>标签将 CSS 插入到 DOM 中
-  3. css-loader:仅处理 css 的各种加载语法(@import 和 url()函数等),就像 js 解析 import/require() 一样
-  4. less-loader:解析 less，转换为 css
-
-- webpack 打包原理
 
 - webpack 与 vite 区别？
 
@@ -139,9 +118,25 @@
 
 - [浏览器强缓存与协商缓存](https://www.cnblogs.com/terrymin/p/13717855.html)
 
+  1. 缓存访问顺序:网络请求优先访问强缓存,如果失效再访问协商缓存,如果失效发起网络请求。
+
+- [应用资源缓存 PWA](https://segmentfault.com/a/1190000041564624)
+
+  1. PWA（Progressive Web Apps）不是特指某一项技术，而是应用多项技术来改善用户体验的 Web App，为 Web App 提供类似 Native App 的用户体验。其核心技术包括 Web App Manifest，Web Push，Service Worker 和 Cache Api 等，用户体验才是 PWA 的核心。
+
+  2. PWA 主要特点如下：
+
+     - 可靠 - 即使在网络不稳定甚至断网的环境下，也能瞬间加载并展现
+     - 用户体验 - 快速响应，具有平滑的过渡动画及用户操作的反馈
+     - 用户黏性 - 和 Native App 一样，可以被添加到桌面，能接受离线通知，具有沉浸式的用户体验
+
+  3. 缓存
+     3.1 应用缓存(Application Cache):用于存储静态资源(缓存应用程序)。
+     3.2 Service Worker 本质上是充当 Web 应用程序、浏览器与网络（可用时）之间的代理服务器，独立于网页主进程。它可以拦截网络请求，实现离线支持、消息推送、后台同步等功能，为 Web 应用带来类似原生应用的用户体验。逐渐成为了 Application Cache 的替代方案。
+
 - 跨域:
 
-  1.  定义: 跨域是指浏览器从一个域名的网页去请求另一个域名的资源时，由于浏览器的同源策略，会导致请求被限制的情况。同源策略是浏览器的一种安全机制，它要求网页的协议、域名和端口都相同才被认为是同源，只有同源的页面之间才能进行自由的资源共享和交互。
+  1.  定义: 跨域是指在浏览器中从一个域名地址的网页去请求另一个域名的资源时，由于浏览器的同源策略，会导致请求被限制的情况。同源策略是浏览器的一种安全机制，它要求网页的协议、域名和端口都相同才被认为是同源，只有同源的页面之间才能进行自由的资源共享和交互。
 
   2.  原因: 浏览器的同源策略是跨域问题产生的根本原因。同源策略的目的是为了防止不同源的网站之间进行恶意的脚本攻击，比如防止一个网站通过脚本读取另一个网站的敏感信息。
 

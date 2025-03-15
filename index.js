@@ -218,4 +218,14 @@ class MyPromise {
 //   console.log(res);
 // });
 
-
+function thousandsNumber(num) {
+  let numStr = num.toString();
+  let [intgerStr, dotStr] = numStr.split(".");
+  intgerStr = intgerStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if (dotStr) {
+    dotStr = dotStr.replace(/0+$/, "");
+    return dotStr ? `${intgerStr}.${dotStr}` : intgerStr;
+  }
+  return intgerStr;
+}
+console.log(thousandsNumber(1234567.8900)); // 输出: 1,234,567.89
