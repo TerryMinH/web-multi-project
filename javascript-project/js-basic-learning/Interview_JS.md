@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-14 17:07:54
+ * @LastEditTime: 2025-03-17 09:03:00
  * @Description: file not
 -->
 
@@ -42,7 +42,7 @@
 
 - CSS 常考面试题
 
-  1.  link 与@import 区别: link 不会阻塞页面渲染，@import 会阻塞页面渲染；link 可以通过标签动态加载，@import 不可以。
+  1.  link 与@import 区别: link 不会阻塞页面渲染，@import 会阻塞页面渲染；link 可以通过标签动态加载，@import 不可以。link 标签是 HTML 标准的一部分，具有良好的兼容性。
 
 - [Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
 
@@ -241,20 +241,6 @@
      3.4 call、apply、bind：指向第一个参数
      3.5 箭头函数：指向函数定义时的上下文，不随调用方法改变
 
-## ES6 与 Typescript
-
-- var、let、const 区别:
-
-  1.  作用域：
-      1.1 var: 声明的变量具有函数作用域，即在整个函数中都是可见的。声明的变量会影响到外部作用域。
-      1.2 let 和 const: 声明的变量具有块级作用域，由{}界定，如 if 语句块，for 循环块。变量只在它声明的块级作用域内可见。声明的变量不会影响到外部作用域。
-  2.  变量提升：
-      2.1 var:var 声明的变量会发生变量提升，即变量可以在声明之前使用，但是值是 undfined.
-      2.2 let 和 const:let 和 const 声明的变量 存在“暂时性死区”(在变量声明之前访问它会导致 ReferenceError)。
-  3.  重复声明：
-      3.1 var：可以在同一作用域内使用 var 重复声明同一个变量，后面的声明会覆盖前面的声明。
-      3.2 let 和 const：在统一作用域内，let 和 const 不允许重复声明同一个变量，否则会抛出 SyntaxError。
-
 - 取消网络请求
 
   1. AbortController 是浏览器提供的一个 Web API，用于在 Fetch API 和 XMLHttpRequest 中取消请求
@@ -329,6 +315,20 @@
   // 取消请求
   source.cancel("用户取消了请求");
   ```
+
+## ES6 与 Typescript
+
+- var、let、const 区别:
+
+  1.  作用域：
+      1.1 var: 声明的变量具有函数作用域，即在整个函数中都是可见的。声明的变量会影响到外部作用域。
+      1.2 let 和 const: 声明的变量具有块级作用域，由{}界定，如 if 语句块，for 循环块。变量只在它声明的块级作用域内可见。声明的变量不会影响到外部作用域。
+  2.  变量提升：
+      2.1 var:var 声明的变量会发生变量提升，即变量可以在声明之前使用，但是值是 undfined.
+      2.2 let 和 const:let 和 const 声明的变量 存在“暂时性死区”(在变量声明之前访问它会导致 ReferenceError)。
+  3.  重复声明：
+      3.1 var：可以在同一作用域内使用 var 重复声明同一个变量，后面的声明会覆盖前面的声明。
+      3.2 let 和 const：在统一作用域内，let 和 const 不允许重复声明同一个变量，否则会抛出 SyntaxError。
 
 ## 常见场景题
 

@@ -1,39 +1,38 @@
-<!--
- * @Author: TerryMin
- * @Date: 2024-10-23 14:30:58
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-14 15:32:14
- * @Description: file not
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Digital Twin Example</title>
-    <style>
-      #scene {
-        width: 800px;
-        height: 600px;
-        border: 1px solid #ccc;
-      }
-    </style>
+    <title>Document</title>
   </head>
-
   <body>
-    <div id="scene"></div>
-    <script>
-      const map1 = new Blob();
-      console.log(map1);
-
-      const text = "hello world";
-      const blob = new Blob([text], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "example.txt";
-      a.click();
-      URL.revokeObjectURL(url);
-    </script>
+    <div id="app">
+      <div id="count-display"></div>
+      <button id="increment-btn">Increment</button>
+    </div>
   </body>
+  <script>
+    function curry(func) {
+      return function curried(...args) {
+        // console.log(args, func, func.length);
+        if (args.length >= func.length) {
+          return func.apply(this, args);
+        } else {
+          return function (...newArgs) {
+            // console.log('newArgs',args,newArgs);
+            return curried.apply(this, args.concat(newArgs));
+          };
+        }
+      };
+    }
+    function multiply(a, b, c) {
+      return a * b * c;
+    }
+    const curriedMultiply = curry(multiply);
+    const step1 = curriedMultiply(2);
+    console.log(curriedMultiply);
+    console.log(step1);
+    const step2 = step1(3);
+    console.log(step2);
+  </script>
 </html>

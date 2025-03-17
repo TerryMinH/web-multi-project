@@ -229,3 +229,4 @@ function thousandsNumber(num) {
   return intgerStr;
 }
 // console.log(thousandsNumber(1234567.8900)); // 输出: 1,234,567.89
+
