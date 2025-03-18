@@ -2,31 +2,34 @@
  * @Author: TerryMin
  * @Date: 2024-10-01 17:25:59
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-24 11:10:04
+ * @LastEditTime: 2025-03-17 14:54:51
  * @Description: file not
  */
-import React from "react";
+import React, { Component } from "react";
 
-// 定义一个普通的函数组件
-const MyComponent = (props) => {
-  console.log(111);
-  return <div>{props.message}</div>;
-};
+class ClassComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
 
-// 使用 React.memo 包装组件
-const MemoizedComponent = React.memo(MyComponent);
+  handleCount() {
+    // console.log(99, this);
+    this.setState({
+      count: this.state.count + 1,
+    });
+  }
 
-// 在其他组件中使用包装后的组件
-const ClassComponent = () => {
-  const [count, setCount] = React.useState(0);
-
-  return (
+  render() {
+    const { count } = this.state;
+    return (
       <div>
-          <button onClick={() => setCount(count + 1)}>增加计数{count}</button>
-          {/* 传递 props */}
-          {/* <MemoizedComponent message="Hello, React!" /> */}
-          <MyComponent message="Hello, React!" />
+        <button onClick={() => this.handleCount()}>增加计数</button>
+        <div>类组件Component:{count}</div>
       </div>
-  );
-};
+    );
+  }
+}
 export { ClassComponent };
