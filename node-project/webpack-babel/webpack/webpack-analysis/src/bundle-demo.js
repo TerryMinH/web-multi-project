@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-20 07:54:21
+ * @LastEditTime: 2025-03-20 07:58:24
  * @Description: file not
  */
 const fs = require('fs');
@@ -69,6 +69,6 @@ function bundle(entry) {
     return output;
 }
 
-const entry = path.resolve(__dirname, 'index_interview.js');
+const entry = path.resolve(__dirname, 'print.js');
 const bundledCode = bundle(entry);
 fs.writeFileSync('bundle.js', bundledCode);

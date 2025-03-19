@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-19 11:01:18
+ * @LastEditTime: 2025-03-19 17:57:46
  * @Description: file not
 -->
 
@@ -12,6 +12,16 @@
 
   1. [React 中文文档](https://zh-hans.react.dev/)
   2. [前端哪些事儿](https://github.com/jonny-wei)
+
+- setState 是同步还是异步?
+
+  1.  在 React 中，setState 的执行表现既可以是异步的，也可以是同步的，这取决于它的调用场景:
+  2.  异步场景:
+      2.1 React 事件处理函数中:setState 是异步执行的。这样做的主要目的是为了提高性能，React 会将多次 setState 调用合并成一次更新，从而减少不必要的渲染。
+      2.2 生命周期函数中:setState 同样是异步执行的
+  3.  同步场景:
+      3.1 原生事件处理函数中:在原生事件处理函数（如 addEventListener 绑定的事件）中，setState 是同步执行的。因为原生事件不受 React 合成事件系统的管理，React 不会对其进行批量更新。
+      3.2 setTimeout 和 Promise 等异步回调中:在 setTimeout、Promise 等异步回调函数中，setState 也是同步执行的。这是因为这些异步回调函数的执行时机在 React 批量更新之后。
 
 - React Hooks？
 

@@ -2,18 +2,25 @@
  * @Author: TerryMin
  * @Date: 2024-09-19 16:52:15
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-20 15:34:12
+ * @LastEditTime: 2025-03-19 20:35:16
  * @Description: file not
  */
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import { ExampleComponent } from "./components/MultiComponent";
 // import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <App />
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/ExampleComponent" element={<ExampleComponent />} />
+    </Routes>
+  </Router>
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
