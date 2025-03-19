@@ -2,11 +2,11 @@
  * @Author: TerryMin
  * @Date: 2025-02-20 10:57:51
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-20 11:15:06
+ * @LastEditTime: 2025-03-19 08:55:45
  * @Description: file not
  */
 module.exports = {
-  extends: ["react-app", "react-app/jest"],
+  extends: ["eslint:recommended", "plugin:react/recommended"],
   parser: "@babel/eslint-parser",
   parserOptions: {
     requireConfigFile: false,
@@ -14,5 +14,8 @@ module.exports = {
       plugins: [["@babel/plugin-proposal-decorators", { legacy: true }]],
     },
   },
-  // 其他配置...
+  rules: {
+    "no-undef": "off",
+    // 其他规则
+  },
 };

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.26.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "babel-jest": "^27.4.2",
@@ -121,20 +122,10 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ],
-    "resetMocks": true
-  },
-  "babel": {
-    "presets": [
-      "react-app"
+    "eslintIgnore": [
+      "node_modules"
     ],
-    "plugins": [
-      [
-        "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
-      ]
-    ]
+    "resetMocks": true
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.25.9"

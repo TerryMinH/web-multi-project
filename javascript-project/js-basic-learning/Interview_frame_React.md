@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-18 16:05:58
+ * @LastEditTime: 2025-03-19 11:01:18
  * @Description: file not
 -->
 
@@ -13,11 +13,6 @@
   1. [React 中文文档](https://zh-hans.react.dev/)
   2. [前端哪些事儿](https://github.com/jonny-wei)
 
-- 什么是 JSX?为什么要用 JSX?
-
-  1.  JSX:JSX 是 JavaScript 的语法扩展。它的特点是，UI 与 JavaScript 逻辑的相融 - 组合成元件
-  2.  使用 JSX 原因:JSX 直观上有违写程式的原则,一般程序我们会尽量做关注点分离。原因在于现代的许多网站都是高度动态，许多逻辑会决定内容的呈现，这时把内容与逻辑放在一起 ，能确保有任何更动时两者维持同步，以及在重复使用时也方便。
-
 - React Hooks？
 
   1.  Hooks 是 React.16.8 之后出现, class component 是使用 React 生命周期函数; functional component 通过 use 开头函数使用 React 的功能和状态。
@@ -26,34 +21,6 @@
 - Hooks 为什么只能在最顶端呼叫？
 
   1.  主要是为了 React 能正确将内部 state 和对应的 Hook 进行关联。如果写在 if…else 判断式中，那每次渲染的顺序可能就会产生变化，这会使得 React 无法得知每个 Hook 对应的值应该返回什么，这将导致 state 的顺序可能错乱
-
-- React 源码解读
-
-  1.  react-dom 处理端的能力(浏览器 api `react-dom`,跨端开发`react-native`,3D 开发`react-three-fiber`),渲染器逻辑
-      1.1 createRoot、ReactDom.createRoot()、createContainer
-      1.2 render、updateCotainer
-
-  2.  react 为外部开发者统一提供接口协议
-      2.1 useState
-      2.2 useEffect
-
-  3.  react-reconciler(调和)
-      3.1 diff 当数据变化时在执行调度器
-      3.2 Filber 架构(createFiberRoot、initializaUpdateQueue)
-      3.3 createUpdate、enqueueUpdate
-
-  4.  scheduler(优先级调度):实现页面更新
-      4.1 React 自己开发一个 scheduler 库(功能类似:requestIdleCallback、scheduler.postTask,但是它们无法满足):类似定时器一直检查数据是否变化,如果变化更新 DOM
-      4.2 利用小根堆处理优先级
-
-  5.  react-noop-renderer:定义 react 宿主环境
-
-      ```js
-      /**
-       * 传统是面向DOM开发,通过事件驱动数据更新
-       * 数据(状态) => 事件 => 渲染(虚拟DOM)
-       * **/
-      ```
 
 - [常用 Hooks](https://juejin.cn/post/7118937685653192735)
 
@@ -111,6 +78,41 @@
      1.1 React 会将所有的事件都绑定到文档（document）上,采用事件冒泡传播,React 通过事件委托机制监听文档上面的事件类型。
      1.2 统一事件接口:合成事件提供了统一的接口，无论在哪个浏览器中使用，开发者都可以使用相同的方式来处理事件。这使得代码具有更好的可移植性和兼容性。提供了跨浏览器兼容的 API。
   2. 阻止原生事件冒泡后 React 仍可监听的原因: React 事件是基于合成事件系统和事件委托机制，它并不依赖原生事件在 DOM 树中完整的冒泡过程来触发事件处理函数。只要事件触发点对应的 React 组件绑定了相应的事件处理函数，React 就能通过自己的机制捕获到事件并执行处理函数。
+
+- React 源码解读
+
+  1.  react-dom 处理端的能力(浏览器 api `react-dom`,跨端开发`react-native`,3D 开发`react-three-fiber`),渲染器逻辑
+      1.1 createRoot、ReactDom.createRoot()、createContainer
+      1.2 render、updateCotainer
+
+  2.  react 为外部开发者统一提供接口协议
+      2.1 useState
+      2.2 useEffect
+
+  3.  react-reconciler(调和)
+      3.1 diff 当数据变化时在执行调度器
+      3.2 Filber 架构(createFiberRoot、initializaUpdateQueue)
+      3.3 createUpdate、enqueueUpdate
+
+  4.  scheduler(优先级调度):实现页面更新
+      4.1 React 自己开发一个 scheduler 库(功能类似:requestIdleCallback、scheduler.postTask,但是它们无法满足):类似定时器一直检查数据是否变化,如果变化更新 DOM
+      4.2 利用小根堆处理优先级
+
+  5.  react-noop-renderer:定义 react 宿主环境
+
+      ```js
+      /**
+       * 传统是面向DOM开发,通过事件驱动数据更新
+       * 数据(状态) => 事件 => 渲染(虚拟DOM)
+       * **/
+      ```
+
+- React Fiber 架构理解:
+
+  1. React Fiber 是 React 16.x 版本之后引入的协调算法架构，其目的是为了解决旧版协调算法在处理大型应用时性能方面的问题。
+  2. 在 React 16 之前，采用的是栈协调算法，这是一种递归的方式来进行虚拟 DOM 的比较和更新。当组件树比较庞大时，一旦开始协调过程，就会持续占用主线程，直到整个协调完成。在这个过程中，浏览器无法处理其他任务，像用户输入、动画渲染这类操作都会被阻塞，从而导致页面出现卡顿现象。
+  3. Fiber 原理:通过将协调过程拆分成小任务、实现优先级调度以及可中断和恢复的特性，有效解决了旧版协调算法在处理大型应用时的性能问题。
+  4. React 不直接使用 requestIdleCallback 而是自己实现 Scheduler 模块，是为了更好地满足跨平台兼容性、灵活的优先级调度和精确的时间控制等需求，从而提高 React 应用的性能和响应能力。
 
 - React 状态管理
 
