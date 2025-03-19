@@ -2,9 +2,11 @@
  * @Author: TerryMin
  * @Date: 2023-09-18 13:50:26
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-26 10:50:25
+ * @LastEditTime: 2025-03-19 08:19:09
  * @Description: file not
  */
+let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
+
 // 计数排序
 let countingSort = function (arr, flag = 0) {
   let min = arr[0],
@@ -36,8 +38,6 @@ let countingSort = function (arr, flag = 0) {
   }
   return flag ? res.reverse() : res;
 };
-
-let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
 // console.log(countingSort(arr));
 
 // 冒泡排序
@@ -62,16 +62,16 @@ function quickSort(arr) {
 
   var cIndex = Math.floor(arr.length / 2);
   var c = arr.splice(cIndex, 1);
-  var l = [];
-  var r = [];
+  var left = [];
+  var right = [];
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] < c) {
-      l.push(arr[i]);
+      left.push(arr[i]);
     } else {
-      r.push(arr[i]);
+      right.push(arr[i]);
     }
   }
-  return quickSort(l).concat(c, quickSort(r));
+  return quickSort(left).concat(c, quickSort(right));
 }
 
 // 插入排序
@@ -107,4 +107,30 @@ function shellSort(arr) {
     }
   }
   return arr;
+}
+
+// 归并排序 时间复杂度为O(nlogn)  空间复杂度 O(n)
+function mergeSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  let mid = Math.floor(arr.length / 2);
+  let left = mergeSort(arr.slice(0, mid));
+  let right = mergeSort(arr.slice(mid));
+  return mergeSortChild(left, right);
+}
+function mergeSortChild(left, right) {
+  let result = [],
+    leftIndex = 0,
+    rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      result.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+  return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }

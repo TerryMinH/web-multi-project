@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-16 09:35:23
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-27 17:14:49
+ * @LastEditTime: 2025-03-19 07:47:14
  * @Description: file not
 -->
 
@@ -188,7 +188,7 @@
       }
     }
 
-    // 将剩余的元素添加到结果数组
+    // 当其中一个数组遍历完后，将另一个数组中剩余的元素添加到 result 数组的末尾。
     return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
   }
 

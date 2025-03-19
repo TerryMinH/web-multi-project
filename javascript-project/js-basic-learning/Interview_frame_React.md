@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-17 17:25:56
+ * @LastEditTime: 2025-03-18 16:05:58
  * @Description: file not
 -->
 
@@ -122,8 +122,8 @@
 
 - [React 与 Vue 区别](https://zhuanlan.zhihu.com/p/180455618)
 
-      1. 拥有各自框架的生命周期
-      2. React 使用的 JSX 语法;Vue 使用的是模板系统
+  1. 拥有各自框架的生命周期
+  2. React 使用的 JSX 语法;Vue 使用的是模板系统
 
 - Vue 与 React 虚拟 DOM 有什么区别?
 

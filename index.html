@@ -12,27 +12,48 @@
     </div>
   </body>
   <script>
-    function curry(func) {
-      return function curried(...args) {
-        // console.log(args, func, func.length);
-        if (args.length >= func.length) {
-          return func.apply(this, args);
+    // 归并排序
+    function mergerSort(arr) {
+      if (arr.length === 1) {
+        return arr;
+      }
+      let mid = Math.floor(arr.length / 2);
+      let left = mergerSort(arr.slice(0, mid));
+      let right = mergerSort(arr.slice(mid));
+      return mergerSortChild(left, right);
+    }
+    function mergerSortChild(left, right) {
+      let result = [],
+        leftIndex = 0,
+        rightIndex = 0;
+      while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+          result.push(left[leftIndex]);
+          leftIndex++;
         } else {
-          return function (...newArgs) {
-            // console.log('newArgs',args,newArgs);
-            return curried.apply(this, args.concat(newArgs));
-          };
+          result.push(right[rightIndex]);
+          rightIndex++;
         }
-      };
+      }
+      return result
+        .concat(left.slice(leftIndex))
+        .concat(right.slice(rightIndex));
     }
-    function multiply(a, b, c) {
-      return a * b * c;
+    const arr1 = [38, 27, 43, 3, 9, 82, 10];
+
+    function bubbleSort(arr) {
+      console.log(arr,arr.length);
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            let temp = arr[j + 1];
+            arr[j + 1] = arr[j];
+            arr[j] = temp;
+          }
+        }
+      }
+      return arr;
     }
-    const curriedMultiply = curry(multiply);
-    const step1 = curriedMultiply(2);
-    console.log(curriedMultiply);
-    console.log(step1);
-    const step2 = step1(3);
-    console.log(step2);
+    console.log(bubbleSort(arr1));
   </script>
 </html>
