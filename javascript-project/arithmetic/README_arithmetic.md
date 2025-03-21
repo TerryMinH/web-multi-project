@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-16 09:35:23
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-19 07:47:14
+ * @LastEditTime: 2025-03-21 16:39:37
  * @Description: file not
 -->
 
@@ -313,3 +313,52 @@
 ## 资源总结
 
 [顺序存储结构与链式存储结构优缺点](https://blog.csdn.net/li_wen01/article/details/82986015#)
+
+- 双循环与双指针的区别
+
+  1. 双循环：
+     1.1 双循环指的是在代码里嵌套使用两个循环结构（如 for 循环、while 循环）。外层循环控制一个变量的遍历范围，内层循环则在每次外层循环迭代时，对另一个变量进行遍历。
+     1.2 适用场景：适用于需要对数据进行全面比较或者组合的场景，比如查找数组中的所有元素对、计算矩阵中元素的总和等。时间复杂度通常为  O(n\*n)
+  2. 双指针：
+     2.1 双指针是一种使用两个指针（变量）在数组、链表等数据结构上进行遍历的技巧。这两个指针可以同向移动、相向移动或者反向移动，通过指针的移动来解决问题。
+     2.2 适用场景：常用于处理有序数组、链表等数据结构，可用于解决查找、排序、合并等问题，例如两数之和、数组去重、反转数组等。时间复杂度通常为  (O(n))
+
+     ```js
+     // 利用双指针进行数组去重且不生成新数组
+     function removeDuplicates(nums) {
+       if (nums.length === 0) return 0;
+       // 慢指针，记录去重后数组的位置
+       let slow = 0;
+       // 快指针，用于遍历原数组
+       for (let fast = 1; fast < nums.length; fast++) {
+         if (nums[fast] !== nums[slow]) {
+           slow++;
+           // 将不重复的元素移动到慢指针位置
+           nums[slow] = nums[fast];
+         }
+       }
+       // 截取数组，只保留去重后的元素
+       nums.length = slow + 1;
+       return nums.length;
+     }
+
+     // 示例用法
+     const nums = [1, 1, 2, 2, 3, 4, 4, 4, 5];
+     const newLength = removeDuplicates(nums);
+     console.log(nums.slice(0, newLength));
+
+     // 通过 indexOf 和 lastIndexOf 方法来判断元素是否重复，若重复则使用 splice 方法移除。
+     function removeDuplicatesInPlace(arr) {
+       for (let i = 0; i < arr.length; i++) {
+         if (arr.indexOf(arr[i]) !== arr.lastIndexOf(arr[i])) {
+           arr.splice(i, 1);
+           i--;
+         }
+       }
+       return arr;
+     }
+
+     const arr = [1, 2, 2, 3, 4, 4, 5];
+     removeDuplicatesInPlace(arr);
+     console.log(arr);
+     ```

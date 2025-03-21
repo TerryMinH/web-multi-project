@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-21 07:38:16
+ * @LastEditTime: 2025-03-21 22:02:22
  * @Description: file not
 -->
 
@@ -145,6 +145,10 @@
   1.  MVVM（Model-View-ViewModel）是一种前端开发的设计模式，它是在 MVC（Model-View-Controller）和 MVP（Model-View-Presenter）模式的基础上发展而来，主要用于实现视图（View）和数据模型（Model）的分离，提高代码的可维护性和可测试性。
   2.  MVVM 模式通过引入 ViewModel 实现了视图和数据模型的分离，利用数据绑定和双向数据绑定机制实现了两者之间的自动同步，在提高代码可维护性和可测试性方面具有显著优势，是现代前端开发中常用的设计模式之一。
   3.  [MVVM 与 MVC 区别](https://blog.csdn.net/qq_51066068/article/details/125441774)
+      3.1 mvc 和 mvvm 都是一种设计思想。 主要就是 mvc 中 Controller 演变成 mvvm 中的 viewModel。 mvvm 主要解决了 mvc 中大量 DOM 操作使页面渲染性能降低，加载速度变慢的问题 。
+      3.2 MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步：当 Model 的属性改变时，我们不用再自己手动操作 Dom 元素来改变 View 的显示，它会自动变化。
+      3.3 整体看来，MVVM 比 MVC 精简很多，我们不用再用选择器频繁地操作 DOM。
+      3.4 MVVM 并不是用 VM 完全取代了 C，ViewModel 存在目的在于抽离 Controller 中展示的业务逻辑，而不是替代 Controller，其它视图操作业务等还是应该放在 Controller 中实现。
 
 - 注意事项
 

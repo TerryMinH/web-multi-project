@@ -1,74 +1,22 @@
-/*
- * @Author: TerryMin
- * @Date: 2024-10-23 13:44:20
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-20 07:54:21
- * @Description: file not
- */
-const fs = require('fs');
-const path = require('path');
-const parser = require('@babel/parser');
-const traverse = require('@babel/traverse').default;
+const arr1 = [1, 2, 5, 3, 2, 4, 2];
 
-function parseModule(filePath) {
-    const code = fs.readFileSync(filePath, 'utf-8');
-    const ast = parser.parse(code, { sourceType: 'module' });
-    const dependencies = [];
+// const arr2 = arr1.reduce((sum, current, index) => {
+//   if (!sum.includes(current)) {
+//     sum.push(current);
+//   }
+//   return sum;
+// }, []);
 
-    traverse(ast, {
-        ImportDeclaration({ node }) {
-            const importPath = node.source.value;
-            const absolutePath = path.resolve(path.dirname(filePath), importPath);
-            dependencies.push(absolutePath);
-        }
-    });
-
-    return {
-        filePath,
-        code,
-        dependencies
-    };
+// console.log(arr2);
+function removeDuplicationInPlace(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j]) {
+        arr.splice(j, 1);
+        j--;
+      }
+    }
+  }
+  return arr;
 }
 
-function bundle(entry) {
-    const modules = {};
-    const entryModule = parseModule(entry);
-    const queue = [entryModule];
-
-    while (queue.length > 0) {
-        const currentModule = queue.shift();
-        modules[currentModule.filePath] = currentModule;
-
-        currentModule.dependencies.forEach(dependency => {
-            if (!modules[dependency]) {
-                const dependencyModule = parseModule(dependency);
-                queue.push(dependencyModule);
-            }
-        });
-    }
-
-    let output = `(function(modules) {
-        function require(filePath) {
-            const module = { exports: {} };
-            const fn = modules[filePath];
-            fn(module, module.exports, require);
-            return module.exports;
-        }
-        require('${entry}');
-    })({`;
-
-    for (const filePath in modules) {
-        const module = modules[filePath];
-        output += `'${filePath}': function(module, exports, require) {
-            ${module.code}
-        },`;
-    }
-
-    output = output.slice(0, -1) + '});';
-
-    return output;
-}
-
-const entry = path.resolve(__dirname, 'index_interview.js');
-const bundledCode = bundle(entry);
-fs.writeFileSync('bundle.js', bundledCode);
