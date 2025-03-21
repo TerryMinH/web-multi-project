@@ -1,59 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app">
-      <div id="count-display"></div>
-      <button id="increment-btn">Increment</button>
-    </div>
-  </body>
-  <script>
-    // 归并排序
-    function mergerSort(arr) {
-      if (arr.length === 1) {
-        return arr;
-      }
-      let mid = Math.floor(arr.length / 2);
-      let left = mergerSort(arr.slice(0, mid));
-      let right = mergerSort(arr.slice(mid));
-      return mergerSortChild(left, right);
-    }
-    function mergerSortChild(left, right) {
-      let result = [],
-        leftIndex = 0,
-        rightIndex = 0;
-      while (leftIndex < left.length && rightIndex < right.length) {
-        if (left[leftIndex] < right[rightIndex]) {
-          result.push(left[leftIndex]);
-          leftIndex++;
-        } else {
-          result.push(right[rightIndex]);
-          rightIndex++;
-        }
-      }
-      return result
-        .concat(left.slice(leftIndex))
-        .concat(right.slice(rightIndex));
-    }
-    const arr1 = [38, 27, 43, 3, 9, 82, 10];
 
-    function bubbleSort(arr) {
-      console.log(arr,arr.length);
-      for (let i = 0; i < arr.length - 1; i++) {
-        for (let j = 0; j < arr.length - 1 - i; j++) {
-          if (arr[j] > arr[j + 1]) {
-            let temp = arr[j + 1];
-            arr[j + 1] = arr[j];
-            arr[j] = temp;
-          }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .triangle-up {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid blue;
         }
-      }
-      return arr;
-    }
-    console.log(bubbleSort(arr1));
-  </script>
+    </style>
+</head>
+
+<body>
+    <div class="triangle-up"></div>
+</body>
+<script>
+let str='werwr';
+for(let i in str){
+  console.log(i,str[i]);
+}
+</script>
 </html>

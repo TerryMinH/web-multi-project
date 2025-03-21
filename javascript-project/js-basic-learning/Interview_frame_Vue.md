@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-17 22:13:26
+ * @LastEditTime: 2025-03-21 07:38:16
  * @Description: file not
 -->
 
@@ -25,33 +25,6 @@
      2.2 reactive 基于 Proxy 实现响应式。它创建一个代理对象，拦截对原对象属性的访问和修改操作，当属性值发生变化时，会触发相应的更新机制，通知依赖该数据的组件进行重新渲染。
 
 - [Vue 生命周期](https://cn.vuejs.org/guide/essentials/lifecycle)
-
-- Vue 响应式原理(源码)
-
-  1.  compiler:主要负责把 Vue 组件的模板字符串转化为 JavaScript 渲染函数,这些渲染函数在运行时会生成虚拟 DOM 树，最终被渲染为真实的 DOM 节点。
-  2.  reactivity:添加数据响应式,进行依赖收集
-      2.1 Object.defineProperty: Vue 2 在创建 Vue 实例时，会遍历 data 选项中的所有属性，使用 Object.defineProperty() 将这些属性转换为 getter/setter 进行数据劫持并在 Watcher 中进行依赖收集,当属性值发生变化会发布更新。
-      2.2 Object.defineProperty 缺点: 不能监听数组(重写会改变数组本身的方法)、对嵌套对象属性需要递归添加 getter 与 setter,比较浪费性能、对 ES6 新的数据结构 Map 和 Set 不支持响应式。
-      2.3 Proxy(Reflect 先进语法):get 与 set 响应式数据拦截加工、track 响应式数据依赖追踪收集添加到 Map 数据结构里面、trigger 触发更新
-  3.  runtime:是 Vue 3 框架中连接虚拟 DOM 和真实 DOM 的桥梁，它通过实现渲染器、封装 DOM 操作、处理特定指令和组件等功能，使得 Vue 应用能够高效地在浏览器中运行，并实现数据驱动的视图更新。
-
-- Vue 编译过程
-  Vue 的编译过程主要包括模板解析、优化和代码生成三个阶段:
-
-  1. 解析: 将模板字符串通过词法分析和语法分析解析成（AST，Abstract Syntax Tree），便于后续处理；
-  2. 优化: 对 AST 进行优化，通过深度优先遍历 标记出静态节点和静态根节点，以提高渲染性能；
-  3. 生成: 将优化后的 AST 转换为渲染函数的代码字符串。渲染函数会生成虚拟 DOM，最终映射到真实 DOM 上
-
-- Vue2 和 Vue3 有哪些区别？
-
-      1. 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑,Vue 3 也兼容选项式 API，方便老项目的迁移。
-      2. 响应式系统:
-      vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
-      vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
-      3. 虚拟DOM性能优化:对虚拟 DOM 进行了优化，采用了静态提升、PatchFlag 等技术，减少了不必要的 diff 计算，提高了渲染性能，尤其是在处理大型组件树时性能提升明显。
-      4. 更好的TypeScript支持: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
-      5. 生命周期钩子部分做了调整:Vue3大部分生命周期钩子仍然保留，但名称有所变化。例如，beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted。同时，在组合式 API 中，可以使用新的方式来使用生命周期钩子，如 onBeforeMount、onMounted 等
-
 - Vue Hooks 与 工具方法的区别
 
   1.  概念:
@@ -105,6 +78,52 @@
      3.2 为被缓存的组件动态设置不同的 key 值，当 key 发生变化时，keep-alive 会认为是一个新的组件实例，从而重新创建组件。
      3.3 手动清除缓存: 可以通过访问 keep-alive 实例的 cache 和 keys 属性来实现。
 
+- $nextTick 实现原理
+
+  1. 异步更新：Vue 通过异步更新队列来批量更新 DOM，提高性能。
+  2. $nextTick：用于在 DOM 更新完成后执行回调函数，确保能访问到最新的 DOM 状态。
+  3. 实现原理：$nextTick 的实现主要依赖于 JavaScript 的事件循环机制，根据不同的环境选择合适的异步方法（如 Promise.then、MutationObserver、setImmediate、setTimeout 等）来执行回调函数。
+
+- Vue 组件通信有几种方式
+
+  1.  子组件向父组件传递数据:
+      1.1 自定义事件（defineEmits）
+      1.2 v-model 指令(本质上也是基于自定义事件实现)
+      1.3 provide 和 inject 主要用于跨层级组件通信,这种方式会让组件间的耦合度增加。
+      1.4 事件总线（Event Bus）(Vue 3 官方不再推荐使用事件总线)
+      1.5 状态管理
+
+- vue 事件总线 和状态管理分别在什么场景下使用
+
+  1. 事件总线适用于简单的组件通信和一次性的事件传递，而状态管理适用于多个组件共享状态和复杂的状态逻辑管理。在实际项目中，需要根据项目的规模和需求来选择合适的通信方式。
+  2. 备注：一次性的事件通信：如果组件间的通信是一次性的，比如某个组件在特定条件下触发一个事件，通知其他组件执行相应操作，使用事件总线会很合适。例如，在用户点击某个按钮后，通知另一个组件进行页面滚动。
+
+- Vue 响应式原理(源码)
+
+  1.  compiler:主要负责把 Vue 组件的模板字符串转化为 JavaScript 渲染函数,这些渲染函数在运行时会生成虚拟 DOM 树，最终被渲染为真实的 DOM 节点。
+  2.  reactivity:添加数据响应式,进行依赖收集
+      2.1 Object.defineProperty: Vue 2 在创建 Vue 实例时，会遍历 data 选项中的所有属性，使用 Object.defineProperty() 将这些属性转换为 getter/setter 进行数据劫持并在 Watcher 中进行依赖收集,当属性值发生变化会发布更新。
+      2.2 Object.defineProperty 缺点: 不能监听数组(重写会改变数组本身的方法)、对嵌套对象属性需要递归添加 getter 与 setter,比较浪费性能、对 ES6 新的数据结构 Map 和 Set 不支持响应式。
+      2.3 Proxy(Reflect 先进语法):get 与 set 响应式数据拦截加工、track 响应式数据依赖追踪收集添加到 Map 数据结构里面、trigger 触发更新
+  3.  runtime:是 Vue 3 框架中连接虚拟 DOM 和真实 DOM 的桥梁，它通过实现渲染器、封装 DOM 操作、处理特定指令和组件等功能，使得 Vue 应用能够高效地在浏览器中运行，并实现数据驱动的视图更新。
+
+- Vue 编译过程
+  Vue 的编译过程主要包括模板解析、优化和代码生成三个阶段:
+
+  1. 解析: 将模板字符串通过词法分析和语法分析解析成（AST，Abstract Syntax Tree），便于后续处理；
+  2. 优化: 对 AST 进行优化，通过深度优先遍历 标记出静态节点和静态根节点，以提高渲染性能；
+  3. 生成: 将优化后的 AST 转换为渲染函数的代码字符串。渲染函数会生成虚拟 DOM，最终映射到真实 DOM 上
+
+- Vue2 和 Vue3 有哪些区别？
+
+      1. 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑,Vue 3 也兼容选项式 API，方便老项目的迁移。
+      2. 响应式系统:
+      vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
+      vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
+      3. 虚拟DOM性能优化:对虚拟 DOM 进行了优化，采用了静态提升、PatchFlag 等技术，减少了不必要的 diff 计算，提高了渲染性能，尤其是在处理大型组件树时性能提升明显。
+      4. 更好的TypeScript支持: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
+      5. 生命周期钩子部分做了调整:Vue3大部分生命周期钩子仍然保留，但名称有所变化。例如，beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted。同时，在组合式 API 中，可以使用新的方式来使用生命周期钩子，如 onBeforeMount、onMounted 等
+
 - 说说函数式编程理解
 
   1. 函数式编程（Functional Programming，FP）是一种编程范式，它将计算视为函数的求值，避免使用共享状态和可变数据，强调函数的纯粹性和不可变性。
@@ -121,7 +140,11 @@
      - 优点:复用性强、更好的状态管理、组合更灵活、减少代码量，提高维护性。
      - 缺点: 资源占用大：在 JS 中为了实现对象状态的不可变，往往会创建新的对象、递归消耗性能。
 
+- MVVM 你是怎么理解
 
+  1.  MVVM（Model-View-ViewModel）是一种前端开发的设计模式，它是在 MVC（Model-View-Controller）和 MVP（Model-View-Presenter）模式的基础上发展而来，主要用于实现视图（View）和数据模型（Model）的分离，提高代码的可维护性和可测试性。
+  2.  MVVM 模式通过引入 ViewModel 实现了视图和数据模型的分离，利用数据绑定和双向数据绑定机制实现了两者之间的自动同步，在提高代码可维护性和可测试性方面具有显著优势，是现代前端开发中常用的设计模式之一。
+  3.  [MVVM 与 MVC 区别](https://blog.csdn.net/qq_51066068/article/details/125441774)
 
 - 注意事项
 

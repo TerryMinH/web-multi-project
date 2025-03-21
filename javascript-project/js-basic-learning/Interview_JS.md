@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-17 09:03:00
+ * @LastEditTime: 2025-03-21 07:46:32
  * @Description: file not
 -->
 
@@ -32,110 +32,20 @@
   1. 面试也是构建自己知识框架的一个过程,多复习多复盘,平时工作要有意识去完善自己的**知识广度和深度**。
   2. 多看官网一手资料,碎片化知识学习很难形成完整的知识体系。
 
-## HTML
-
-- window.onload 与 DOMContentLoaded 区别
-  window.onload 是在整个页面(包括文档内容、样式表、脚本、图片等所有外部资源)完全加载完成后才会触发
-  DOMContentLoaded 是在浏览器已经完成 HTML 文档解析、构建好 DOM 树之后就会触发。
-
-## CSS 常见面试题
-
-- CSS 常考面试题
-
-  1.  link 与@import 区别: link 不会阻塞页面渲染，@import 会阻塞页面渲染；link 可以通过标签动态加载，@import 不可以。link 标签是 HTML 标准的一部分，具有良好的兼容性。
-
-- [Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
-
-- [盒模型理解](https://www.cnblogs.com/terrymin/p/14586108.html)
-  2.1 对于行级元素，margin-top 和 margin-bottom 对于上下元素无效，margin-left 和 margin-right 有效。
-  2.2 对于相邻的块级元素 margin-bottom 和 margin-top 取值方式:
-  2.2.1 都是正数: 取最大值,距离=Math.max(margin-botton,margin-top)
-  2.2.2 都是负数: 取最小值,距离=Math.min(margin-botton,margin-top)
-  2.2.3 上面是正数，下面是负数或者 上面是负数，下面是正数: 正负相加,距离=margin-botton+margin-top
-
-- BFC(Block formatting context):
-
-  1. 定义:称为块级格式化上下文，是 CSS 中的一种渲染机制。它决定了块级元素如何对它的子元素内容进行布局，以及与子元素同级别的兄弟元素的关系和相互作用
-  2. BFC 解决的问题:
-     2.1 使用 Float 脱离文档流，高度塌陷
-     2.2 Margin 边距重叠
-     2.3 非浮动元素会覆盖浮动元素的位置
-  3. 如何触发 BFC:
-     3.1 float 的值不为 none
-     3.2 overflow 的值不为 visible
-     3.3 display 的值为 table-cell、table-caption 和 inline-block 之一
-     3.4 position 的值不为 static 或者 releative 中任何一个
-
-- CSS 有哪些选择器
-
-  1.  元素选择器
-  2.  类选择器
-  3.  ID 选择器:通过元素的 id 属性来选择元素，ID 名前需要加上 #。一个 HTML 文档中，每个元素的 id 应该是唯一的
-  4.  属性选择器:根据元素的属性或属性值来选择元素。
-  5.  伪类选择器:用于选择处于特定状态的元素，如链接的不同状态、元素的第一个子元素等。伪类名前需要加上 :。
-
-      ```js
-      /**
-       * 1. 链接伪类选择器: :link：用于选择未被访问过的链接,:visited：用于选择已经被访问过的链接等
-        2. 结构伪类选择器: :first-child：选择父元素的第一个子元素。
-        3. 目标伪类选择器: :target：选择当前活动的目标元素，通常与 URL 中的锚点（# 后面的部分）相关
-        4. 表单伪类选择器: :disabled，:checked：选择被选中的表单元素等
-      **/
-      ```
-
-  6.  伪元素选择器:用于选择元素的特定部分，如元素的第一个字母、第一行等。伪元素名前需要加上 ::。
-
-  ```js
-    /* 选择每个 <p> 元素的第一个字母 */
-      p::first-letter {
-          font-size: 24px;
-      }
-
-      /* 选择每个 <p> 元素的第一行 */
-      p::first-line {
-          color: brown;
-      }
-
-      /* 在每个 <p> 元素的内容前面插入一些文本 */
-      p::before {
-          content: ">> ";
-      }
-
-      /* 在每个 <p> 元素的内容后面插入一些文本 */
-      p::after {
-          content: " <<";
-      }
-  ```
-
-  7.  组合选择器:通过组合多个选择器来更精确地选择元素。
-
-  ```js
-    /* 后代选择器：选择 <div> 元素内的所有 <p> 元素 */
-    div p {
-        background-color: lightgray;
-    }
-
-    /* 子选择器：选择 <div> 元素的直接子元素 <p> */
-    div > p {
-        font-style: italic;
-    }
-
-    /* 相邻兄弟选择器：选择紧跟在 <h2> 元素后面的 <p> 元素 */
-    h2 + p {
-        color: orange;
-    }
-
-    /* 通用兄弟选择器：选择 <h2> 元素后面的所有 <p> 元素 */
-    h2 ~ p {
-        text-decoration: underline;
-    }
-  ```
-
 ## JavaScript
 
 - JS 常考面试题
 
-  1. script 标签有哪些属性
+  1. script 标签有哪些属性?
+
+  2. 两个等于与三个等于区别、 null 与 undefined 是否相等:
+     2.1 null 和 undefined 在宽松相等比较下相等，在严格相等比较下不相等
+     2.2 null 是一个原始值，表示一个空对象指针；undefined 表示变量已声明但未赋值，或者函数没有返回值等情况。它们的数据类型不同，所以使用 === 比较时结果为 false。
+     2.3 == 也被称作宽松相等运算符，在进行比较时，它会尝试对两边的值进行类型转换，然后再比较它们的值是否相等。
+
+  3. for in 与 for of 区别:
+     3.1 for...in：适用于遍历对象的可枚举属性，包括对象自身和继承的属性，在遍历数组或字符串时会遍历索引，可能会包含原型链上的属性。遍历字符串会遍历每个字符索引。
+     3.2 for...of：适用于遍历可迭代对象，如数组、字符串、Set、Map 等，直接遍历元素值，不涉及对象的属性和原型链。(不能直接用于遍历普通对象)，遍历字符串会遍历每个字符值。
 
 - 事件循环:
   事件循环是 JavaScript 处理异步任务的机制。JavaScript 是单线程的，但它通过事件循环实现了非阻塞的异步操作。事件循环的核心是不断地从任务队列中取出任务并执行。
@@ -328,7 +238,16 @@
       2.2 let 和 const:let 和 const 声明的变量 存在“暂时性死区”(在变量声明之前访问它会导致 ReferenceError)。
   3.  重复声明：
       3.1 var：可以在同一作用域内使用 var 重复声明同一个变量，后面的声明会覆盖前面的声明。
-      3.2 let 和 const：在统一作用域内，let 和 const 不允许重复声明同一个变量，否则会抛出 SyntaxError。
+      3.2 let 和 const：在同一作用域内，let 和 const 不允许重复声明同一个变量，否则会抛出 SyntaxError。
+
+- Git 常用那些命令
+  1.  git reset 与 git revert 区别
+      1.1 git reset：主要用于撤销提交，能让当前分支的指针移动到指定的提交点，把提交历史改变。此操作不会生成新的提交记录，而是直接修改提交历史。
+      1.2 git revert：用于撤销某个特定提交所做的更改，不过它会以新的提交记录来保存撤销操作，不会改变原有的提交历史。
+      1.3 适用场景：在公共分支上，建议优先使用 git revert 来避免破坏提交历史；而在本地分支上，git reset 可以更方便地丢弃不需要的提交。
+  2.  git merge 与 git rebase 区别
+      2.1 git merge 会对提交历史进行保留，更适合多人协作开发的场景，因为如果出现问题也可以追溯到历史的每一次提交。
+      2.2 git rebase 则是会让提交历史更加简洁易读，保持提交历史的线性结构，所以更适合个人开发和整理分支的情况。
 
 ## 常见场景题
 
