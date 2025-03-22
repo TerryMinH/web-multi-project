@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-28 21:02:27
+ * @LastEditTime: 2025-03-22 20:45:16
  * @Description: file not
 -->
 
@@ -474,4 +474,8 @@ type U1 = Parameters<(a: number, b: string) => void>; // [number, string]
 2. ts 关键字
    [typeof 与 keyof 示例](https://juejin.cn/post/7096869746481561608)
 
-3. [type-challenges](https://gitcode.net/mirrors/type-challenges/type-challenges/-/blob/master/README.zh-CN.md)
+- Ts 训练资源
+
+  1. [type-challenges](https://gitcode.net/mirrors/type-challenges/type-challenges/-/blob/master/README.zh-CN.md)
+  2. [ts 挑战博客](https://wangtunan.github.io/blog/typescript/challenge.html)
+  3. [web-interview](https://github.com/febobo/web-interview)

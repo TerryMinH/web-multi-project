@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-12 18:44:13
+ * @LastEditTime: 2025-03-22 20:16:20
  * @Description: file not
 -->
 
@@ -124,107 +124,107 @@ func("boy");
 
 1. 函数防抖(debounce)：指事件在触发 n 秒后再执行回调,如果在这个时间间隔内多次点击，会重新计时,只有最后一次有效。 应用场景：
 
-- 手机号、邮箱输入检测
-- 搜索框搜索输入（只需最后一次输入完后，再发送 Ajax 请求）
-- 窗口大小`resize`（只需窗口调整完成后，计算窗口大小，防止重复渲染）
-- 滚动事件`scroll`（只需执行触发的最后一次滚动事件的处理程序）
-- 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，（停止输入后）验证一次就好
-- 适用场景：当按钮点击触发的操作比较耗时，或者频繁触发会带来严重后果（如重复提交表单、重复发起支付请求）时，适合使用防抖。在双十一的场景中，像提交订单、支付按钮等操作，使用防抖可以避免用户因为误操作或快速多次点击而产生多个相同的请求，保证业务的准确性和稳定性
+   - 手机号、邮箱输入检测
+   - 搜索框搜索输入（只需最后一次输入完后，再发送 Ajax 请求）
+   - 窗口大小`resize`（只需窗口调整完成后，计算窗口大小，防止重复渲染）
+   - 滚动事件`scroll`（只需执行触发的最后一次滚动事件的处理程序）
+   - 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，（停止输入后）验证一次就好
+   - 适用场景：当按钮点击触发的操作比较耗时，或者频繁触发会带来严重后果（如重复提交表单、重复发起支付请求）时，适合使用防抖。在双十一的场景中，像提交订单、支付按钮等操作，使用防抖可以避免用户因为误操作或快速多次点击而产生多个相同的请求，保证业务的准确性和稳定性
 
-```js
-<!DOCTYPE html>
-<html lang="en">
+   ```js
+   <!DOCTYPE html>
+   <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>函数防抖模式</title>
-</head>
-<body>
-  函数防抖： <input type="text" id="inputId">
-</body>
-<script>
-  let elem = document.getElementById("inputId");
-  // 不防抖函数
-  elem.addEventListener('keyup', function (e) {
-    console.log(e.target.value);
-  })
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>函数防抖模式</title>
+   </head>
+   <body>
+     函数防抖： <input type="text" id="inputId">
+   </body>
+   <script>
+     let elem = document.getElementById("inputId");
+     // 不防抖函数
+     elem.addEventListener('keyup', function (e) {
+       console.log(e.target.value);
+     })
 
-  // 防抖函数
-  function debounce(fn, delay) {
-    let timer;
-    return function () {
-      // this赋值：函数运行时会改变内部this的指向问题. 下面可以利用箭头函数而不用this赋值。
-      let context = this, args = arguments;
-      if (timer) { clearTimeout(timer); }
-      timer = setTimeout(function () {
-        fn.apply(context, args);
-      }, delay)
-    }
-  }
+     // 防抖函数
+     function debounce(fn, delay) {
+       let timer;
+       return function () {
+         // this赋值：函数运行时会改变内部this的指向问题. 下面可以利用箭头函数而不用this赋值。
+         let context = this, args = arguments;
+         if (timer) { clearTimeout(timer); }
+         timer = setTimeout(function () {
+           fn.apply(context, args);
+         }, delay)
+       }
+     }
 
-  function testDebounce(e, content) {
-    console.log(e.target.value, content);
-  }
-  let DebounceFn = debounce(testDebounce, 1000);
+     function testDebounce(e, content) {
+       console.log(e.target.value, content);
+     }
+     let DebounceFn = debounce(testDebounce, 1000);
 
-  elem.addEventListener('keyup', function (e) {
-    DebounceFn(e, 'debounce');
-  })
-</script>
-</html>
-```
+     elem.addEventListener('keyup', function (e) {
+       DebounceFn(e, 'debounce');
+     })
+   </script>
+   </html>
+   ```
 
 2. 函数节流(throttle)：规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。 应用场景：
 
-- `DOM`元素的拖拽功能实现（`mousemove`）
-- 射击游戏的  `mousedown`/`keydown`  事件（单位时间只能发射一颗子弹）
-- 计算鼠标移动的距离（`mousemove`）
-- 搜索联想（`keyup`）
-- 滚动事件`scroll`，（只要页面滚动就会间隔一段时间判断一次）
+   - `DOM`元素的拖拽功能实现（`mousemove`）
+   - 射击游戏的  `mousedown`/`keydown`  事件（单位时间只能发射一颗子弹）
+   - 计算鼠标移动的距离（`mousemove`）
+   - 搜索联想（`keyup`）
+   - 滚动事件`scroll`，（只要页面滚动就会间隔一段时间判断一次）
 
-```js
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>函数节流模式</title>
-</head>
-<body>
-</body>
-<script>
-  // 非节流函数
-  document.onmousemove = function (e) {
-    console.log(e);
-  }
+   ```js
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>函数节流模式</title>
+   </head>
+   <body>
+   </body>
+   <script>
+     // 非节流函数
+     document.onmousemove = function (e) {
+       console.log(e);
+     }
 
-  // 节流函数
-  function throttle(fn, delay) {
-    let timer;
-    return function () {
-      let context = this, args = arguments;
-      if (timer) { return; }
-      timer = setTimeout(function () {
-        fn.apply(context, args);
-        timer = null;
-      }, delay);
-    }
-  }
-  function testThrottle(e, content) {
-    console.log(e, content);
-  }
+     // 节流函数
+     function throttle(fn, delay) {
+       let timer;
+       return function () {
+         let context = this, args = arguments;
+         if (timer) { return; }
+         timer = setTimeout(function () {
+           fn.apply(context, args);
+           timer = null;
+         }, delay);
+       }
+     }
+     function testThrottle(e, content) {
+       console.log(e, content);
+     }
 
-  let testThrottleFn = throttle(testThrottle, 1000); // 节流函数
+     let testThrottleFn = throttle(testThrottle, 1000); // 节流函数
 
-  document.onmousemove = function (e) {
-    testThrottleFn(e, 'throttle');
-  }
-</script>
-</html>
-```
+     document.onmousemove = function (e) {
+       testThrottleFn(e, 'throttle');
+     }
+   </script>
+   </html>
+   ```
 
 3. 防抖与函数节流区别：函数防抖是某一段时间只执行一次，而函数节流是间隔时间执行。
 

@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-04-14 06:54:55
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 07:20:15
+ * @LastEditTime: 2025-03-22 20:35:47
  * @Description: file not
 -->
 
@@ -24,6 +24,11 @@
      1.3.1 输入验证和过滤：对用户输入的数据进行严格的验证和过滤，只允许合法的字符和格式。可以使用正则表达式或白名单机制来过滤输入。
      1.3.2 输出编码：在将用户输入的数据输出到页面时，进行适当的编码，将特殊字符转换为 HTML 实体。例如，将 < 转换为 &lt;，将 > 转换为 &gt;。
      1.3.3 设置 CSP（内容安全策略）：通过设置 CSP 头，限制页面可以加载的资源来源，只允许加载来自可信源的脚本、样式表等资源。
+
+     ```js
+     1. 通过设置HTTP Header的Content-Security-Policy
+     2. 通过meta标签来设置，例如：<meta http-equiv="Content-Security-Policy">
+     ```
 
   2. CSRF（跨站请求伪造）
      2.1 定义：CSRF 攻击是指攻击者通过诱导用户在已登录的网站上执行恶意操作，利用用户的身份信息向目标网站发送伪造的请求。

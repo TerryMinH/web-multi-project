@@ -2,14 +2,14 @@
  * @Author: TerryMin
  * @Date: 2024-06-09 10:08:43
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-20 08:38:09
+ * @LastEditTime: 2025-03-22 20:27:17
  * @Description: file not
  */
-type User = {
+type Person = {
   name: string;
-  age:number;
+  age: number;
 };
-const boy: User = {
-  name: "zhangsan",
-  age:25
-};
+// 结果：'name' | 'age'
+type result = keyof Person;
+
+const instance: result = "age";

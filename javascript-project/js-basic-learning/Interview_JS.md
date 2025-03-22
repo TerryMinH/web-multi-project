@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-12-31 13:59:33
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 08:28:04
+ * @LastEditTime: 2025-03-22 20:59:35
  * @Description: file not
 -->
 
@@ -70,7 +70,7 @@
   2.  任务队列（Task Queue）:
       也称为宏任务队列（Macrotask Queue），存放的是宏任务，如 script 脚本、setTimeout、setInterval、I/O 操作、UI 渲染等。
       微任务队列（Microtask Queue）：存放的是微任务，如 Promise.then、MutationObserver、queueMicrotask 等。
-  3.  注意: requestAnimationFrame 既不是宏任务也不是微任务，是浏览器提供的一个用于优化动画效果的 API
+  3.  注意: requestAnimationFrame 虽然不属于严格的宏任务或微任务分类，但由于其执行时机和特性与宏任务更为接近，因此通常被视为一个特殊的宏任务。
 
   ```js
   // 这里有个重要的点，就是await会将后续代码阻塞进微任务队列

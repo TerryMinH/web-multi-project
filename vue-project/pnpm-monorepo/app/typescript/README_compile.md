@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-12-26 13:58:25
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-23 09:07:22
+ * @LastEditTime: 2025-03-22 20:45:08
  * @Description: ts文件动态编译: tsc index.ts --watch
 -->
 
@@ -19,8 +19,6 @@
   - 2 指定待编译的文件: compilerOptions
 
 - [ts 编译原理](https://juejin.cn/post/7009661133686734861)
-
-[web-interview](https://github.com/febobo/web-interview)
 
 # 模块、命名空间
 
