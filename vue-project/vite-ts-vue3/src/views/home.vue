@@ -2,21 +2,25 @@
  * @Author: TerryMin
  * @Date: 2022-01-14 14:47:17
  * @LastEditors: TerryMin
- * @LastEditTime: 2023-09-19 19:24:50
+ * @LastEditTime: 2025-03-22 10:50:45
  * @Description: file not
 -->
 
 <template>
-  <div>
+  <div class="component-wrap">
     <h3>BaseComponent:</h3>
     <BaseComponent />
   </div>
 
-  <div>
+  <div class="component-wrap">
     <h3>HookComponent:</h3>
     <HookComponent />
   </div>
 
+  <div class="component-wrap">
+    <h3>PlayComponent:</h3>
+    <PlayComponent />
+  </div>
   <!-- <div>
     <h3>PinaBasicSetUp:</h3>
     <PinaBasicSetUp />
@@ -51,5 +55,10 @@ const internalInstance = getCurrentInstance();
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.component-wrap {
+  border: 1px solid #666;
+  margin-top:10px;
 }
 </style>
