@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-22 21:25:54
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 21:28:21
+ * @LastEditTime: 2025-03-22 21:35:13
  * @Description: file not
  */
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
     // 代码块行号
     lineNumbers: true
   },
-  themeConfig: {
+  theme: {
     // 最后更新时间
     lastUpdated: '最后更新时间',
     // 所有页面自动生成侧边栏
