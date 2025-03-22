@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-20 14:33:34
+ * @LastEditTime: 2025-03-22 20:00:05
  * @Description: file not
 -->
 
@@ -142,8 +142,9 @@
 
 - [React 与 Vue 区别](https://zhuanlan.zhihu.com/p/180455618)
 
-  1. 拥有各自框架的生命周期
-  2. React 使用的 JSX 语法;Vue 使用的是模板系统
+  1. React 使用的 JSX 语法;Vue 使用的是模板系统
+  2. 拥有各自框架的生命周期及基于框架的状态管理库和路由库
+  3. React 拥有庞大的生态系统和丰富的社区资源，可能能更好的应对项目中各种挑战。Vue 社区活跃度较高,在国内有广泛的应用和支持，对初学者非常友好。
 
 - Vue 与 React 虚拟 DOM 有什么区别?
 
