@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 20:13:30
+ * @LastEditTime: 2025-03-22 22:54:34
  * @Description: file not
 -->
 
@@ -119,6 +119,42 @@
   3.  文档与测试
   4.  版本管理与发布
   5.  持续更新与维护
+
+- 低代码平台设计
+
+  1. 沉淀产物（monorepo packages）
+     1.1 物料编排（组件拖拽）layout-engine-sdk
+     1.2 物料渲染引擎（组件在页面中渲染）material-renderer
+     1.3 数据源管理 online-database-sdk
+     1.4 流程编辑器（负责配置）+流程引擎（负责执行（内存型流程、工作流流程引擎[OA 审批流、自动化批处理流]））flow-editer、flow-interpretor
+     1.5 资源中心（静态资源）(大文件上传) resource
+
+  2. layout-engine-sdk
+     2.1 引擎分类
+
+     - block：从上往下布局，相对灵活度比较低
+     - flex：如：figma outlayout
+     - grid：
+     - canvas：一般在设计类软件居多，100%灵活方式（参考工具:figma）
+
+       2.2 应用场景
+
+     - 管理后台、CRM、ERP
+     - 仪表盘
+     - 表单、OA、数据源
+
+  3. material-renderer
+     3.1 基础功能：框架JSON、数据JSON
+
+     - 渲染方式：PC、H5
+     - 设备兼容
+     - 主题定制：样式 token、样式消费
+
+  4. online-database-sdk
+     4.1 canvas、table
+     4.2 类似飞书多维表，字段管理，单元格交互（CellEditor、CellRenderer、CellValidator、CellRules）
+     4.3 表设计
+     4.4 外部数据链接
 
 ## React 与 Vue 对比
 

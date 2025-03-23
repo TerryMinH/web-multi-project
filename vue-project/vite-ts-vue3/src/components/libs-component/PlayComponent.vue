@@ -1,3 +1,10 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-06-09 10:08:43
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-03-23 10:28:46
+ * @Description: file not
+-->
 <template>
 	<div>
 		<Suspense>
@@ -9,11 +16,15 @@
 			</template>
 		</Suspense>
 	</div>
+	<PlayChildComponent :address="'中国'"></PlayChildComponent>
+	<input v-focus />
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent,getCurrentInstance } from 'vue';
 
+const instance=getCurrentInstance();
+console.log(instance);
 const AsyncDataComponent = defineAsyncComponent(() =>
 	new Promise((resolve) => {
 		setTimeout(() => {

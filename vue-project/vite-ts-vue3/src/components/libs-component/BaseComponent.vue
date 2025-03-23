@@ -2,14 +2,13 @@
  * @Author: TerryMin
  * @Date: 2022-04-26 10:00:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-10 16:39:23
+ * @LastEditTime: 2025-03-23 08:21:30
  * @Description: file not
 -->
 <template>
   <div>
     <button type="button" @click="changeBtn('1')">按钮1</button>
     <button @click="changeBtn('2')">按钮2</button>
-    <ChildComponent :address="'中国'"></ChildComponent>
   </div>
   <div class="container">
     <p>{{ address.street }}</p>
@@ -20,7 +19,6 @@
 
 <script setup>
 import { ref, reactive, onMounted, toRefs, h, toRef, computed } from "vue";
-import ChildComponent from "./ChildComponent.vue";
 
 let obj = { name: "alice", age: 12 };
 let newObj = toRef(obj, "name");
