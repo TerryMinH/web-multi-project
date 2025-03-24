@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-04-26 10:00:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-23 08:21:30
+ * @LastEditTime: 2025-03-23 11:22:16
  * @Description: file not
 -->
 <template>
@@ -60,7 +60,7 @@ h1 {
   border: 1px solid;
 }
 
-::v-deep .mg-class {
-  color: red;
+:deep(.mg-class) {
+  color: green;
 }
 </style>

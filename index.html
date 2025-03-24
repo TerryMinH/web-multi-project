@@ -4,25 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      .parent {
-        width: 200px;
-        height: 200px;
-        background-color: lightgray;
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
+      .drag-item {
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        margin: 10px;
+        cursor: move;
       }
 
-      .child {
-        display: inline-block;
-        background-color: lightblue;
+      .drop-area {
+        width: 500px;
+        height: 500px;
+        border: 2px dashed gray;
       }
     </style>
   </head>
 
   <body>
-    <div class="parent">
-      <div class="child">行内块级元素</div>
-    </div>
+    <div class="drag-item" draggable="true" id="item1">可拖拽物料</div>
+    <div class="drop-area" id="dropArea"></div>
+
+    <script>
+      const dragItem = document.getElementById("item1");
+      const dropArea = document.getElementById("dropArea");
+
+      dragItem.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", e.target.id);
+      });
+
+      dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      dropArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        console.log(e);
+        const data = e.dataTransfer.getData("text/plain");
+        console.log(data);
+        const draggedItem = document.getElementById(data);
+        dropArea.appendChild(draggedItem);
+
+        const dropAreaRect = dropArea.getBoundingClientRect();
+        const x = e.clientX - dropAreaRect.left;
+        const y = e.clientY - dropAreaRect.top;
+
+        // 定义样式对象
+        const styles = {
+          position: "absolute",
+          left: `${x}px`,
+          top: `${y}px`,
+          width: "100px",
+          height: "100px",
+          backgroundColor: "lightblue",
+        };
+        console.log(styles);
+        // 应用样式到物料
+        Object.assign(draggedItem.style, styles);
+      });
+    </script>
   </body>
 </html>
