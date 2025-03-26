@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-09-18 13:50:26
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-02-26 16:55:38
+ * @LastEditTime: 2025-03-25 17:38:42
  * @Description: file not
  */
 function grayArithmetic() {}
@@ -20,5 +20,20 @@ function maxSubArray(arr) {
   }
   return maxSum;
 }
+
 const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-console.log(maxSubArray(nums));
+function insertSort(arr) {
+  let len = arr.length;
+  let preIndex, current;
+  for (let i = 1; i < len; i++) {
+    preIndex = i - 1;
+    current = arr[i];
+    while (preIndex >= 0 && arr[preIndex] > current) {
+      arr[preIndex + 1] = arr[preIndex];
+      preIndex--;
+    }
+    arr[preIndex + 1] = current;
+  }
+  return arr;
+}
+console.log(insertSort(nums));

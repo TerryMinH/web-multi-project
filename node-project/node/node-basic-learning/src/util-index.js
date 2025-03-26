@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-09-20 17:45:55
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-07-29 13:50:27
+ * @LastEditTime: 2025-03-25 21:26:02
  * @Description: file not
  */
 
@@ -11,7 +11,7 @@
 //   test: () => {},
 // };
 exports.test1='a';
+console.log(__dirname);
 
-// console.log(process.cwd());
-// console.log(process.chdir('./dataBase'));
-// console.log(process.cwd());
+console.log(process.cwd());
+// console.log(11,global);

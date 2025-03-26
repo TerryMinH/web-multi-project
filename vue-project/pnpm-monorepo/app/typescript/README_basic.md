@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 20:45:16
+ * @LastEditTime: 2025-03-24 21:44:50
  * @Description: file not
 -->
 
@@ -102,12 +102,8 @@ const d: Intersetion = {
 
 5. 接口 与 type(类型别名) 区别：(https://juejin.cn/post/6844904114925600776)
 
-- type 会给一个类型起个新名字。 type 有时和 interface 很像，但是可以作用于原始值（基本类型），联合类型，元组以及其它任何你自定义的类型
-- interface 接口是对象的状态(属性)和行为(方法)的抽象(描述)
-
-- 都允许扩展：interface 用 extends 来实现扩展;type 使用 & 实现扩展
-- 不同点：type 可以声明基本数据类型别名/联合类型/元组等，而 interface 不行; interface 能够合并声明，而 type 不行
-- 公共的用 interface 实现，不能用 interface 实现的再用 type 实现。
+   - type 会给一个类型起个新名字，可以作用于原始值（基本类型），联合类型，元组以及其它任何你自定义的类型，type 使用 & 实现扩展。
+   - interface 接口是对象的状态(属性)和行为(方法)的抽象(描述)，通过 implements(支持实现类的契约)或者 extends(可以被继承和扩展)。
 
 ```ts
 1. 作用于原始值（基本类型）
