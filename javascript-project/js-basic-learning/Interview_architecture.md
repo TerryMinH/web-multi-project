@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-25 17:20:26
+ * @LastEditTime: 2025-03-28 08:19:08
  * @Description: file not
 -->
 
@@ -220,3 +220,80 @@
       3.1 MVVM 与 MVC 最大的区别就是：它实现了 View 和 Model 的自动同步：当 Model 的属性改变时，我们不用再自己手动操作 Dom 元素来改变 View 的显示，它会自动变化。
       3.2 MVC 和 MVVM 都是一种设计思想。 主要就是 MVC 中 Controller 演变成 MVVM 中的 viewModel。 MVVM 主要解决了 MVC 中大量 DOM 操作使页面渲染性能降低，加载速度变慢的问题 。
       3.3 MVVM 并不是用 VM 完全取代了 C，ViewModel 存在目的在于抽离 Controller 中展示的业务逻辑，而不是替代 Controller，其它视图操作业务等还是应该放在 Controller 中实现。
+
+## 八年前端技术复盘规划（广度 + 深度）
+
+- 前端框架+跨端：
+
+  1. 基本技能：精通 HTML/CSS3/JavaScript/ES6/TypeScript;React/Vue 理解框架底层实现原理
+  2. 跨端开发：熟悉跨端开发框架（如 React Native、Flutter、Taro）。
+  3. 服务端渲染：nuxtjs、nextjs
+  4. 桌面端：Electron(Electron Forge)、Tauri2（基于 Rust）
+  5. 数字孪生：动画、（Canvas、SVG）Echarts、Threejs、D3.js、WebGL
+  6. AI 大模型Agent与前端结合使用
+
+- 基建(工程化构建)和后端开发(全栈)：
+
+  1. 组件库开发
+  2. Webpack、Vite 打包工具原理
+  3. 自动化： CI 脚手架命令、CI(docker K8s)、命令行工具
+  4. node（基建/脚手架、BFF 开发）：Cluster、Worker、子进程、process
+  5. 前端工具链：基于 Rust(Oxc、Rsbuild)趋势
+
+- 架构思维：
+
+  1. 微前端
+  2. 低代码/无代码
+  3. 算法
+
+- 管理(软实力)：
+
+  1. 沟通技巧
+  2. 团队管理、任务分配
+  3. 带人、培训
+
+- 前端技术架构师(个人规划)
+
+  1. 核心前端技术
+     HTML/CSS/JavaScript：熟练掌握前端三大基础技术，理解语义化、响应式设计和现代 JavaScript 特性。
+     TypeScript：掌握类型系统，提升代码质量和可维护性。
+     前端框架：精通至少一个主流框架（如 React、Vue、Angular），并理解其底层原理。
+     状态管理：熟悉 Redux、MobX、Vuex 等状态管理工具。
+     前端构建工具：掌握 Webpack、Vite、Rollup 等构建工具，优化打包和构建流程。
+  2. 前端工程化
+     模块化开发：掌握 ES Module、CommonJS 等模块化方案。
+     代码规范与质量：熟悉 ESLint、Prettier 等工具，制定团队代码规范。
+     测试：掌握单元测试（Jest、Mocha）、端到端测试（Cypress、Playwright）等。
+     CI/CD：熟悉 GitLab CI、GitHub Actions 等持续集成/持续部署工具。
+     性能优化：掌握前端性能优化技巧，如懒加载、代码分割、缓存策略等。
+  3. 架构设计能力
+     设计模式：熟悉前端常见设计模式（如单例、观察者、工厂模式等）。
+     组件化设计：能够设计高复用、低耦合的组件库。
+     微前端架构：了解微前端解决方案（如 Single-SPA、Qiankun），设计可扩展的前端架构。
+     跨端开发：熟悉跨端开发框架（如 React Native、Flutter、Taro）。
+     服务端渲染（SSR）：掌握 Next.js、Nuxt.js 等 SSR 框架，优化首屏加载性能。
+  4. 后端与全栈知识
+     Node.js：掌握 Node.js 开发，能够搭建 BFF（Backend for Frontend）层。
+     RESTful API/GraphQL：熟悉接口设计规范，能够与后端团队协作。
+     数据库基础：了解 SQL 和 NoSQL 数据库的基本使用。
+     DevOps 基础：了解容器化（Docker）、云服务（AWS、Azure）等。
+  5. 浏览器与网络
+     浏览器原理：理解浏览器渲染机制、事件循环、V8 引擎等。
+     网络协议：熟悉 HTTP/HTTPS、WebSocket、TCP/IP 等协议。
+     安全知识：了解 XSS、CSRF、CORS 等前端安全问题及解决方案。
+  6. 团队协作与项目管理
+     代码版本控制：熟练使用 Git，掌握分支管理策略（如 Git Flow）。
+     敏捷开发：熟悉 Scrum、Kanban 等敏捷开发流程。
+     文档编写：能够撰写技术文档、架构设计文档。
+     技术选型：根据项目需求，选择合适的技术栈和工具。
+     团队协作：具备良好的沟通能力，能够带领团队完成项目目标。
+  7. 前沿技术与趋势
+     WebAssembly：了解 WebAssembly 的应用场景。
+     PWA：掌握渐进式 Web 应用开发。
+     Web3.0：了解区块链、智能合约等新兴技术。
+     低代码/无代码平台：熟悉低代码开发趋势。
+  8. 软技能
+     问题解决能力：能够快速定位和解决复杂技术问题。
+     学习能力：保持对新技术的敏感度，持续学习。
+     领导力：能够指导团队成员，推动技术落地。
+     沟通能力：与产品、设计、后端团队高效协作。

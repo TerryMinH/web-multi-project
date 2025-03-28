@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-06-09 10:08:43
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-23 14:48:53
+ * @LastEditTime: 2025-03-27 07:37:08
  * @Description: file not
 -->
 <template>
@@ -25,7 +25,6 @@ import { defineAsyncComponent,reactive,ref } from 'vue';
 
 const count = ref(0)
 const object = { id: ref(1) }
-
 const AsyncDataComponent = defineAsyncComponent(() =>
 	new Promise((resolve) => {
 		setTimeout(() => {

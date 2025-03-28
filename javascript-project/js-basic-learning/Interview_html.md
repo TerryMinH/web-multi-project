@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-25 10:56:31
+ * @LastEditTime: 2025-03-27 19:01:41
  * @Description: file not
 -->
 
@@ -22,6 +22,8 @@
 
 - [Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
 
+  1.  flex:1 表示 flex:1 1 0% ; flex:auto 表示:1 1 auto
+
 - [盒模型理解](https://www.cnblogs.com/terrymin/p/14586108.html)
   2.1 对于行级元素，margin-top 和 margin-bottom 对于上下元素无效，margin-left 和 margin-right 有效。
   2.2 对于相邻的块级元素 margin-bottom 和 margin-top 取值方式:
@@ -37,10 +39,10 @@
      2.2 Margin 边距重叠
      2.3 非浮动元素会覆盖浮动元素的位置
   3. 如何触发 BFC:
-     3.1 float 的值不为 none
+     3.1 float 的值为 left 或者 right
      3.2 overflow 的值不为 visible
      3.3 display 的值为 table-cell、table-caption 和 inline-block 之一
-     3.4 position 的值不为 static 或者 releative 中任何一个
+     3.4 position 的值为 absolute 或者 fixed 中任何一个
 
 - CSS 有哪些选择器
 
@@ -48,18 +50,18 @@
   2.  类选择器
   3.  ID 选择器:通过元素的 id 属性来选择元素，ID 名前需要加上 #。一个 HTML 文档中，每个元素的 id 应该是唯一的
   4.  属性选择器:根据元素的属性或属性值来选择元素。
-  5.  伪类选择器:用于选择处于特定状态的元素，如链接的不同状态、元素的第一个子元素等。伪类名前需要加上 :。
+  5.  伪类选择器:用于选择处于特定状态的元素，如链接的不同状态、元素的第一个子元素等。伪类名前需要加上一个冒号 :。
 
       ```js
       /**
        * 1. 链接伪类选择器: :link：用于选择未被访问过的链接,:visited：用于选择已经被访问过的链接等
-        2. 结构伪类选择器: :first-child：选择父元素的第一个子元素。
+        2. 结构伪类选择器: :first-child：选择父元素的第一个子元素。:nth-child(n)：选择父元素的第 n 个子元素。:nth-of-type() 是按元素类型筛选后再依据位置选择。
         3. 目标伪类选择器: :target：选择当前活动的目标元素，通常与 URL 中的锚点（# 后面的部分）相关
         4. 表单伪类选择器: :disabled，:checked：选择被选中的表单元素等
       **/
       ```
 
-  6.  伪元素选择器:用于选择元素的特定部分，如元素的第一个字母、第一行等。伪元素名前需要加上 ::。
+  6.  伪元素选择器:用于选择元素的特定部分，如元素的第一个字母、第一行等。伪元素名前需要加上双冒号 ::。
 
   ```js
     /* 选择每个 <p> 元素的第一个字母 */
