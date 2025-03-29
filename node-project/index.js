@@ -1,28 +1,12 @@
-/*
- * @Author: TerryMin
- * @Date: 2024-06-09 10:07:03
- * @LastEditors: TerryMin
- * @LastEditTime: 2024-09-17 17:33:53
- * @Description: file not
- */
-var exec = require('child_process').exec;
+const path = require("path");
 
-// 成功的例子
-exec('ls -al', function(error, stdout, stderr){
-    if(error) {
-        console.error('error: ' + error);
-        return;
-    }
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + typeof stderr);
-});
+// const buffer=Buffer.from('您好!');
+// console.log(buffer);
+// const str=buffer.toString();
+// console.log(str);
 
-// 失败的例子
-exec('ls hello.txt', function(error, stdout, stderr){
-    if(error) {
-        console.error('error: ' + error);
-        return;
-    }
-    console.log('stdout: ' + stdout);
-    console.log('stderr: ' + stderr);
-});
+// console.log('process.cwd():', process.cwd());
+// console.log('__dirname:', __dirname);
+// console.log('__filename:', __filename);
+const currentPath=path.resolve();
+console.log(currentPath);
