@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 20:14:10
+ * @LastEditTime: 2025-03-29 10:38:23
  * @Description: file not
 -->
 
@@ -23,13 +23,18 @@
       3.1 原生事件处理函数中:在原生事件处理函数（如 addEventListener 绑定的事件）中，setState 是同步执行的。因为原生事件不受 React 合成事件系统的管理，React 不会对其进行批量更新。
       3.2 setTimeout 和 Promise 等异步回调中:在 setTimeout、Promise 等异步回调函数中，setState 也是同步执行的。这是因为这些异步回调函数的执行时机在 React 批量更新之后。
 
-- Vue 组件通信有几种方式
+- React 组件通信有几种方式
 
   1.  子组件向父组件传递数据有几种方式：
       1.1 回调函数:父组件把一个回调函数作为 prop 传递给子组件，子组件在需要的时候调用这个回调函数，并且把数据当作参数传入。
       1.2 自定义事件（在类组件中使用 createEvent 模拟）:子组件通过 CustomEvent 创建一个自定义事件，并且使用 window.dispatchEvent 触发该事件。父组件在 componentDidMount 里监听这个事件，在 handleChildEvent 中处理接收到的数据。
       1.3 跨级组件通信:可以使用 React 的上下文（Context）来实现跨级组件通信，避免通过多层 props 传递。
       1.4 状态管理库
+
+- React 合成事件
+
+  1. React 合成事件（SyntheticEvent）是 React 为了实现跨浏览器兼容性和更好的事件处理机制而封装的一套事件系统。
+  2. 原理：React 对原生 DOM 事件进行了包装，创建了合成事件对象。利用事件委托机制,当事件触发时，一般是先执行原生事件，然后事件冒泡到根节点再触发合成事件。然后 React 根据事件类型和目标元素找到对应的事件处理程序并执行。
 
 - React Hooks？
 
@@ -137,4 +142,3 @@
   1. 状态管理解决问题:
      1.1 解决跨层级组件通信问题。
      1.2 就是对一些全局公共状态的缓存。
-
