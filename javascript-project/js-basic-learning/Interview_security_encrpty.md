@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-04-14 06:54:55
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 20:35:47
+ * @LastEditTime: 2025-03-30 16:53:25
  * @Description: file not
 -->
 
@@ -13,7 +13,7 @@
 - XSS 与 CSRF 的区别
 
   1. XSS（跨站脚本攻击）
-     1.1 定义：XSS 攻击是指攻击者通过在目标网站注入恶意脚本，当用户访问该网站时，这些脚本会在用户的浏览器中执行，从而获取用户的敏感信息，如 Cookie、会话令牌等，或者执行其他恶意操作。
+     1.1 定义：XSS 攻击是指攻击者通过在目标网站注入恶意脚本，当用户访问该网站时，这些脚本会在用户的浏览器中执行，从而获取用户的敏感信息(如 Cookie、会话令牌等)或者执行其他恶意操作。
 
      1.2 攻击方式：
      1.2.1 反射型 XSS：攻击者诱导用户点击包含恶意脚本的链接，服务器接收到请求后，将恶意脚本作为响应的一部分返回给用户的浏览器，脚本在浏览器中执行。例如，一个搜索页面的 URL 为 http://example.com/search?keyword=xxx，攻击者构造一个恶意链接 http://example.com/search?keyword=<script>alert('XSS')</script>，当用户点击该链接时，服务器将恶意脚本返回给浏览器并执行。
@@ -59,7 +59,7 @@
   3. 点击劫持（Clickjacking）
      3.1 定义： 攻击者通过在一个透明的 iframe 中嵌入目标网站，然后在上面覆盖一个看似正常的页面，诱导用户在不知情的情况下点击 iframe 中的按钮或链接，执行恶意操作。
      3.2 防范措施：
-     3.2.1 设置 X - Frame - Options 头：在服务器的 HTTP 响应头中设置 X - Frame - Options 头，限制页面是否可以被嵌入到 iframe 中。可以设置为 DENY 表示禁止任何网站嵌入，SAMEORIGIN 表示只允许同域名的网站嵌入。
+     3.2.1 设置 X - Frame - Options 头：在服务器的 HTTP 响应头中设置 X - Frame - Options 头，限制 iframe 是否可以嵌入到页面中。可以设置为 DENY 表示禁止任何网站嵌入，SAMEORIGIN 表示只允许同域名的网站嵌入。
      3.2.2 使用 CSP 的 frame - ancestors 指令：通过设置 CSP 的 frame - ancestors 指令，限制页面可以被嵌入的来源。例如，Content - Security - Policy: frame - ancestors'self' 表示只允许同域名的网站嵌入。
 
 ## JS 加解密 [Https 加密原理](https://www.cnblogs.com/terrymin/p/15735083.html)

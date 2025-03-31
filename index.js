@@ -1,35 +1,32 @@
-let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
-
-function bubbleSort(arr) {
-  let len = arr.length;
-  for (let i = 0; i < len - 1; i++) {
-    for (let j = 0; j < len - 1 - i; j++) {
-      if (arr[j] > arr[j + 1]) {
-        let temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
-      }
+class EventEmiter {
+  constructor() {
+    this.events = {};
+  }
+  on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(callback);
+  }
+  emit(eventName, ...args) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach((callback) => {
+        callback(...args);
+      });
     }
   }
-  return arr;
-}
-
-function quickSort(arr) {
-  console.log(arr);
-  if (arr.length === 0) {
-    return [];
-  }
-  let mid = Math.floor(arr.length / 2);
-  let current = arr.splice(mid, 1);
-  let left = [],
-    right = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < current) {
-      left.push(arr[i]);
-    } else {
-      right.push(arr[i]);
+  off(eventName, callback) {
+    if (this.events[eventName]) {
+      this.events[eventName] = this.events[eventName].filter(
+        (cb) => cb != callback
+      );
     }
   }
-  return quickSort(left).concat(current, quickSort(right));
+  once(eventName, callback) {
+    const wrapper = (...args) => {
+      callback(...args);
+      this.off(eventName, wrapper);
+    };
+    this.on(eventName, wrapper);
+  }
 }
-console.log(quickSort(arr));

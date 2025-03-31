@@ -200,60 +200,53 @@
   </head>
 
   <body>
-    <div class="zhuti" style="position: relative; width: 800px; height: 800px">
-      <!-- 最外层玩家占位 -->
-      <div class="wz_main">
-        <div id="wz_temp" class="wz_part" style="display: none">
-          <div class="wz_bg"></div>
-          <div class="wz_title"></div>
-        </div>
-      </div>
-
-      <div class="box">
-        <!-- 大转盘抽奖 -->
-        <div class="main" ontransitionend="end()">
-          <div id="temp" class="part" style="display: none">
-            <div class="bg"></div>
-            <div class="title"></div>
-            <div class="ren"></div>
-          </div>
-        </div>
-        <!-- 箭头 -->
-        <div class="pointer">
-          <div class="pointer-bar"></div>
-          <div class="pointer-cursor"></div>
-        </div>
-      </div>
-    </div>
-    <button onclick="start()">开始</button>
-    <div class="winner"></div>
+    <div id="virtual-list-container"></div>
   </body>
   <script type="text/javascript">
-    let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
+    // 示例代码：简单的虚拟列表实现思路
+    class VirtualList {
+      constructor({ container, data, itemHeight }) {
+        this.container = container;
+        this.data = data;
+        this.itemHeight = itemHeight;
+        // this.container.style.height = `${data.length * itemHeight}px`;
+        this.container.style.height = `500px`;
+        this.container.style.width = `100%`;
+        this.container.style.overflow = `auto`;
+        this.container.style.border = `1px solid red`;
+        this.renderVisibleItems();
+        console.log(44);
+        this.container.addEventListener("scroll", this.handleScroll.bind(this));
+      }
 
-    function quickSort(arr) {
-      console.log(arr);
-      if (arr.length === 0) {
-        return [];
+      renderVisibleItems() {
+        const scrollTop = this.container.scrollTop;
+        const startIndex = Math.floor(scrollTop / this.itemHeight);
+        const endIndex =
+          startIndex + Math.ceil(this.container.offsetHeight / this.itemHeight);
+        const visibleData = this.data.slice(startIndex, endIndex);
+        console.log('visibleData',visibleData);
+        this.container.innerHTML = "";
+        visibleData.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.style.height = `${this.itemHeight}px`;
+          div.style.position = "absolute";
+          div.style.top = `${(startIndex + index) * this.itemHeight}px`;
+          div.textContent = item;
+          this.container.appendChild(div);
+        });
       }
-      let mid = Math.floor(arr.length / 2);
-      let current = arr.splice(mid, 1);
-      let left = [],
-        right = [];
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] < current) {
-          left.push(arr[i]);
-        } else {
-          right.push(arr[i]);
-        }
+
+      handleScroll() {
+        console.log(11);
+        this.renderVisibleItems();
       }
-      return quickSort(left).concat(current, quickSort(right));
     }
-    // console.log(quickSort(arr));
-    console.log(arr, arr.length);
-    
-    for (let i = 0; i < arr.length; i++) {
-      console.log(i, arr[i]);
-    }
+
+    // 使用示例
+    const container = document.getElementById("virtual-list-container");
+    const data = Array.from({ length: 10000 }, (_, i) => `Item ${i}`);
+    const itemHeight = 30;
+    new VirtualList({ container, data, itemHeight });
   </script>
 </html>
