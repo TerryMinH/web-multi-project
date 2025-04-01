@@ -1,252 +1,30 @@
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>转盘</title>
+<!DOCTYPE html>
+<html lang="en">
 
-    <style type="text/css">
-      body {
-        text-align: center;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            overflow: visible;
+            margin: 50px;
+        }
 
-      button {
-        cursor: pointer;
-      }
-
-      .box {
-        width: 500px;
-        height: 500px;
-        margin: 10px auto;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: url("./turnplate-bg.png");
-        /*大转盘的背景图 */
-        background-size: 100%;
-        background-repeat: no-repeat;
-        padding: 22px;
-      }
-
-      .wz_main {
-        width: 800px;
-        height: 800px;
-        box-sizing: border-box;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        transition: all 5s cubic-bezier(0.46, 0.03, 0, 0.96);
-      }
-
-      .main {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        border: 0px solid black;
-        border-radius: 50%;
-
-        overflow: hidden;
-        position: relative;
-        transition: all 5s cubic-bezier(0.46, 0.03, 0, 0.96);
-      }
-
-      .pointer {
-        width: 50px;
-        height: 50px;
-        background: #dc2426;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9;
-      }
-
-      .pointer-bar {
-        width: 60px;
-        height: 25px;
-        background: #dc2426;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, 50%) rotate(90deg);
-      }
-
-      .pointer-cursor {
-        width: 25px;
-        height: 25px;
-        position: absolute;
-        left: 50%;
-        top: 160%;
-        transform: translate(-50%, -50%) rotateZ(45deg);
-        background: #dc2426;
-      }
-
-      .part {
-        height: 100%;
-        width: 50%;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform-origin: left center;
-      }
-
-      .wz_part {
-        height: 100%;
-        width: 50%;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform-origin: left center;
-      }
-
-      .bg {
-        width: 100%;
-        height: 100%;
-      }
-
-      .wz_bg {
-        width: 100%;
-        height: 100%;
-      }
-
-      .title {
-        transform: translate(0, -50%);
-        transform-origin: left top;
-        width: 100%;
-        height: auto;
-        text-align: center;
-        font-size: 30px;
-        color: #e53130;
-        position: absolute;
-        top: 50%;
-        left: 30%;
-        padding-left: 85px;
-        box-sizing: border-box;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .wz_title {
-        transform: translate(0, -50%);
-        transform-origin: left top;
-        width: 100%;
-        height: auto;
-        text-align: center;
-        font-size: 30px;
-        color: white;
-        position: absolute;
-        top: 50%;
-        left: 14%;
-        padding-left: 85px;
-        box-sizing: border-box;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .ren {
-        transform: translate(0, -50%);
-        transform-origin: left top;
-        width: 100%;
-        height: auto;
-        text-align: center;
-        font-size: 30px;
-        background-color: black;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        padding-left: 85px;
-        box-sizing: border-box;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        color: #fff;
-      }
-
-      .title img {
-        transform: rotate(90deg);
-        width: 50%;
-      }
-
-      .kaqi {
-        transform: rotate(90deg);
-        width: 50%;
-      }
-
-      .kaqi p {
-        padding: 0;
-        margin: 0;
-      }
-
-      .pk {
-        font-size: 12px;
-        font-weight: bolder;
-      }
-
-      .py {
-        font-size: 16px;
-      }
-
-      .wz_name {
-        transform: rotate(-90deg);
-        color: #000;
-      }
-
-      .winner {
-        font-size: 30px;
-        color: red;
-        font-weight: bold;
-      }
+        .content {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
-    <div id="virtual-list-container"></div>
-  </body>
-  <script type="text/javascript">
-    // 示例代码：简单的虚拟列表实现思路
-    class VirtualList {
-      constructor({ container, data, itemHeight }) {
-        this.container = container;
-        this.data = data;
-        this.itemHeight = itemHeight;
-        // this.container.style.height = `${data.length * itemHeight}px`;
-        this.container.style.height = `500px`;
-        this.container.style.width = `100%`;
-        this.container.style.overflow = `auto`;
-        this.container.style.border = `1px solid red`;
-        this.renderVisibleItems();
-        console.log(44);
-        this.container.addEventListener("scroll", this.handleScroll.bind(this));
-      }
+<body>
+    <div class="box">
+        <div class="content">溢出内容示例</div>
+    </div>
+</body>
 
-      renderVisibleItems() {
-        const scrollTop = this.container.scrollTop;
-        const startIndex = Math.floor(scrollTop / this.itemHeight);
-        const endIndex =
-          startIndex + Math.ceil(this.container.offsetHeight / this.itemHeight);
-        const visibleData = this.data.slice(startIndex, endIndex);
-        console.log('visibleData',visibleData);
-        this.container.innerHTML = "";
-        visibleData.forEach((item, index) => {
-          const div = document.createElement("div");
-          div.style.height = `${this.itemHeight}px`;
-          div.style.position = "absolute";
-          div.style.top = `${(startIndex + index) * this.itemHeight}px`;
-          div.textContent = item;
-          this.container.appendChild(div);
-        });
-      }
-
-      handleScroll() {
-        console.log(11);
-        this.renderVisibleItems();
-      }
-    }
-
-    // 使用示例
-    const container = document.getElementById("virtual-list-container");
-    const data = Array.from({ length: 10000 }, (_, i) => `Item ${i}`);
-    const itemHeight = 30;
-    new VirtualList({ container, data, itemHeight });
-  </script>
 </html>

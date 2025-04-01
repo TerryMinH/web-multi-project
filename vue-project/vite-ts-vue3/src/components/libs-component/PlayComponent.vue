@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-06-09 10:08:43
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-27 07:37:08
+ * @LastEditTime: 2025-04-01 07:44:14
  * @Description: file not
 -->
 <template>
@@ -17,14 +17,13 @@
 		</Suspense>
 	</div>
 	<PlayChildComponent :address="'中国'"></PlayChildComponent>
-	{{ object.id }}
+	<button @click="handleBtn"> 按钮点击{{ count }} </button>
 </template>
 
 <script setup>
-import { defineAsyncComponent,reactive,ref } from 'vue';
+import { defineAsyncComponent, reactive, ref } from 'vue';
 
 const count = ref(0)
-const object = { id: ref(1) }
 const AsyncDataComponent = defineAsyncComponent(() =>
 	new Promise((resolve) => {
 		setTimeout(() => {
@@ -34,4 +33,8 @@ const AsyncDataComponent = defineAsyncComponent(() =>
 		}, 2000);
 	})
 );
+
+const handleBtn = () => {
+	count.value++;
+}
 </script>

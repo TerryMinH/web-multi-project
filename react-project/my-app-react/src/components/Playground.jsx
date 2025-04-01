@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-01 17:25:59
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-29 10:45:54
+ * @LastEditTime: 2025-04-01 08:05:15
  * @Description: file not
  */
 import React, { Component } from "react";
@@ -15,18 +15,18 @@ class Playground extends React.Component{
     this.childRef = React.createRef();
   }
   componentDidMount() {
-    console.log("React componentDidMount！");
-    this.parentRef.current?.addEventListener("click", (e) => {
-      // e.stopPropagation()
-      console.log("原生事件：父元素 DOM 事件监听！");
-    });
-    this.childRef.current?.addEventListener("click", (e) => {
-      // e.stopPropagation()
-      console.log("原生事件：子元素 DOM 事件监听！");
-    });
-    document.addEventListener("click", (e) => {
-      console.log("原生事件：document DOM 事件监听！");
-    });
+    // console.log("React componentDidMount！");
+    // this.parentRef.current?.addEventListener("click", (e) => {
+    //   // e.stopPropagation()
+    //   console.log("原生事件：父元素 DOM 事件监听！");
+    // });
+    // this.childRef.current?.addEventListener("click", (e) => {
+    //   // e.stopPropagation()
+    //   console.log("原生事件：子元素 DOM 事件监听！");
+    // });
+    // document.addEventListener("click", (e) => {
+    //   console.log("原生事件：document DOM 事件监听！");
+    // });
   }
   parentClickFun = () => {
     console.log("React 事件：父元素事件监听！");
