@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-27 19:01:41
+ * @LastEditTime: 2025-04-02 21:48:53
  * @Description: file not
 -->
 
@@ -115,10 +115,10 @@
       1.1 使用 text-align 和 line-height（适用于单行文本）
       1.2 行内块级元素：可以结合 text-align: center 和 vertical-align: middle 以及 display: flex 或 display: table-cell 来实现。
   2.  块级元素水平垂直居中
-      2.1 绝对定位:已知宽度和高度的块级元素,使用绝对定位和负边距
+      2.1 绝对定位:已知宽度和高度的块级元素,使用绝对定位(50%)和负边距(margin-top: -50px;)
       2.2 flexbox:未知宽度和高度的块级元素
-      2.3 grid 布局
-      2.4 使用绝对定位和 transform
+      2.3 grid 布局(父元素 display: grid;place-items: center;)
+      2.4 使用绝对定位和(子元素 position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);)
       2.5 将绝对定位元素的 top、left、right、bottom 都设置为 0，然后将 margin 设置为 auto 可以实现水平垂直居中。
 
 - CSS 绝对定位与相对定位的区别

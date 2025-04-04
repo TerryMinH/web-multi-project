@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-05-31 09:09:32
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-29 08:03:28
+ * @LastEditTime: 2025-04-04 13:47:28
  * @Description: file not
 -->
 
@@ -36,8 +36,8 @@
   console.log(p);
   ```
 
-  2. path.join() 主要用于拼接路径，不会解析为绝对路径。
-  3. path.resolve() 用于将路径解析为绝对路径，适合需要绝对路径的场景。
+  2. path.join() 主要用于拼接路径，返回的可能是相对路径，也可能是绝对路径，这取决于传入的路径片段。
+  3. path.resolve() 用于将路径解析为绝对路径，适合需要绝对路径的场景。如果没有传入任何参数，它会返回当前工作目录的绝对路径。
 
 - fs 模块
 

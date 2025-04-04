@@ -1,0 +1,57 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2022-02-07 13:40:50
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-04 14:29:31
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>express.static 托管静态资源</h1>
+    <div id="postContent">
+      <button id="btn">获取post资源</button>
+    </div>
+  </body>
+  <script>
+    const btnDom = document.getElementById("btn");
+    const postContentDom = document.getElementById("postContent");
+    btnDom.addEventListener("click", async () => {
+      try {
+        const url = "http://127.0.0.1:3000/api/data";
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: "foo",
+            body: "bar",
+            userId: 1,
+          }),
+        });
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("POST 请求结果:", data);
+        // 创建一个新的段落元素
+        const newParagraph = document.createElement("p");
+        // 设置段落元素的文本内容
+        newParagraph.textContent = data.message;
+        postContentDom.appendChild(newParagraph);
+        
+      } catch (error) {
+        console.error("POST 请求出错:", error);
+      }
+    });
+  </script>
+</html>
