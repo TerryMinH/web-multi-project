@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-09-24 14:28:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-31 07:43:04
+ * @LastEditTime: 2025-04-06 22:39:00
  * @Description: file not
 -->
 
@@ -176,7 +176,7 @@
   5.  webpack
   6.  vite：是基于 esbuild 和 rollup 现代打包工具,充分利用 ES 模块原生能力、提升了开发体验和性能。
   7.  基于 Rust 构建工具
-      7.1 turbo、oxc/swc(替代 babel)
+      7.1 turbopack打包工具、oxc/swc(替代 babel)编译工具
       7.2 解决单线程瓶颈、功能统一(Lint 格式化、ast 统一、代码检查)
 
 ## Git

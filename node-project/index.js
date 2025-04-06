@@ -2,18 +2,30 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-05 11:00:14
+ * @LastEditTime: 2025-04-07 07:51:28
  * @Description: file not
  */
-const {exec}=require('child_process');
-exec('ls -l | grep .js',(error,stdout,stderr)=>{
-    if(error){
-        console.error(`执行命令时出错 ${error.message}`);
-        return;
-    }
-    if(stderr){
-        console.error(`命令执行过程中出现错误:${stderr}`)
-        return;
-    }
-    console.log(`命令输出结果:\n${stdout}`);
-})
+const cluster = require("cluster");
+const http = require("http");
+const numCPUs = require("os").cpus().length;
+
+if (cluster.isMaster) {
+  console.log(`主进程 ${process.pid} 正在运行`);
+
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+  cluster.on("exit", (worker, code, signal) => {
+    console.log(`工作进程${worker.process.pid}已退出`);
+  });
+} else {
+  http
+    .createServer((req, res) => {
+      res.writeHead(200,{'content-type':'text/plain;charset=utf-8'});
+      res.end("hello world 你好,世界!");
+    })
+    .listen(8000,()=>{
+        console.log(`http://localhost:8000`);
+    });
+  console.log(`工作进程${process.pid}已启动`);
+}
