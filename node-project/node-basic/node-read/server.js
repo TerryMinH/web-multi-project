@@ -1,35 +1,25 @@
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
+/*
+ * @Author: TerryMin
+ * @Date: 2024-06-09 10:07:03
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-06 09:48:37
+ * @Description: file not
+ */
+const fs = require("fs");
+const writeStream = fs.createWriteStream("output.txt");
+writeStream.write("Hello, ");
+writeStream.write("world!");
 
+writeStream.on("finish", () => {
+  console.log("数据写入流");
+});
 
-// 创建服务器
-http.createServer(function (request, response) {
-  // 解析请求，包括文件名
-  var pathname = url.parse(request.url).pathname;
-
-  // 输出请求的文件名
-  console.log("Request for " + pathname + " received.");
-
-  // 从文件系统中读取请求的文件内容
-  fs.readFile(pathname.substr(1), function (err, data) {
-    if (err) {
-      console.log(err);
-      // HTTP 状态码: 404 : NOT FOUND
-      // Content Type: text/html
-      response.writeHead(404, { 'Content-Type': 'text/html' });
-    } else {
-      // HTTP 状态码: 200 : OK
-      // Content Type: text/html
-      response.writeHead(200, { 'Content-Type': 'text/html' });
-
-      // 响应文件内容
-      response.write(data.toString());
-    }
-    //  发送响应数据
-    response.end();
-  });
-}).listen(8080);
-
-// 控制台会输出以下信息
-console.log('Server running at http://127.0.0.1:8080/');
+writeStream.on("error", (error) => {
+  console.log("写入数据时出错：", error);
+});
+// const buf1 = Buffer.from("hello", "utf8");
+// const buf2 = Buffer.alloc(10);
+// const buf3 = Buffer.from([1, 2, 3]);
+// console.log(buf1,buf1.toString());
+// console.log(buf2);
+// console.log(buf3);
