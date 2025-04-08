@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-02 16:45:59
+ * @LastEditTime: 2025-04-08 13:19:54
  * @Description: file not
 -->
 
@@ -48,13 +48,16 @@
 - [常用 Hooks](https://juejin.cn/post/7118937685653192735)
 
   1.  useState:用于定义和保存元件中状态(state)
-  2.  useEffect:是异步执行的。在 React 完成 DOM 更新、浏览器绘制页面之后，才会执行 useEffect 中的回调函数
-  3.  useLayoutEffect:是同步执行的。它会在 React 完成 DOM 更新，但浏览器还未绘制页面之前 行。也就是说，useLayoutEffect 的回调函数会阻塞浏览器的渲染，直到回调函数执行完毕，浏览器 会进行页面绘制。(对应 componentDidMount 和 componentDidUpdate )
-  4.  useReducer:也是一种管理 state 的 hook，可作为 useState 替代方案。当状态管理逻辑变 更复杂时，通常会建议使用 useReducer 而非 useState。
-  5.  useCallback:缓存的是一个函数，确保函数的引用在多次渲染之间保持不变。
-  6.  useMemo:缓存的是一个值
-  7.  useRef：可以创建一个可变 ref 对象，这个对象在组件的整个生命周期内不会改变，可以用来存储一些不应该因为状态变化而变化的值或函数。
-  8.  React.memo:React 提供的一个高阶组件（Higher-Order Component，HOC），主要用于优化函数组件的性能，避免不必要的渲染。适用 纯展示组件和 频繁渲染的组件。
+  2.  useReducer:也是一种管理 state 的 hook，可作为 useState 替代方案。当状态管理逻辑变 更复杂时，通常会建议使用 useReducer 而非 useState。
+  3.  useContext 的实现原理基于 React 的上下文机制，通过 Context.Provider 提供数据，useContext 消费数据。React 的内部实现确保了上下文数据的更新能够及时反映到消费组件中，从而实现了组件间的数据共享。
+
+  4.  useEffect:是异步执行的。在 React 完成 DOM 更新、浏览器绘制页面之后，才会执行 useEffect 中的回调函数
+  5.  useLayoutEffect:是同步执行的。它会在 React 完成 DOM 更新，但浏览器还未绘制页面之前 行。也就是说，useLayoutEffect 的回调函数会阻塞浏览器的渲染，直到回调函数执行完毕，浏览器 会进行页面绘制。(对应 componentDidMount 和 componentDidUpdate )
+
+  6.  useMemo：用于记忆一个计算结果。当某些依赖项未改变时，它会直接返回之前计算得到的结果，避免重复计算，以此提升性能。通常在需要进行昂贵计算的场景中使用，例如复杂的数组排序、对象的深度比较等。
+  7.  useCallback：用于记忆一个函数。当依赖项未改变时，它会返回同一个函数实例，防止因函数的重新创建而致使子组件不必要的重新渲染。一般在将函数作为 props 传递给子组件时使用。
+  8.  useRef：创建一个可变 ref 对象，这个对象在组件的整个生命周期内不会改变，可以用来存储一些不应该因为状态变化而变化的值或函数。
+  9.  React.memo:React 提供的一个高阶组件（Higher-Order Component，HOC），主要用于优化函数组件的性能，避免不必要的渲染。适用 纯展示组件和 频繁渲染的组件。
 
 - React 生命周期方法有哪些？
   [生命周期图谱](https://cloud.tencent.com/developer/article/2204517)
@@ -148,8 +151,8 @@
   3. Fiber 原理:通过将协调过程拆分成小任务、实现优先级调度以及可中断和恢复的特性，有效解决了旧版协调算法在处理大型应用时的性能问题。
   4. React 不直接使用 requestIdleCallback 而是自己实现 Scheduler 模块，是为了更好地满足跨平台兼容性、灵活的优先级调度和精确的时间控制等需求，从而提高 React 应用的性能和响应能力。
 
-- React 状态管理
+- React 核心算法
 
-  1. 状态管理解决问题:
-     1.1 解决跨层级组件通信问题。
-     1.2 就是对一些全局公共状态的缓存。
+  1. 调和算法（Reconciliation）：从虚拟 DOM 比较到实际 DOM 更新的全流程，主要任务：协调渲染、调度、提交等全过程。
+  2. Diff 算法：Diff 算法是调和算法的核心，用于比较新旧虚拟 DOM 节点的差异。通过 Diff 算法，React 可以高效地找出需要更新的节点，减少不必要的 DOM 操作。
+  3. 调度算法（Scheduling）：在 React 16.x 及以后版本引入了 Fiber 架构，调度算法是 Fiber 架构的核心之一。它允许 React 根据任务的优先级和时间片来安排任务的执行，将渲染任务拆分成多个小任务，在浏览器的空闲时间执行，避免长时间占用主线程，从而提高页面的响应性。

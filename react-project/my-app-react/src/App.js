@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-09-19 16:52:15
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-06 22:18:26
+ * @LastEditTime: 2025-04-08 10:56:46
  * @Description: file not
  */
 // import logo from "./logo.svg";
@@ -10,7 +10,7 @@ import React from "react";
 import "./App.css";
 import { HookComponent } from "./components/MultiComponent";
 import { ClassComponent } from "./components/ClassComponent";
-import { PlaysGround } from "./components/PlaysGround";
+import { CounterProvider, CounterComponent } from "./components/PlaysGround";
 import { MemoComponent } from "./components/MemoComponent";
 import IndexBase, { Counter, CounterClick } from "./components/MyReducer";
 import HocComponent from "./components/HocComponent";
@@ -32,7 +32,9 @@ function App() {
       </div>
       <div className="component-wrap">
         <h3>Playground:</h3>
-        <PlaysGround> </PlaysGround>
+        <CounterProvider>
+          <CounterComponent />
+        </CounterProvider>
       </div>
     </div>
   );

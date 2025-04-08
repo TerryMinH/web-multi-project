@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-01-02 09:51:15
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-06 10:09:30
+ * @LastEditTime: 2025-04-08 18:35:17
  * @Description: file not
 -->
 
@@ -169,3 +169,7 @@
 ## TCP(Transmission Control Protocol)
 
 ## UDP(User Datagram Protocol)
+
+## Nginx
+
+- [Nginx 常考面试题](https://blog.csdn.net/qq_21891743/article/details/131743996)

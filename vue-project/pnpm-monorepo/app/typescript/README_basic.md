@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-24 21:44:50
+ * @LastEditTime: 2025-04-07 11:00:16
  * @Description: file not
 -->
 
@@ -100,37 +100,22 @@ const d: Intersetion = {
 };
 ```
 
-5. 接口 与 type(类型别名) 区别：(https://juejin.cn/post/6844904114925600776)
+5. 接口 与 type(类型别名) 区别：(https://blog.csdn.net/ocean2103/article/details/142679234)
 
-   - type 会给一个类型起个新名字，可以作用于原始值（基本类型），联合类型，元组以及其它任何你自定义的类型，type 使用 & 实现扩展。
-   - interface 接口是对象的状态(属性)和行为(方法)的抽象(描述)，通过 implements(支持实现类的契约)或者 extends(可以被继承和扩展)。
+   - interface 和 type 都可以用来描述对象的形状，interface 更适合于定义对象结构，尤其是需要继承和合并时。type 更适合用于**简单的类型定义和复杂的类型组合**，如联合类型。但它们在某些特性上有所不同。
+   - 继承和合并：interface 支持声明合并(即同名的接口会合并成一个，可以多次定义同一个接口。)和通过 extends 关键字实现继承，而 type 则不支持。
+   - 类型表达能力：type 的类型表达能力更灵活，可以用于联合类型和交叉类型，通过交叉类型(&)可以实现多种类型的组合，而 interface 主要用于对象的结构定义。
 
-```ts
-1. 作用于原始值（基本类型）
-// 为 string 类型创建别名
-type UserName = string;
-// 使用别名定义变量
-const username: UserName = "JohnDoe";
-
-2. 作用于联合类型
-// 定义联合类型别名
-type StringOrNumber = string | number;
-// 使用别名定义变量
-const value1: StringOrNumber = "hello";
-const value2: StringOrNumber = 123;
-
-3. 作用于元组
-// 定义元组类型别名
-type PersonInfo = [string, number];
-// 使用别名定义元组变量
-const person: PersonInfo = ["Alice", 30];
-
-4. 作用于其它自定义类型
-// 定义函数类型别名
-type AddFunction = (a: number, b: number) => number;
-// 使用别名定义函数
-const add: AddFunction = (a, b) => a + b;
-```
+   ```ts
+   // interface声明合并
+   interface Person {
+     name: string;
+   }
+   interface Person {
+     age: number;
+   }
+   const john: Person = { name: "John", age: 30 };
+   ```
 
 6. ts 操作符
 

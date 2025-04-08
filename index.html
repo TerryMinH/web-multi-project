@@ -1,45 +1,83 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-10-23 14:30:58
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-08 18:06:06
+ * @Description: file not
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        .grid-container {
-            display: grid;
-            grid-template-columns: [col-start] 100px [col-middle] 100px [col-end];
-            grid-template-rows: [row-start] 100px [row-middle] 100px [row-end];
-            gap: 10px;
-        }
-        .grid-item {
-            background-color: lightblue;
-            padding: 20px;
-            text-align: center;
-        }
-        .item1 {
-            grid-column: col-start / col-middle;
-            grid-row: row-start / row-middle;
-        }
-        /* .item2 {
+      .grid-container {
+        display: grid;
+        grid-template-columns: [col-start] 100px [col-middle] 100px [col-end];
+        grid-template-rows: [row-start] 100px [row-middle] 100px [row-end];
+        gap: 10px;
+      }
+      .grid-item {
+        background-color: lightblue;
+        padding: 20px;
+        text-align: center;
+      }
+      .item1 {
+        grid-column: col-start / col-middle;
+        grid-row: row-start / row-middle;
+      }
+      /* .item2 {
             grid-column: col-middle / col-end;
             grid-row: row-start / row-middle;
         } */
-        .item3 {
-            grid-column: col-start / col-middle;
-            grid-row: row-middle / row-end;
-        }
-        .item2 {
-            grid-column: col-middle / col-end;
-            grid-row: row-middle / row-end;
-        }
+      .item3 {
+        grid-column: col-start / col-middle;
+        grid-row: row-middle / row-end;
+      }
+      .item2 {
+        grid-column: col-middle / col-end;
+        grid-row: row-middle / row-end;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="grid-container">
-        <div class="grid-item item1">Item 1</div>
-        <div class="grid-item item2">Item 2</div>
-        <div class="grid-item item3">Item 3</div>
-        <!-- <div class="grid-item item4">Item 4</div> -->
+      <div class="grid-item item1">Item 1</div>
+      <div class="grid-item item2">Item 2</div>
+      <div class="grid-item item3">Item 3</div>
+      <!-- <div class="grid-item item4">Item 4</div> -->
     </div>
-</body>
+  </body>
+  <script>
+    /*
+     * @Author: TerryMin
+     * @Date: 2024-10-23 13:44:20
+     * @LastEditors: TerryMin
+     * @LastEditTime: 2025-04-08 18:00:35
+     * @Description: file not
+     */
+    function before(fn, beforeFn) {
+      return function () {
+        beforeFn.apply(this, arguments);
+        return fn.apply(this, arguments);
+      };
+    }
+    function after(fn, afterFn) {
+      return function () {
+        return function () {
+          const result = fn.apply(this, arguments);
+          afterFn.apply(this, arguments);
+          return result;
+        };
+      };
+    }
+    let doSomething = () => console.log("执行业务逻辑");
+    doSomething = before(doSomething, () => console.log("执行前记录日志"));
+    console.log("doSomething1", doSomething);
+    doSomething = after(doSomething, () => console.log("执行后清理资源"));
+    console.log("doSomething2", doSomething);
+    const instanceFn = doSomething();
+    console.log("doSomething3", instanceFn);
+    instanceFn();
+  </script>
 </html>
-    
