@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 13:19:54
+ * @LastEditTime: 2025-04-08 20:55:33
  * @Description: file not
 -->
 
@@ -156,3 +156,5 @@
   1. 调和算法（Reconciliation）：从虚拟 DOM 比较到实际 DOM 更新的全流程，主要任务：协调渲染、调度、提交等全过程。
   2. Diff 算法：Diff 算法是调和算法的核心，用于比较新旧虚拟 DOM 节点的差异。通过 Diff 算法，React 可以高效地找出需要更新的节点，减少不必要的 DOM 操作。
   3. 调度算法（Scheduling）：在 React 16.x 及以后版本引入了 Fiber 架构，调度算法是 Fiber 架构的核心之一。它允许 React 根据任务的优先级和时间片来安排任务的执行，将渲染任务拆分成多个小任务，在浏览器的空闲时间执行，避免长时间占用主线程，从而提高页面的响应性。
+
+## [React-redux](https://cn.react-redux.js.org/)
