@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-09-24 14:28:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-06 22:39:00
+ * @LastEditTime: 2025-04-10 10:24:19
  * @Description: file not
 -->
 
@@ -175,9 +175,107 @@
   4.  parcel：
   5.  webpack
   6.  vite：是基于 esbuild 和 rollup 现代打包工具,充分利用 ES 模块原生能力、提升了开发体验和性能。
-  7.  基于 Rust 构建工具
-      7.1 turbopack打包工具、oxc/swc(替代 babel)编译工具
-      7.2 解决单线程瓶颈、功能统一(Lint 格式化、ast 统一、代码检查)
+  7.  Rspack：
+      7.1 定义：是一个基于 Rust 语言开发的高性能前端构建工具，设计目的是提供与 webpack 兼容的 API,，让开发者可以在不进行大量代码修改的情况下，从 Webpack 迁移到 Rspack，同时显著提升构建速度。
+      7.2 适用场景：需要平滑迁移现有 Webpack 项目、需要稳定生产构建能力、项目使用多种前端框架、依赖特定 Webpack 插件。
+  8.  Turbopack：
+      8.1 定义：是由 Webpack 的创建者 Tobias Koppers 携手 Next.js 团队采用 Rust 语言编写的，针对 JavaScript 和 TypeScript 进行优化的增量打包工具。
+      8.2 适用场景：使用 Next.js 开发项目
+
+  9.  基于 Rust 构建工具
+      9.1 oxc/swc(替代 babel)编译工具
+      9.2 解决单线程瓶颈、功能统一(Lint 格式化、ast 统一、代码检查)
+
+## 前端性能优化
+
+- 前端性能优化方式:
+
+  1.  资源层面优化:
+
+      - 优化图片:使用合适的图片格式(WebP),并对图片进行压缩。图片尺寸做一定的限制。
+      - 延迟加载:使用懒加载技术，只有在用户滚动到特定区域时再加载相关资源。按需加载所需模块资源
+      - 精简 CSS 和 JavaScript：
+        - 代码压缩：移除代码中的空格、注释和多余的字符、减少文件大小
+        - 合并文件：将多个 CSS 和 JavaScript 文件合并为一个文件，减少 HTTP 请求次数
+        - 树摇(Tree Shaking)：移除未使用的代码，减少打包文件的体积
+      - 减少第三方库的：按需加载第三方库或使用更轻量级的替代方案。
+
+      - 预加载与预渲染: 对于重要的资源（如关键的脚本和样式表），使用预加载（<link rel="preload">）提前加载到浏览器缓存中。对于一些可能会被用户访问的页面，使用预渲染（<link rel="prerender">）提前在后台渲染，当用户访问时可以立即显示
+      - 预渲染(渲染方式分为三种:客户端渲染,服务端渲染,预渲染)
+
+  2.  网络层面优化:
+
+      - 使用 CDN：将静态资源托管在内容分发网络上，缩短资源加载的时间。
+      - 压缩文本资源：启用 Gzip 或 Brotli 压缩，减少 HTML、CSS 和 JavaScript 文件的体积。
+      - 服务端渲染和静态生成：使用服务端渲染或静态生成技术，减少客户端渲染的压力。
+      - 如果服务器支持 HTTP2.0,可以配置服务器在客户端请求 HTMLL 时推送关键资源。
+      - 缓存:
+        - DNS(（Domain Name System) 缓存:由于浏览器会在 DNS 解析步骤中消耗一定的时间，所以，对于一些高访问量网站来说，做好 DNS 的缓存工作，就会一定程度上提升网站效率
+        - CDN(Content Delivery Network) 缓存:CDN 作为静态资源文件的分发网络，本身就已经提升了，网站静态资源的获取速度，加快网站的加载速度，同时也给静态资源做好缓存工作，有效的利用已缓存的静态资源，加快获取速度
+        - HTTP 缓存:也是给资源设定缓存时间，防止在有效的缓存时间内对资源进行重复的下载，从而提升整体网页的加载速度[缓存](https://www.cnblogs.com/terrymin/p/13717855.html)
+
+  3.  DOM 操作和脚本执行方面:
+      - 减少 DOM 操作:使用文档片段（DocumentFragment）来批量处理 DOM 节点，最后再将文档片段插入到 DOM 树中。
+      - 防抖与节流
+      - 使用 Web Workers:对于一些耗时的计算任务，可以将其放到 Web Workers 中执行，避免阻塞主线程。Web Workers 可以在后台线程中独立运行，不会影响页面的渲染和交互。
+
+  - 建立性能监测指标：
+
+    1. FP(First Pait) 首次绘制：指的是浏览器首次将任何内容(包含背景、文本、图片等任意元素)绘制到屏幕上的时间点，即只要浏览器开始在屏幕上绘制像素，FP 就被触发。它标志着页面开始有视觉上的变化，是页面加载过程中一个重要的起始视觉信号。
+    2. FCP(First Contentful Paint)首次内容绘制：用户首次看到页面上有实际意义内容的时刻。
+    3. LCP(Largest Contentful Paint)最大内容绘制：指的是在视口内可见的最大内容元素(图片、视频、包含文本的块级元素等)渲染到屏幕上的时间点。浏览器会根据元素在视口中的大小来确定。
+    4. INP(Interaction to Next Paint)交互至下次绘制：衡量的是用户与页面进行交互（如点击按钮、输入文本等）后，页面响应交互并完成下一次绘制所需的时间。
+    5. TTI(Time to Interactive)可交互时间：指页面达到完全可交互状态的时间点。是页面在 FCP 之后，主线程在 5 秒内没有长任务，并且所有的子资源（如图片、脚本等）都已加载完成的最早时间。TTI 侧重于衡量页面何时能够稳定地响应用户的各种操作，如点击、输入等。
+    6. TBT(Total Blocking Time)总阻塞时间：指的是从 FCP 到 TTI 之间，主线程被阻塞以至于无法响应用户输入的总时间。TBT 时间越长，说明在页面加载过程中，用户等待交互的时间就越长，会让用户感觉页面反应迟钝，操作不流畅。
+    7. FMP(First MeaningFul Paint)首次有效绘制：指的是页面的主要内容首次渲染完成的时间点。(缺乏明确计算标准，逐渐被弃用)
+
+    - 统计分析工具
+      - FP、FCP 可以用 Performance 工具来检测，FMP 可以使用 MutationObserver 来实现
+      - 第三方工具分析：PageSpeed Insight、WebPageTest
+
+    ```js
+    // 在浏览器中，可以使用 PerformanceObserver 来统计 INP。
+    if ("PerformanceObserver" in window) {
+      const observer = new PerformanceObserver((list) => {
+        let inp = 0;
+        list.getEntries().forEach((entry) => {
+          if (entry.interactionId) {
+            const interactionDuration = entry.duration;
+            if (interactionDuration > inp) {
+              inp = interactionDuration;
+            }
+          }
+        });
+        console.log("INP:", inp);
+      });
+      observer.observe({ type: "event", buffered: true });
+    }
+
+    // 使用 PerformanceObserver 来统计 LCP
+    if ("PerformanceObserver" in window) {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        if (lastEntry) {
+          console.log("LCP:", lastEntry.startTime);
+        }
+      });
+      observer.observe({ type: "largest-contentful-paint", buffered: true });
+    }
+    ```
+
+- SSR、CSR
+
+  - 服务端渲染(Server-Side Rendering，SSR):
+    在服务端渲染模式下，服务器在接收到客户端请求后，会将页面的初始 HTML 内容生成并发送给客户端。客户端接收到 HTML 后，进行解析和渲染，最终呈现给用户。在这种模式下，页面的大部分内容在服务器端已经渲染完成，因此页面加载速度相对较快，并且对搜索引擎友好。但是，交互式的内容和功能需要等待客户端的 JavaScript 代码执行完成后才能实现。对应的库(Next.js:基于 React 的 SSR 框架,Nuxt.js:基于 Vue 的 SSR 框架)
+
+  - 客户端渲染（Client-Side Rendering，CSR）:
+
+    1. 在客户端渲染模式下，服务器返回一个基本的 HTML 页面结构和一些必要的 JavaScript 和 CSS 文件。然后，客户端的浏览器通过执行 JavaScript 代码来请求数据，并根据数据动态生成页面内容。这种模式下，页面的渲染过程主要由客户端的浏览器完成，可以实现更丰富的交互和动态内容。但是，初始加载时需要下载和执行大量的 JavaScript 代码，页面加载速度相对较慢，对搜索引擎的可访问性较差。对应的库(React,Vue)
+    2. 适用于单页应用
+
+  - 预渲染:
+    就是将浏览器解析 javascript 动态渲染页面的这部分工作，在打包阶段就完成了，（只构建了静态数据）换个说法在构建过程中，webpack 通过使用 prerender-spa-plugin 插件生成静态结构的 html
 
 ## Git
 

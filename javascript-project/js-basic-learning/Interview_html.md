@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-02 21:48:53
+ * @LastEditTime: 2025-04-10 10:36:13
  * @Description: file not
 -->
 
@@ -43,6 +43,11 @@
      3.2 overflow 的值不为 visible
      3.3 display 的值为 table-cell、table-caption 和 inline-block 之一
      3.4 position 的值为 absolute 或者 fixed 中任何一个
+
+- 重绘和重排:
+
+  1. 重绘:是指当元素的外观（如颜色、背景色、边框颜色等不影响布局的样式）发生改变时，浏览器重新绘制该元素的过程。它不会引起页面布局的重新计算。
+  2. 重排(回流):是指当 DOM 的结构或者元素的几何属性（如宽度、高度、位置、浮动等）发生变化时，浏览器需要重新计算元素的布局，并重新绘制受影响的部分。回流的性能开销比重绘要大得多，因为它涉及到重新布局整个页面或者部分页面。
 
 - CSS 有哪些选择器
 
