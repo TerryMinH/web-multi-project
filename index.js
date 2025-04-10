@@ -1,27 +1,19 @@
-/*
- * @Author: TerryMin
- * @Date: 2024-10-23 13:44:20
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 18:00:35
- * @Description: file not
- */
-function before(fn, beforeFn) {
-  return function () {
-    beforeFn.apply(this, arguments);
-    return fn.apply(this, arguments);
-  };
+function addBigNumbers(a, b) {
+  a = a.toString();
+  b = b.toString();
+  let maxlength = Math.max(a.length, b.length);
+  a = a.padStart(maxlength,'0');
+  b = b.padStart(maxlength,'0');
+  let carry = 0,
+    result = "";
+  for (let i = maxlength - 1; i >= 0; i--) {
+    let sum = parseInt(a[i]) + parseInt(b[i]) + carry;
+    carry = Math.floor(sum / 10);
+    result = (sum % 10) + result;
+  }
+  if (carry > 0) {
+    result = carry + result;
+  }
+  return result;
 }
-function after(fn, afterFn) {
-  return function () {
-    return function () {
-      const result = fn.apply(this, arguments);
-      afterFn.apply(this, arguments);
-      return result;
-    };
-  };
-}
-let doSomething = () => console.log("执行业务逻辑");
-doSomething = before(doSomething, () => console.log("执行前记录日志"));
-console.log('doSomething',doSomething);
-// doSomething = after(doSomething, () => console.log("执行后清理资源"));
-// doSomething();
+console.log(addBigNumbers(99, 4));

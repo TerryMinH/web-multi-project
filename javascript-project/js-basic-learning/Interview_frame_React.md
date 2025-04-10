@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 20:55:33
+ * @LastEditTime: 2025-04-10 15:37:03
  * @Description: file not
 -->
 
@@ -30,16 +30,6 @@
       1.2 自定义事件（在类组件中使用 createEvent 模拟）:子组件通过 CustomEvent 创建一个自定义事件，并且使用 window.dispatchEvent 触发该事件。父组件在 componentDidMount 里监听这个事件，在 handleChildEvent 中处理接收到的数据。
       1.3 跨级组件通信:可以使用 React 的上下文（Context）来实现跨级组件通信，避免通过多层 props 传递。
       1.4 状态管理库
-
-- React 合成事件
-
-  1. React 合成事件（SyntheticEvent）是 React 为了实现跨浏览器兼容性和更好的事件处理机制而封装的一套事件系统。
-  2. 原理：React 对原生 DOM 事件进行了包装，创建了合成事件对象。利用事件委托机制,当事件触发时，一般是先执行原生事件，然后事件冒泡到根节点再触发合成事件。然后 React 根据事件类型和目标元素找到对应的事件处理程序并执行。
-
-- React Hooks？
-
-  1.  Hooks 是 React.16.8 之后出现, class component 是使用 React 生命周期函数; functional component 通过 use 开头函数使用 React 的功能和状态。
-  2.  纯函数:是一种特殊的函数，它具有特定的输入和输出关系，并且不会产生任何可观察到的副作用
 
 - Hooks 为什么只能在最顶端呼叫？
 
@@ -70,19 +60,6 @@
   6.  componentDidUpdate:它主要用于更新 DOM 以响应 props 或 state 更改。
   7.  componentWillUnmount:它用于取消任何的网络请求，或删除与组件关联的所有事件监听器。
 
-- React 虚拟 DOM?
-
-  1.  虚拟 DOM 定义: 是一个 JavaScript 对象，它是真实 DOM 的抽象表示。React 使用虚拟 DOM 来描述 UI 的结构和状态，并通过 Diff 算法对比新旧虚拟 DOM 的差异，最小化对真实 DOM 的操作。
-  2.  虚拟 DOM 工作原理:
-      2.1 初始渲染:React 组件首次渲染时，会根据组件的 JSX 生成虚拟 DOM 树。
-      2.2 状态更新:当组件的状态（state）或属性（props）发生变化时，React 会重新生成一个新的虚拟 DOM 树。
-      2.3 Diff 算法（对比差异）:React 使用 Diff 算法对比新旧虚拟 DOM 树的差异。
-      2.4 生成更新操作:根据 Diff 算法的结果，React 生成一组最小的更新操作（如添加、删除、更新节点）
-      2.5 应用到真实 DOM:通过 Diff 算法生成的最新结果应用到真实 DOM 上,完成 UI 的更新
-
-  3.  虚拟 DOM 的优点: 通过减少真实 DOM 操作,提高页面性能 ; 跨平台能力,可以映射到多平台 ;声明式编程。
-      缺点:内存占用;不适合极高性能要求的场景
-
 - 高阶组件(HOC)
 
   [高阶组件在 vue 中的应用](https://juejin.cn/post/6844904094885216269)
@@ -109,52 +86,76 @@
   6. 首屏加载: nextjs prefetch、服务端渲染（SSR）或其他高级优化手段。
   7. 打包构建: terser tree-shaking 构建缓存
 
-- [React 合成事件](https://vue3js.cn/interview/React/SyntheticEvent.html)
+- React 原理
 
-  1. React 采用合成事件:
-     1.1 React 会将所有的事件都绑定到文档（document）上,采用事件冒泡传播,React 通过事件委托机制监听文档上面的事件类型。
-     1.2 统一事件接口:合成事件提供了统一的接口，无论在哪个浏览器中使用，开发者都可以使用相同的方式来处理事件。这使得代码具有更好的可移植性和兼容性。提供了跨浏览器兼容的 API。
-  2. 阻止原生事件冒泡后 React 仍可监听的原因: React 事件是基于合成事件系统和事件委托机制，它并不依赖原生事件在 DOM 树中完整的冒泡过程来触发事件处理函数。只要事件触发点对应的 React 组件绑定了相应的事件处理函数，React 就能通过自己的机制捕获到事件并执行处理函数。
+  1. 虚拟 DOM(Virtual DOM)机制
 
-- React 源码解读
+     - 本质与作用：
+       - 轻量级的 JavaScript 对象表示
+       - 跨平台渲染的基础抽象层
+       - 内存中计算最小 DOM 操作
+     - 创建过程：
+       ```js
+       // JSX转译结果
+       const element = React.createElement(
+         "div",
+         { className: "container" },
+         React.createElement("h1", null, "Hello")
+       );
+       ```
+     - 核心优势：
 
-  1.  react-dom 处理端的能力(浏览器 api `react-dom`,跨端开发`react-native`,3D 开发`react-three-fiber`),渲染器逻辑
-      1.1 createRoot、ReactDom.createRoot()、createContainer
-      1.2 render、updateCotainer
+       - 跨平台能力,可以映射到多平台
+       - 批量更新减少重排重绘
+       - 差异比较算法优化性能
+       - 屏蔽底层 DOM 操作差异
 
-  2.  react 为外部开发者统一提供接口协议
-      2.1 useState
-      2.2 useEffect
+  2. React 核心算法:
 
-  3.  react-reconciler(调和)
-      3.1 diff 当数据变化时在执行调度器
-      3.2 Filber 架构(createFiberRoot、initializaUpdateQueue)
-      3.3 createUpdate、enqueueUpdate
+     - 协调算法（Reconciliation）：从虚拟 DOM 比较到实际 DOM 更新的全流程，主要任务：协调渲染、调度、提交等全过程。
+     - Diff 算法：Diff 算法是调和算法的核心，用于比较新旧虚拟 DOM 节点的差异。通过 Diff 算法，React 可以高效地找出需要更新的节点，减少不必要的 DOM 操作。
+     - 调度算法（Scheduling）：在 React 16.x 及以后版本引入了 Fiber 架构，调度算法是 Fiber 架构的核心之一。Fiber 架构革新：链表结构实现可中断渲染、时间切片(Time Slicing)支持、优先级调度控制。
 
-  4.  scheduler(优先级调度):实现页面更新
-      4.1 React 自己开发一个 scheduler 库(功能类似:requestIdleCallback、scheduler.postTask,但是它们无法满足):类似定时器一直检查数据是否变化,如果变化更新 DOM
-      4.2 利用小根堆处理优先级
+  3. [React 合成事件](https://vue3js.cn/interview/React/SyntheticEvent.html)
 
-  5.  react-noop-renderer:定义 react 宿主环境
+     - React 采用合成事件:
+       - React 会将所有的事件都绑定到文档（document）上,采用事件冒泡传播,React 通过事件委托机制监听文档上面的事件类型。
+       - 统一事件接口:合成事件提供了统一的接口，无论在哪个浏览器中使用，开发者都可以使用相同的方式来处理事件。这使得代码具有更好的可移植性和兼容性。提供了跨浏览器兼容的 API。
+     - 阻止原生事件冒泡后 React 仍可监听的原因: React 事件是基于合成事件系统和事件委托机制，它并不依赖原生事件在 DOM 树中完整的冒泡过程来触发事件处理函数。只要事件触发点对应的 React 组件绑定了相应的事件处理函数，React 就能通过自己的机制捕获到事件并执行处理函数。
 
-      ```js
-      /**
-       * 传统是面向DOM开发,通过事件驱动数据更新
-       * 数据(状态) => 事件 => 渲染(虚拟DOM)
-       * **/
-      ```
+  - React 源码解读
 
-- React Fiber 架构理解:
+    1.  react-dom 处理端的能力(浏览器 api `react-dom`,跨端开发`react-native`,3D 开发`react-three-fiber`),渲染器逻辑
+        1.1 createRoot、ReactDom.createRoot()、createContainer
+        1.2 render、updateCotainer
 
-  1. React Fiber 是 React 16.x 版本之后引入的协调算法架构，其目的是为了解决旧版协调算法在处理大型应用时性能方面的问题。
-  2. 在 React 16 之前，采用的是栈协调算法，这是一种递归的方式来进行虚拟 DOM 的比较和更新。当组件树比较庞大时，一旦开始协调过程，就会持续占用主线程，直到整个协调完成。在这个过程中，浏览器无法处理其他任务，像用户输入、动画渲染这类操作都会被阻塞，从而导致页面出现卡顿现象。
-  3. Fiber 原理:通过将协调过程拆分成小任务、实现优先级调度以及可中断和恢复的特性，有效解决了旧版协调算法在处理大型应用时的性能问题。
-  4. React 不直接使用 requestIdleCallback 而是自己实现 Scheduler 模块，是为了更好地满足跨平台兼容性、灵活的优先级调度和精确的时间控制等需求，从而提高 React 应用的性能和响应能力。
+    2.  react 为外部开发者统一提供接口协议
+        2.1 useState
+        2.2 useEffect
 
-- React 核心算法
+    3.  react-reconciler(调和)
+        3.1 diff 当数据变化时在执行调度器
+        3.2 Filber 架构(createFiberRoot、initializaUpdateQueue)
+        3.3 createUpdate、enqueueUpdate
 
-  1. 调和算法（Reconciliation）：从虚拟 DOM 比较到实际 DOM 更新的全流程，主要任务：协调渲染、调度、提交等全过程。
-  2. Diff 算法：Diff 算法是调和算法的核心，用于比较新旧虚拟 DOM 节点的差异。通过 Diff 算法，React 可以高效地找出需要更新的节点，减少不必要的 DOM 操作。
-  3. 调度算法（Scheduling）：在 React 16.x 及以后版本引入了 Fiber 架构，调度算法是 Fiber 架构的核心之一。它允许 React 根据任务的优先级和时间片来安排任务的执行，将渲染任务拆分成多个小任务，在浏览器的空闲时间执行，避免长时间占用主线程，从而提高页面的响应性。
+    4.  scheduler(优先级调度):实现页面更新
+        4.1 React 自己开发一个 scheduler 库(功能类似:requestIdleCallback、scheduler.postTask,但是它们无法满足):类似定时器一直检查数据是否变化,如果变化更新 DOM
+        4.2 利用小根堆处理优先级
+
+    5.  react-noop-renderer:定义 react 宿主环境
+
+        ```js
+        /**
+         * 传统是面向DOM开发,通过事件驱动数据更新
+         * 数据(状态) => 事件 => 渲染(虚拟DOM)
+         * **/
+        ```
+
+  - React Fiber 架构理解:
+
+    1. React Fiber 是 React 16.x 版本之后引入的协调算法架构，其目的是为了解决旧版协调算法在处理大型应用时性能方面的问题。
+    2. 在 React 16 之前，采用的是栈协调算法，这是一种递归的方式来进行虚拟 DOM 的比较和更新。当组件树比较庞大时，一旦开始协调过程，就会持续占用主线程，直到整个协调完成。在这个过程中，浏览器无法处理其他任务，像用户输入、动画渲染这类操作都会被阻塞，从而导致页面出现卡顿现象。
+    3. Fiber 原理:通过将协调过程拆分成小任务、实现优先级调度以及可中断和恢复的特性，有效解决了旧版协调算法在处理大型应用时的性能问题。
+    4. React 不直接使用 requestIdleCallback 而是自己实现 Scheduler 模块，是为了更好地满足跨平台兼容性、灵活的优先级调度和精确的时间控制等需求，从而提高 React 应用的性能和响应能力。
 
 ## [React-redux](https://cn.react-redux.js.org/)

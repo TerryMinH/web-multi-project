@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-20 15:34:07
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-15 18:59:07
+ * @LastEditTime: 2025-04-10 14:20:13
  * @Description: file not
 -->
 
@@ -12,75 +12,76 @@
 
 - 浏览器模块化: JavaScript 模块化规范，它们旨在解决在浏览器环境中模块的定义、加载和依赖管理问题
 
-  1. AMD（Asynchronous Module Definition）: 代表（以 RequireJS 为例）
+  1. AMD（Asynchronous Module Definition）: 代表(以 RequireJS 为例)
      特点：在模块定义时就会立即加载所有依赖的模块，即使这些模块在模块内部可能并不会马上被使用。这种方式适合在模块加载完成后就立即执行的场景。
      示例：当页面加载时，AMD 会并行加载所有依赖的模块，然后再执行模块的定义函数。
 
-     ```js
+     ```html
      <!DOCTYPE html>
      <html lang="en">
-     <head>
-         <meta charset="UTF-8">
+       <head>
+         <meta charset="UTF-8" />
          <title>AMD Example</title>
          <!-- 引入 RequireJS -->
          <script data-main="main" src="require.js"></script>
-     </head>
-     <body>
-     </body>
-     </html>
-     // math.js 定义模块：使用 define 函数定义模块。
-     define(['add', 'subtract'], function(add, subtract) {
-         return {
+       </head>
+       <body></body>
+       <script>
+         // math.js 定义模块：使用 define 函数定义模块。
+         define(["add", "subtract"], function (add, subtract) {
+           return {
              add: add,
-             subtract: subtract
-         };
-     });
+             subtract: subtract,
+           };
+         });
 
-     // main.js 使用模块：在 main.js 中使用 require 函数加载和使用模块。
-     require(['math'], function(math) {
-         console.log(math.add(2, 3));
-         console.log(math.subtract(5, 2));
-     });
+         // main.js 使用模块：在 main.js 中使用 require 函数加载和使用模块。
+         require(["math"], function (math) {
+           console.log(math.add(2, 3));
+           console.log(math.subtract(5, 2));
+         });
+       </script>
+     </html>
      ```
 
   2. CMD（Common Module Definition）: （以 Sea.js 为例）
      特点：只有在模块内部真正需要使用某个依赖时才会去加载该模块。这种方式可以避免不必要的模块加载，提高性能，尤其是在大型项目中，有些模块可能在某些情况下并不会被使用。
      示例：在 math 模块中，只有当执行到 require('add') 和 require('subtract') 时，才会去加载 add 和 subtract 模块。
 
-     ```js
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <title>CMD Example</title>
-          <!-- 引入 Sea.js -->
-          <script src="sea.js"></script>
-          <script>
-              // 配置 Sea.js
-              seajs.config({
-                  base: './',
-                  alias: {
-                      'math': 'math.js'
-                  }
-              });
-              // 加载模块
-              seajs.use('math', function(math) {
-                  console.log(math.add(2, 3));
-                  console.log(math.subtract(5, 2));
-              });
-          </script>
-      </head>
-      <body>
-      </body>
-      </html>
-      // math.js 使用 define 函数定义模块。
-      define(function(require, exports, module) {
-          var add = require('add');
-          var subtract = require('subtract');
+     ```html
+     <!DOCTYPE html>
+     <html lang="en">
+       <head>
+         <meta charset="UTF-8" />
+         <title>CMD Example</title>
+         <!-- 引入 Sea.js -->
+         <script src="sea.js"></script>
+         <script>
+           // 配置 Sea.js
+           seajs.config({
+             base: "./",
+             alias: {
+               math: "math.js",
+             },
+           });
+           // 加载模块
+           seajs.use("math", function (math) {
+             console.log(math.add(2, 3));
+             console.log(math.subtract(5, 2));
+           });
 
-          exports.add = add;
-          exports.subtract = subtract;
-      });
+           // math.js 使用 define 函数定义模块。
+           define(function (require, exports, module) {
+             var add = require("add");
+             var subtract = require("subtract");
+
+             exports.add = add;
+             exports.subtract = subtract;
+           });
+         </script>
+       </head>
+       <body></body>
+     </html>
      ```
 
   3. ESM（ES Module）:
@@ -126,14 +127,14 @@
      });
      ```
 
-- CommonJS 与 ES6 Module 规范的区别：
+- CommonJS 与 ESM 规范的区别：
 
   1.  CommonJS 是同步加载，ESM 是异步加载；(由于 CommonJS 是用于服务器端的模块体系，需要加载的模块都在本地，所以采用同步加载也不会出问题，但是 ESM 用于浏览器端时，可能涉及到一些异步请求，所以需要采用异步加载。)
   2.  CommonJS 模块是运行时加载，ES6 Modules 是编译时输出接口。
   3.  ES6 Modules 中没有这些顶层变量：arguments、require、module、exports、filename、dirname。
   4.  CommonJS 输出是值的浅拷贝；ES6 Modules 输出的是值的引用，被输出模块的内部的改变会影响引用的改变。
   5.  CommonJs 导入的模块路径可以是一个表达式，因为它使用的是 require()方法；而 ES6 Modules 只能是字符串。
-  6.  CommonJSthis 指向当前模块，ES6 Modulesthis 指向 undefined。
+  6.  CommonJS this 指向当前模块，ES6 Modulesthis 指向 undefined。
 
 - CJS 模块化 [exports 与 module.exports](https://www.jianshu.com/p/da295cf76eea)
 
@@ -204,17 +205,3 @@
       - 默认情况下，浏览器同步加载 JavaScript 脚本，即渲染引擎遇到 < script>标签就会停下来，等到脚本执行完毕再继续向下渲染。如果是外部脚本，还必须加入脚本下载的时间。(如果脚本体积很大就会“卡死”)
       - < script>标签打开 defer 或 async 属性，脚本就会异步加载。defer 是“渲染完再执行”，async 是“下载完就执行”
       - 浏览器加载 ES6 模块时也使用< script>标签，但是要加入 type=”module”属性。对于带有 type=”module”的< script>，浏览器都是异步加载的，不会造成浏览器堵塞，即等到整个页面渲染完再执行模块脚本，等同于打开了< script>标签的 defer 属性。
-
-## NPM
-
-- npm 基本知识
-
-  1. [package.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-json)
-  2. [npm 包发布](https://www.kancloud.cn/outsider/clitool/313178)
-  3. (node_module 扁平化代码组织方式)[https://mp.weixin.qq.com/s/Oaq9JTSOHwO_sziNWESV1g]
-  4. [统一导出资源](https://blog.csdn.net/chengqige/article/details/121221779)
-  5. 以 @ 开头的文件或文件夹在 Node.js 项目中通常用于表示命名空间或组织范围的模块，有助于组织、区分和管理不同的模块和项目变体。
-
-  ```js
-  例如，一个使用 TypeScript 的项目可能会安装 @types 命名空间下的类型定义文件，这些文件用于提供 TypeScript 对特定模块的类型信息。
-  ```

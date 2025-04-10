@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-04 19:11:59
+ * @LastEditTime: 2025-04-10 18:31:39
  * @Description: file not
  */
 
@@ -204,3 +204,35 @@ function batchDownload(urls, limitN, done) {
     download();
   }
 }
+// 如何实现这个不报错: 自定义迭代器
+// const [x,y]={x:1,y:2}
+
+// 实现两个大数想加
+function addBigNumbers(a, b) {
+  // 确保输入是字符串
+  a = a.toString();
+  b = b.toString();
+
+  // 补零使长度相同
+  const maxLength = Math.max(a.length, b.length);
+  a = a.padStart(maxLength, "0");
+  b = b.padStart(maxLength, "0");
+
+  let carry = 0;
+  let result = "";
+
+  // 从最低位开始相加
+  for (let i = maxLength - 1; i >= 0; i--) {
+    const sum = parseInt(a[i]) + parseInt(b[i]) + carry;
+    carry = Math.floor(sum / 10); // 进位
+    result = (sum % 10) + result; // 进位之后余数拼接
+  }
+  // 处理最后的进位
+  if (carry > 0) {
+    result = carry + result;
+  }
+
+  return result;
+}
+// 示例
+// console.log(addBigNumbers(1789, 9537));

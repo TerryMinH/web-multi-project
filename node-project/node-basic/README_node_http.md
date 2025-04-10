@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-01-02 09:51:15
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 18:35:17
+ * @LastEditTime: 2025-04-10 15:46:11
  * @Description: file not
 -->
 
@@ -67,7 +67,7 @@
   5.  403 Forbidden:客户端具有访问资源权限,但服务器拒绝了请求。
   6.  404 Not Found: 资源未找到
   7.  500 Internal Server Error：服务器内部发生了未知的错误，导致无法处理请求。
-  8.  502 Bad Gateway: 服务器作为网关,上游服务求出现故障。
+  8.  502 Bad Gateway: 服务器作为网关,上游服务请求出现故障。
   9.  503 Service Unavailable: 服务器暂时不可用。
 
 - 前端页面数据实时更新方案 轮询、SSE、WebScoket 之间区别

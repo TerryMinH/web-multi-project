@@ -2,12 +2,14 @@
  * @Author: TerryMin
  * @Date: 2021-12-11 15:47:19
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-15 14:18:18
+ * @LastEditTime: 2025-04-10 20:06:49
  * @Description: file not
  */
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MyWebpackPlugin = require("./myWebpackPlugin");
+
 const webpack = require("webpack");
 
 module.exports = {
@@ -42,6 +44,7 @@ module.exports = {
     hot: true,
   },
   plugins: [
+    new MyWebpackPlugin(),
     new webpack.DefinePlugin({
       QTRR: JSON.stringify(process.env.NODE_ENV_QDRR),
     }),
