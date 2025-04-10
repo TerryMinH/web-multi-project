@@ -1,14 +1,22 @@
 {
-  "name": "min-cli",
-  "version": "1.0.0",
-  "bin":{
-    "min-cli":"bin/cli.js"
+  "name": "min-cli-tool",
+  "version": "1.0.1",
+  "bin": {
+    "min-cli-tool": "bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node lib/generator.js",
+    "test": "node bin/cli.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^13.1.0",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^12.5.2",
+    "util": "^0.12.5"
+  }
 }
