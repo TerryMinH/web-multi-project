@@ -2,52 +2,27 @@
  * @Author: TerryMin
  * @Date: 2025-03-29 10:21:09
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 20:31:55
+ * @LastEditTime: 2025-04-11 10:21:25
  * @Description: file not
  */
-import React, { createContext, useContext, useReducer } from "react";
+import React, { useState, useContext, useReducer } from "react";
+import PlaysGroundChild from "./PlaysGroundChild";
 
-const counterReducer = (state, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return { count: state.count + 1 };
-    case "DECREMENT":
-      return { count: state.count - 1 };
-    default:
-      return state;
-  }
-};
-const CounterContext = createContext();
-
-const CounterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
-  return (
-    <CounterContext.Provider value={{ state, dispatch }}>
-      <div>{children}</div>
-    </CounterContext.Provider>
-  );
-};
-
-const CounterComponent = () => {
-  const { dispatch, state } = useContext(CounterContext);
+const PlaysGround = () => {
+  const [number, setNumber] = useState(0);
+  const handleBtn = () => {
+    setNumber(number + 5);
+    setNumber((n) => n + 1);
+    setNumber(42);
+    setTimeout(() => {
+      console.log(number);
+    }, 1000);
+  };
   return (
     <>
-      <div>Count:{state.count}</div>
-      <button
-        onClick={() => {
-          dispatch({ type: "INCREMENT" });
-        }}
-      >
-        Increment
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: "DECREMENT" });
-        }}
-      >
-        Decrement
-      </button>
+      <h1>{number}</h1>
+      <button onClick={handleBtn}>增加数字</button>
     </>
   );
 };
-export { CounterProvider, CounterComponent };
+export { PlaysGround };
