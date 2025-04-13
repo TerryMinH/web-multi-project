@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-10 07:42:26
+ * @LastEditTime: 2025-04-12 15:52:46
  * @Description: file not
 -->
 
@@ -117,7 +117,16 @@
      4.3 表设计
      4.4 外部数据链接
 
-- 低代码平台常见问题
+## 微前端
+
+- 基座只需关心子应用
+  - 初始化 bootstrap
+  - 挂载 mount
+  - 卸载 unmount
+
+## 低代码
+
+- 低代码平台问题
 
   1. 低代码平台渲染引擎不同场景设计：事件系统设计、逻辑编排、数据绑定
 
