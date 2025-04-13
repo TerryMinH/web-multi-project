@@ -1,3 +1,10 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2025-04-13 15:06:39
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-13 15:36:44
+ * @Description: file not
+-->
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
@@ -5,11 +12,7 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    child-app-vue子应用
   </header>
 
   <main>
