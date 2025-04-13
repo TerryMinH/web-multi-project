@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-02-22 09:51:10
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-13 09:41:06
+ * @LastEditTime: 2025-04-13 18:00:11
  * @Description: file not
 -->
 
@@ -10,7 +10,8 @@
 
 ## 微前端
 
-[micro-app 微前端文档](https://cangdu.org/micro-app/)
+[micro-app 微前端文档](https://github.com/jd-opensource/micro-app?tab=readme-ov-file)
 
-[micro-app 微前端搭建](https://blog.csdn.net/weixin_41897680/article/details/124014727)
-
+- 微前端搭建
+  [micro-app 微前端搭建](https://blog.csdn.net/weixin_41897680/article/details/124014727)
+  [上手京东微前端框架 micro-app](https://blog.csdn.net/m0_46171043/article/details/129974770)

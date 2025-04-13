@@ -2,21 +2,38 @@
  * @Author: TerryMin
  * @Date: 2022-12-26 13:58:25
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-22 20:45:08
+ * @LastEditTime: 2025-04-13 17:33:19
  * @Description: ts文件动态编译: tsc index.ts --watch
 -->
 
 # typescript 编译原理
 
-1. [ts 配置详解](https://juejin.cn/post/6844904093568221191)
+- [TS 官方配置文档](https://www.typescriptlang.org/tsconfig/)
 
-- tsconfig.json 作为其配置文件，它主要包含两块内容:
+  1. [ts 配置详解](https://juejin.cn/post/6844904093568221191)
 
-  - 1 定义编译选项:(https://juejin.cn/post/6924264635218542605)
-    - 1.1 files:files 属性是一个数组，数组元素可以是相对文件路径和绝对文件路径。
-    - 1.2 include、exclude: include 和 exclude 属性也是一个数组，但数组元素是类似 glob 的文件模式。它支持的 glob 通配符。
-    - 1.3 注意事项:exclude 只对 include 有效，对 files 无效。即 files 指定的文件如果同时被 exclude 排除，那么该文件仍然会被编译器引入。
-  - 2 指定待编译的文件: compilerOptions
+     ```json
+     {
+       "compilerOptions": {
+         // 编译器选项
+       },
+       "include": [
+         // 要包含的文件或文件夹、它支持的 glob 通配符。
+       ],
+       "exclude": [
+         // 要排除的文件或文件夹exclude 只对 include 有效，对 files 无效。即 files 指定的文件如果同时被 exclude 排除，那么该文件仍然会被编译器引入。
+       ],
+       "files": [
+         // 要编译的具体文件、files 属性是一个数组，数组元素可以是相对文件路径和绝对文件路径。
+       ],
+       // extends 主要用于配置的继承和共享，解决配置重复的问题，不涉及项目之间的依赖关系和编译顺序。
+       "extends": "path/to/another/tsconfig.json",
+       // references 主要用于管理项目之间的依赖关系，确保项目按照正确的顺序编译，并且支持增量编译。
+       "references": [
+         // 项目引用
+       ]
+     }
+     ```
 
 - [ts 编译原理](https://juejin.cn/post/7009661133686734861)
 

@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-04-13 15:06:40
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-13 15:59:02
+ * @LastEditTime: 2025-04-13 18:19:10
  * @Description: file not
  */
 import { fileURLToPath, URL } from "node:url";
@@ -20,7 +20,7 @@ export default defineConfig({
     },
   },
   server: {
-    port:8080,
+    port: 8080,
     proxy: {
       "/gateway": "http://36.155.98.130/",
       "/mgs": "http://m.miguvideo.com",
