@@ -2,30 +2,63 @@
  * @Author: TerryMin
  * @Date: 2022-07-27 18:06:28
  * @LastEditors: TerryMin
- * @LastEditTime: 2022-10-21 17:23:57
+ * @LastEditTime: 2025-04-13 10:46:54
  * @Description: file not
 -->
-# monorepo + [pnpm](https://pnpm.io/zh/) + Vue3 + [Vite](https://vitejs.bootcss.com/) + TypeScript 多项目管理
 
-# migu-activity-project 重构
+# monorepo 项目开发
 
-## monorepo多项目管理
-[monorepo进行多项目管理实践](https://juejin.cn/post/7043990636751503390)
+- 项目启动
 
-[monorepo多项目打包问题及方案分析](https://juejin.cn/post/6950082433647640612)
+  ```js
+  node = v16.x;
+  根目录 pnpm install
 
-[monorepo 源码管理总结](https://blog.csdn.net/QcloudCommunity/article/details/122994881)
+    # 全局安装共用依赖（React/Vue等）
+    pnpm add react -w  # -w表示workspace root
 
-## changesets:主要用于 monorepo 项目下子项目版本的更新、changelog文件生成、包的发布
-[changesets构建monorepo](https://juejin.cn/post/7098609682519949325)
+    # 子包单独安装特定依赖
+    pnpm --filter app add axios
+    pnpm --filter admin add @vueuse/core
 
-## Vite  +  Vue
-[vue3+vite配置](https://juejin.cn/post/6975442828386107400)
+    # 子包相互引用
+    pnpm --filter app add shared@workspace:*
+  ```
 
-[vite+ vue3 +multipage](https://gitee.com/cheere/vite-vue3-multipage#https://gitee.com/link)
+- 项目初始化
 
-[vue-cli脚手架原理](https://blog.csdn.net/six_six_six_666/article/details/82633731)
+  ```js
+  # 创建monorepo结构
+  mkdir monorepo && cd monorepo
+  pnpm init
+  touch pnpm-workspace.yaml
 
+  # 添加子包
+  pnpm create vite packages/app --template react-ts
+  pnpm create vite packages/admin --template vue-ts
+  mkdir packages/shared
+  ```
 
+- 依赖管理
 
+  ```js
+  # 全局安装共用依赖（React/Vue等）
+   pnpm add react -w  # -w表示workspace root
 
+   # 子包单独安装特定依赖
+   pnpm --filter app add axios
+   pnpm --filter admin add @vueuse/core
+
+   # 子包相互引用
+   pnpm --filter app add shared@workspace:*
+  ```
+
+- 脚本执行
+
+  ```js
+    # 并行运行所有子包的build命令
+    pnpm -r run build
+
+    # 仅针对特定子包
+    pnpm --filter app run dev
+  ```

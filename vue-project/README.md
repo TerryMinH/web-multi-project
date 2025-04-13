@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-02-17 11:41:32
  * @LastEditors: TerryMin
- * @LastEditTime: 2024-04-14 07:41:44
+ * @LastEditTime: 2025-04-13 09:36:57
  * @Description: file not
 -->
 
@@ -24,5 +24,3 @@
 
 1. [前端如何实现文件下载，防止浏览器自动打开可预览文件](https://blog.csdn.net/qq_19313497/article/details/104234723)
 2. [前端下载文件的 5 种方法的对比](https://juejin.cn/post/6844904069958467592)
-
-## [源码阅读](https://juejin.cn/post/7079706017579139102)
