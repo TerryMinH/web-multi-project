@@ -1,3 +1,10 @@
+/*
+ * @Author: TerryMin
+ * @Date: 2025-04-13 14:49:51
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-13 15:18:42
+ * @Description: file not
+ */
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,7 +14,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          child-app-react子应用
         </p>
         <a
           className="App-link"
