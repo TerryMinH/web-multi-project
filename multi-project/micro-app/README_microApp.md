@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-02-22 09:51:10
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-13 18:00:11
+ * @LastEditTime: 2025-04-13 18:35:04
  * @Description: file not
 -->
 
@@ -10,7 +10,7 @@
 
 ## 微前端
 
-[micro-app 微前端文档](https://github.com/jd-opensource/micro-app?tab=readme-ov-file)
+[micro-app 微前端文档](https://jd-opensource.github.io/micro-app/)
 
 - 微前端搭建
   [micro-app 微前端搭建](https://blog.csdn.net/weixin_41897680/article/details/124014727)
