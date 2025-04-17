@@ -2,13 +2,39 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-08 13:31:27
+ * @LastEditTime: 2025-04-16 11:17:04
  * @Description: file not
 -->
 
 # [Vue](https://cn.vuejs.org/)
 
 ## Vue
+
+- Vue 响应式原理(源码)
+
+  1.  compiler:主要负责把 Vue 组件的模板字符串转化为 JavaScript 渲染函数,这些渲染函数在运行时会生成虚拟 DOM 树，最终被渲染为真实的 DOM 节点。
+  2.  reactivity:添加数据响应式,进行依赖收集
+      2.1 Object.defineProperty: Vue 2 在创建 Vue 实例时，会遍历 data 选项中的所有属性，使用 Object.defineProperty() 将这些属性转换为 getter/setter 进行数据劫持并在 Watcher 中进行依赖收集,当属性值发生变化会发布更新。
+      2.2 Object.defineProperty 缺点: 不能监听数组(重写会改变数组本身的方法)、对嵌套对象属性需要递归添加 getter 与 setter,比较浪费性能、对 ES6 新的数据结构 Map 和 Set 不支持响应式。
+      2.3 Proxy(Reflect 先进语法):get 与 set 响应式数据拦截加工、track 响应式数据依赖追踪收集添加到 Map 数据结构里面、trigger 触发更新
+  3.  runtime:是 Vue 3 框架中连接虚拟 DOM 和真实 DOM 的桥梁，它通过实现渲染器、封装 DOM 操作、处理特定指令和组件等功能，使得 Vue 应用能够高效地在浏览器中运行，并实现数据驱动的视图更新。
+
+- Vue 编译过程
+  Vue 的编译过程主要包括模板解析、优化和代码生成三个阶段:
+
+  1. 解析: 将模板字符串通过词法分析和语法分析解析成（AST，Abstract Syntax Tree），便于后续处理；
+  2. 优化: 对 AST 进行优化，通过深度优先遍历 标记出静态节点和静态根节点，以提高渲染性能；
+  3. 生成: 将优化后的 AST 转换为渲染函数的代码字符串。渲染函数会生成虚拟 DOM，最终映射到真实 DOM 上
+
+- Vue2 和 Vue3 有哪些区别？
+
+      1. 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑,Vue 3 也兼容选项式 API，方便老项目的迁移。
+      2. 响应式系统:
+      vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
+      vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
+      3. 虚拟DOM性能优化:对虚拟 DOM 进行了优化，采用了静态提升、PatchFlag 等技术，减少了不必要的 diff 计算，提高了渲染性能，尤其是在处理大型组件树时性能提升明显。
+      4. 更好的TypeScript支持: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
+      5. 生命周期钩子部分做了调整:Vue3大部分生命周期钩子仍然保留，但名称有所变化。例如，beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted。同时，在组合式 API 中，可以使用新的方式来使用生命周期钩子，如 onBeforeMount、onMounted 等
 
 - Vue2 中 data 为什么是函数而不是对象
 
@@ -125,29 +151,3 @@
 
   1. 事件总线适用于简单的组件通信和一次性的事件传递，而状态管理适用于多个组件共享状态和复杂的状态逻辑管理。在实际项目中，需要根据项目的规模和需求来选择合适的通信方式。
   2. 备注：一次性的事件通信：比如某个组件在特定条件下触发一个事件，通知其他组件执行相应操作，使用事件总线会很合适。例如，在用户点击某个按钮后，通知另一个组件进行页面滚动。
-
-- Vue 响应式原理(源码)
-
-  1.  compiler:主要负责把 Vue 组件的模板字符串转化为 JavaScript 渲染函数,这些渲染函数在运行时会生成虚拟 DOM 树，最终被渲染为真实的 DOM 节点。
-  2.  reactivity:添加数据响应式,进行依赖收集
-      2.1 Object.defineProperty: Vue 2 在创建 Vue 实例时，会遍历 data 选项中的所有属性，使用 Object.defineProperty() 将这些属性转换为 getter/setter 进行数据劫持并在 Watcher 中进行依赖收集,当属性值发生变化会发布更新。
-      2.2 Object.defineProperty 缺点: 不能监听数组(重写会改变数组本身的方法)、对嵌套对象属性需要递归添加 getter 与 setter,比较浪费性能、对 ES6 新的数据结构 Map 和 Set 不支持响应式。
-      2.3 Proxy(Reflect 先进语法):get 与 set 响应式数据拦截加工、track 响应式数据依赖追踪收集添加到 Map 数据结构里面、trigger 触发更新
-  3.  runtime:是 Vue 3 框架中连接虚拟 DOM 和真实 DOM 的桥梁，它通过实现渲染器、封装 DOM 操作、处理特定指令和组件等功能，使得 Vue 应用能够高效地在浏览器中运行，并实现数据驱动的视图更新。
-
-- Vue 编译过程
-  Vue 的编译过程主要包括模板解析、优化和代码生成三个阶段:
-
-  1. 解析: 将模板字符串通过词法分析和语法分析解析成（AST，Abstract Syntax Tree），便于后续处理；
-  2. 优化: 对 AST 进行优化，通过深度优先遍历 标记出静态节点和静态根节点，以提高渲染性能；
-  3. 生成: 将优化后的 AST 转换为渲染函数的代码字符串。渲染函数会生成虚拟 DOM，最终映射到真实 DOM 上
-
-- Vue2 和 Vue3 有哪些区别？
-
-      1. 语法与组合式 API:Vue2 使用选项式 API;Vue3 使用组合式 API,使用函数来组织逻辑,Vue 3 也兼容选项式 API，方便老项目的迁移。
-      2. 响应式系统:
-      vue2 的响应式原理用 Object.defineProperty 的 get 和 set 进行数据劫持;
-      vue3 中响应式原理使用 Proxy 进行代理,Proxy 可以拦截对象中任意的属性变化，当然包括读写，添加，删除等
-      3. 虚拟DOM性能优化:对虚拟 DOM 进行了优化，采用了静态提升、PatchFlag 等技术，减少了不必要的 diff 计算，提高了渲染性能，尤其是在处理大型组件树时性能提升明显。
-      4. 更好的TypeScript支持: Vue3 增强的 TypeScript 支持，使大规模应用开发更轻松,新增了一些状态管理库pinia。
-      5. 生命周期钩子部分做了调整:Vue3大部分生命周期钩子仍然保留，但名称有所变化。例如，beforeDestroy 改为 beforeUnmount，destroyed 改为 unmounted。同时，在组合式 API 中，可以使用新的方式来使用生命周期钩子，如 onBeforeMount、onMounted 等

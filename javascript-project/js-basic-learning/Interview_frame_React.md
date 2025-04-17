@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-15 14:41:47
+ * @LastEditTime: 2025-04-16 09:19:47
  * @Description: file not
 -->
 
@@ -88,7 +88,7 @@
 
   - React 原理回答结构：
 
-    - React 的核心实现基于虚拟 DOM 和 Fiber 架构。当状态变化时，Reconciler 会通过 Diff 算法计算出变更，这个过程现在是可以中断的，因为 Fiber 将渲染任务拆分为多个工作单元。Hooks 通过链表结构保持状态，而合成事件系统则提供了跨浏览器兼容性。React 18 引入的并发渲染进一步提升了响应能力。
+    - React 的核心实现基于虚拟 DOM 和 Fiber 架构。当状态变化时，Reconciler 会通过 Diff 算法计算出变更，由于 Fiber 将渲染任务拆分为多个工作单元，这个过程现在是可以中断的。Hooks 通过链表结构保持状态，而合成事件系统则提供了跨浏览器兼容性。React 18 引入的并发渲染进一步提升了响应能力。
 
       - 从宏观架构：分层设计（调度-协调-渲染）
       - 核心机制：虚拟 DOM、Fiber、Hooks

@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-08-05 10:17:37
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-03-30 20:51:02
+ * @LastEditTime: 2025-04-17 09:15:42
  * @Description: file not
 -->
 
@@ -325,7 +325,7 @@ console.log(obj1, obj2);
     **引用类型：**存放在堆内存中的对象，变量实际保存的是一个指针，这个指针指向另一个位置。每个空间大小不一样，要根据情况开进行特定的分配。
     当我们需要访问引用类型（如**对象，数组，函数**等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。
 
-## 手写 Promise 实现原理,
+## 手写 Promise 实现原理
 
 1. [Promise class 实现原理](https://www.jianshu.com/p/43de678e918a)
 
@@ -543,16 +543,17 @@ console.log(obj1, obj2);
    ```
 
 2. [ES5 方式手写通俗易懂 Promise 实现](https://juejin.cn/post/6856213486633304078#comment)
-   2.1 Promise.all() 要求所有 Promise 都成功才会成功，适用于需要所有异步操作都完成后再进行下一步处理的场景。
-   2.2 Promise.any() 只要有一个 Promise 成功就会成功，适用于多个异步操作中只要有一个成功即可的场景。
-   2.3 Promise.race() 只要有一个 Promise 完成就会结束，常用于实现超时控制等场景。
-   2.4 Promise.allSettled() 会等待所有 Promise 敲定，返回每个 Promise 的结果，适用于需要知道所有异步操作最终状态的场景。
+   2.1 Promise.all() 要求所有 Promise 状态都成功才会成功，适用于需要所有异步操作都完成后再进行下一步处理的场景。
+   2.2 Promise.any() 只要有一个 Promise 状态成功就会成功，适用于多个异步操作中只要有一个成功即可的场景。
+   2.3 Promise.race() 只要有一个 Promise 状态改变(无论是成功还是失败)就会结束，常用于实现超时控制等场景。
+   2.4 Promise.allSettled() 会等待所有 Promise 状态改变，返回每个 Promise 的结果，适用于需要知道所有异步操作最终状态的场景。
 
-## async/await
+- Promise 与 async/await
 
-1. [await 后跟 promise 与普通函数的区别](https://www.jianshu.com/p/78178c8d3f0a)
-
-- 用 await 声明的 Promise 异步返回，必须“等待”到有返回值的时候，代码才继续执行下去。
+  - 用 await 声明的 Promise 异步返回，必须“等待”到有返回值的时候，代码才继续执行下去。
+  - Promise 是基础的异步处理机制，提供了一种链式调用的方式来处理异步操作，适用于较为简单的异步场景。
+  - async/await 是基于 Promise 的语法糖，使异步代码的编写和阅读更加接近同步代码，在处理复杂的异步操作时，能显著提高代码的可读性和可维护性。
+  - [await 后跟 promise 与普通函数的区别](https://www.jianshu.com/p/78178c8d3f0a)
 
 ## 类的相关属性区别
 

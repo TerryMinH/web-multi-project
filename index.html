@@ -1,84 +1,19 @@
-<!--
- * @Author: TerryMin
- * @Date: 2024-10-23 14:30:58
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-10 18:30:45
- * @Description: file not
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      .grid-container {
-        display: grid;
-        grid-template-columns: [col-start] 100px [col-middle] 100px [col-end];
-        grid-template-rows: [row-start] 100px [row-middle] 100px [row-end];
-        gap: 10px;
-      }
-      .grid-item {
-        background-color: lightblue;
-        padding: 20px;
-        text-align: center;
-      }
-      .item1 {
-        grid-column: col-start / col-middle;
-        grid-row: row-start / row-middle;
-      }
-      /* .item2 {
-            grid-column: col-middle / col-end;
-            grid-row: row-start / row-middle;
-        } */
-      .item3 {
-        grid-column: col-start / col-middle;
-        grid-row: row-middle / row-end;
-      }
-      .item2 {
-        grid-column: col-middle / col-end;
-        grid-row: row-middle / row-end;
+     [attr-data*="example" i] {
+        color: red;
       }
     </style>
+    <title>Document</title>
   </head>
   <body>
-    <div class="grid-container">
-      <div class="grid-item item1">Item 1</div>
-      <div class="grid-item item2">Item 2</div>
-      <div class="grid-item item3">Item 3</div>
-      <!-- <div class="grid-item item4">Item 4</div> -->
-    </div>
+    <div attr-data="test-example">这个元素的属性以 attr 开头</div>
+    <div attr-data="test Example">这个元素的属性不以 attr 开头</div>
+    <div attr-data="example">这个元素的属性也以 attr 开头</div>
+    <div class="important">这个元素的属性也以 attr 开头</div>
   </body>
-  <script>
-    function addBigNumbers(a, b) {
-      // 确保输入是字符串
-      a = a.toString();
-      b = b.toString();
-
-      // 补零使长度相同
-      const maxLength = Math.max(a.length, b.length);
-      a = a.padStart(maxLength, "0");
-      b = b.padStart(maxLength, "0");
-
-      let carry = 0;
-      let result = "";
-
-      // 从最低位开始相加
-      for (let i = maxLength - 1; i >= 0; i--) {
-        const sum = parseInt(a[i]) + parseInt(b[i]) + carry;
-        carry = Math.floor(sum / 10); // 进位
-        result = (sum % 10) + result; // 进位之后余数拼接
-      }
-      // 处理最后的进位
-      if (carry > 0) {
-        result = carry + result;
-      }
-
-      return result;
-    }
-
-    // 示例
-    console.log(addBigNumbers(1789, 9537));
-    // console.log(addBigNumbers("12345678901234567890", "98765432109876543210"));
-    // 输出: "111111111011111111100"
-  </script>
 </html>

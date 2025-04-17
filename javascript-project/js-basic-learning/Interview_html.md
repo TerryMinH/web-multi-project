@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-10 10:36:13
+ * @LastEditTime: 2025-04-17 08:33:59
  * @Description: file not
 -->
 
@@ -18,7 +18,17 @@
 
 - CSS 常考面试题
 
-  1.  link 与@import 区别: link 不会阻塞页面渲染，@import 会阻塞页面渲染；link 可以通过标签动态加载，@import 不可以。link 标签是 HTML 标准的一部分，具有良好的兼容性。
+- link 与@import 区别
+
+  - 定义：
+
+    - <link> 是 HTML 标签，用于在 HTML 文档的 <head> 部分引入外部样式表。例如：<link rel="stylesheet" href="styles.css">，rel 属性指定了链接的关系为样式表，href 属性指向外部样式表文件的路径。
+    - @import 是 CSS 规则，通常写在 CSS 文件中，用于从一个 CSS 文件中引入另一个 CSS 文件。例如：@import url('other-styles.css');，它可以放在 CSS 文件的任何位置（通常在文件开头），但必须在其他样式规则之前生效
+
+  - 区别：
+    - link 不会阻塞页面渲染，@import 会阻塞页面渲染。
+    - link 可以通过标签动态加载，@import 不可以。
+    - link 标签是 HTML 标准的一部分，具有良好的兼容性。
 
 - [Flex 布局：flex:1 与 flex:auto 详解](https://www.cnblogs.com/terrymin/p/14654621.html)
 

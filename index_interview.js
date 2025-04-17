@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-10 18:31:39
+ * @LastEditTime: 2025-04-16 16:54:54
  * @Description: file not
  */
 
@@ -236,3 +236,8 @@ function addBigNumbers(a, b) {
 }
 // 示例
 // console.log(addBigNumbers(1789, 9537));
+
+// 腾讯/前程无忧 这个解构能否执行
+const [a, b] = { a: 1, b: 2 };
+
+// 拼多多 js 实现将菜单一维数组转为树形结构如何实现

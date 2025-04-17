@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-09-24 14:28:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-10 10:24:19
+ * @LastEditTime: 2025-04-16 20:46:18
  * @Description: file not
 -->
 
@@ -176,7 +176,7 @@
   5.  webpack
   6.  vite：是基于 esbuild 和 rollup 现代打包工具,充分利用 ES 模块原生能力、提升了开发体验和性能。
   7.  Rspack：
-      7.1 定义：是一个基于 Rust 语言开发的高性能前端构建工具，设计目的是提供与 webpack 兼容的 API,，让开发者可以在不进行大量代码修改的情况下，从 Webpack 迁移到 Rspack，同时显著提升构建速度。
+      7.1 定义：是一个基于 Rust 语言开发的高性能前端构建工具，设计目的是提供与 webpack 兼容的 API，让开发者可以在不进行大量代码修改的情况下，从 Webpack 迁移到 Rspack，同时显著提升构建速度。
       7.2 适用场景：需要平滑迁移现有 Webpack 项目、需要稳定生产构建能力、项目使用多种前端框架、依赖特定 Webpack 插件。
   8.  Turbopack：
       8.1 定义：是由 Webpack 的创建者 Tobias Koppers 携手 Next.js 团队采用 Rust 语言编写的，针对 JavaScript 和 TypeScript 进行优化的增量打包工具。
