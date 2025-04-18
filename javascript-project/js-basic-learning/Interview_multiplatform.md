@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-03 16:09:00
+ * @LastEditTime: 2025-04-18 10:51:31
  * @Description: file not
 -->
 
@@ -76,6 +76,68 @@
   3. 编译和打包机制
      3.1 Taro：编译过程相对复杂，会根据不同的平台进行针对性的编译，生成不同平台的代码。在编译过程中，会对代码进行优化和转换，以确保在各个平台上的性能和兼容性。
      3.2 uni-app：编译速度较快，借助 HBuilderX 的优化编译机制，能够快速生成各个平台的代码。同样支持多端打包，并且在 HBuilderX 中提供了可视化的打包界面，操作简单方便。
+
+- hybridApp jsbridge 实现原理
+
+  - 面试回答：JSBridge 的核心是建立双向通信通道。我们团队采用分层设计：底层通过 Android 的 @JavascriptInterface 和 iOS 的 evaluateJavaScript 实现原生能力注入，上层封装 Promise 化接口。关键创新点是增加了协议版本协商和心跳检测，确保在弱网环境下自动降级。最近我们还探索了基于 WebView postMessage 的零延迟方案，相比传统 URL Scheme 性能提升 40%。
+
+  - 核心原理： JSBridge 本质是 双向通信通道，实现 JavaScript 与 Native（Android/iOS）的互操作，关键技术点：
+
+    1. 通信协议层
+
+       - URL Scheme 拦截（WebView 请求拦截）
+       - JavaScriptCore/WebKit 注入（iOS 的 evaluateJavaScript，Android 的 addJavascriptInterface）
+       - 消息队列轮询（Android 的 @JavascriptInterface 双向调用）
+
+    2. 数据传输格式
+       - 标准化 JSON-RPC 协议（包含 method, params, callbackId）
+       - 二进制数据通过 Base64 编码传输
+
+  - 具体实现方案：
+
+    - URL Scheme 拦截（经典方案）
+
+      ```js
+      // JS 调用 Native
+      function callNative(method, params, callback) {
+        const callbackId = "cb_" + Math.random().toString(36).substr(2);
+        window[callbackId] = callback; // 挂载回调到全局
+
+        const url = `myapp://${method}?${JSON.stringify(
+          params
+        )}&callback=${callbackId}`;
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        document.body.appendChild(iframe);
+        setTimeout(() => iframe.remove(), 100);
+      }
+      // Native 拦截 WebView 的 shouldOverrideUrlLoading 处理请求
+      ```
+
+    - Native 注入 API（高性能方案）
+      ```js
+        // Android 示例
+          webView.addJavascriptInterface(new Object() {
+            @JavascriptInterface
+            public void nativeMethod(String params) {
+              // 处理逻辑后通过 webView.loadUrl("javascript:callback()") 回调
+            }
+          }, "NativeBridge");
+      ```
+    - WebView 消息管道（现代方案）
+
+      ```js
+      // 使用 window.postMessage + onMessage
+      window.NativeBridge = {
+        postMessage: (message) => {
+          window.ReactNativeWebView?.postMessage(JSON.stringify(message));
+        },
+      };
+
+      // Native 通过 WebView 的 onMessage 回调接收
+      ```
+
+- Android 和 IOS 应用基本知识了解
 
 ## 小程序
 
