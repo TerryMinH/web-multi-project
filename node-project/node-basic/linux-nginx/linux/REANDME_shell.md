@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-06-29 09:14:11
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-18 11:51:11
+ * @LastEditTime: 2025-04-18 14:26:00
  * @Description: file not
 -->
 
@@ -25,3 +25,8 @@
 - Vim 使用
 
   - [Mac 终端个性化设置](https://blog.csdn.net/BreakingDawn0/article/details/104835403)
+
+## deepSeek AI 工具个人赋能
+
+- 知识点掌握情况测试
+  - 通过 AI 工具面试个人相关知识点
