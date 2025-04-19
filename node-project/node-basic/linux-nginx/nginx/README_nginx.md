@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-07-21 17:13:48
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-18 11:39:39
+ * @LastEditTime: 2025-04-19 08:12:46
  * @Description: Nginx 直接本地访问localhost:8082地址即可测试Nginx功能
 -->
 
@@ -145,6 +145,7 @@
      4.5 文件可以使用变量$来命名
 
   5. [location 中 try_files](https://juejin.cn/post/7198782832177381431):
+     - try_files 主要用于按顺序查找文件或目录，并且依据查找结果决定如何处理请求。
      - $uri 表示当前 location 后面的字符串
 
 ## Nginx 资源

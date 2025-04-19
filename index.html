@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-     [attr-data*="example" i] {
+      [attr-data*="example" i] {
         color: red;
       }
     </style>
@@ -16,4 +16,13 @@
     <div attr-data="example">这个元素的属性也以 attr 开头</div>
     <div class="important">这个元素的属性也以 attr 开头</div>
   </body>
+  <script>
+    function sayHello() {
+      console.log("Hello!");
+      return '11'
+    }
+    // 在 2000 毫秒（即 2 秒）后执行 sayHello 函数
+    const id = setTimeout(sayHello(), 2000);
+    setTimeout(sayHello, 2000);
+  </script>
 </html>
