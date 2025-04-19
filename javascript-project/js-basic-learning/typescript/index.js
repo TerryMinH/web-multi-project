@@ -1,1 +1,0 @@
-var nameList = 12;
