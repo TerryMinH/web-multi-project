@@ -44,7 +44,7 @@ class LinkedList {
     } else {
       // 获取插入节点上一个节点
       let previous = this.getElementAt(position - 1);
-      // 将previous.next值给node,然后将node节点指向previous.next
+      // 插入节点在上一个节点和下一个节点中间
       node.next = previous.next;
       previous.next = node;
     }
@@ -64,8 +64,9 @@ class LinkedList {
     else {
       let previous = this.getElementAt(position - 1);
       console.log("removeAt==>", JSON.parse(JSON.stringify(previous)));
+      // 将中间节点删除，该节点前后节点相连接
       current = previous.next;
-      previous.next = current.next; // 将删除元素的下一个元素指针给删除元素的上一个元素的指针
+      previous.next = current.next;
     }
 
     this.length--;
@@ -90,13 +91,13 @@ class LinkedList {
 
   getElementAt(position) {
     if (position < 0 || position >= this.length) return null;
-    // console.log("head==>", JSON.parse(JSON.stringify(this.head)));
 
-    // 查找指定位置元素
+    // 根据链表特性，通过循环拿到最后一个节点的数据
     let current = this.head;
     for (let i = 0; i < position; i++) {
       current = current.next;
     }
+    console.log("current==>", current);
     return current;
   }
 
