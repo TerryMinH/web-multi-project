@@ -1,0 +1,25 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2025-04-22 07:59:09
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-22 08:02:02
+ * @Description: file not
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Hello from Electron renderer!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    We are using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    and Electron <span id="electron-version"></span>.
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
