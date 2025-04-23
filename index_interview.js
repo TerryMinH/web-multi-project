@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-16 16:54:54
+ * @LastEditTime: 2025-04-22 17:02:32
  * @Description: file not
  */
 
@@ -207,7 +207,7 @@ function batchDownload(urls, limitN, done) {
 // 如何实现这个不报错: 自定义迭代器
 // const [x,y]={x:1,y:2}
 
-// 实现两个大数想加
+// 实现两个大数相加
 function addBigNumbers(a, b) {
   // 确保输入是字符串
   a = a.toString();
@@ -237,7 +237,41 @@ function addBigNumbers(a, b) {
 // 示例
 // console.log(addBigNumbers(1789, 9537));
 
-// 腾讯/前程无忧 这个解构能否执行
+// 腾讯/前程无忧 这个解构能否执行 解答：数组解构语法 [] 只能用于可迭代对象（如数组、字符串、Map、Set等）
+// 普通对象 { a: 1, b: 2 } 默认不是可迭代对象（没有实现 [Symbol.iterator] 方法）
 const [a, b] = { a: 1, b: 2 };
+const iterableObj = {
+  a: 1,
+  b: 2,
+  [Symbol.iterator]: function* () {
+    yield this.a;
+    yield this.b;
+  },
+};
+
+// 实现一个Promise.all
+function myPromiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    let result = [];
+    let completeCounts = 0;
+    let len = promises.length;
+    if (len === 0) {
+      return resolve(result);
+    }
+    promises.forEach((promiseItem) => {
+      promiseItem
+        .then((value) => {
+          result.push(value);
+          completeCounts++;
+          if (completeCounts === len) {
+            return resolve(result);
+          }
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+    });
+  });
+}
 
 // 拼多多 js 实现将菜单一维数组转为树形结构如何实现

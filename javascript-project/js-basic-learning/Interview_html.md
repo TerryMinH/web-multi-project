@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-17 08:33:59
+ * @LastEditTime: 2025-04-22 11:57:03
  * @Description: file not
 -->
 
@@ -15,8 +15,6 @@
   DOMContentLoaded 是在浏览器已经完成 HTML 文档解析、构建好 DOM 树之后就会触发。
 
 ## CSS 常见面试题
-
-- CSS 常考面试题
 
 - link 与@import 区别
 
@@ -61,9 +59,9 @@
 
 - CSS 有哪些选择器
 
-  1.  元素选择器
+  1.  ID 选择器:通过元素的 id 属性来选择元素，ID 名前需要加上 #。一个 HTML 文档中，每个元素的 id 应该是唯一的
   2.  类选择器
-  3.  ID 选择器:通过元素的 id 属性来选择元素，ID 名前需要加上 #。一个 HTML 文档中，每个元素的 id 应该是唯一的
+  3.  元素选择器
   4.  属性选择器:根据元素的属性或属性值来选择元素。
   5.  伪类选择器:用于选择处于特定状态的元素，如链接的不同状态、元素的第一个子元素等。伪类名前需要加上一个冒号 :。
 
@@ -78,51 +76,53 @@
 
   6.  伪元素选择器:用于选择元素的特定部分，如元素的第一个字母、第一行等。伪元素名前需要加上双冒号 ::。
 
-  ```js
-    /* 选择每个 <p> 元素的第一个字母 */
-      p::first-letter {
-          font-size: 24px;
-      }
+      ```js
+        /* 选择每个 <p> 元素的第一个字母 */
+          p::first-letter {
+              font-size: 24px;
+          }
 
-      /* 选择每个 <p> 元素的第一行 */
-      p::first-line {
-          color: brown;
-      }
+          /* 选择每个 <p> 元素的第一行 */
+          p::first-line {
+              color: brown;
+          }
 
-      /* 在每个 <p> 元素的内容前面插入一些文本 */
-      p::before {
-          content: ">> ";
-      }
+          /* 在每个 <p> 元素的内容前面插入一些文本 */
+          p::before {
+              content: ">> ";
+          }
 
-      /* 在每个 <p> 元素的内容后面插入一些文本 */
-      p::after {
-          content: " <<";
-      }
-  ```
+          /* 在每个 <p> 元素的内容后面插入一些文本 */
+          p::after {
+              content: " <<";
+          }
+      ```
 
   7.  组合选择器:通过组合多个选择器来更精确地选择元素。
 
-  ```js
-    /* 后代选择器：选择 <div> 元素内的所有 <p> 元素 */
-    div p {
-        background-color: lightgray;
-    }
+      ```js
+        /* 后代选择器：选择 <div> 元素内的所有 <p> 元素 */
+        div p {
+            background-color: lightgray;
+        }
 
-    /* 子选择器：选择 <div> 元素的直接子元素 <p> */
-    div > p {
-        font-style: italic;
-    }
+        /* 子选择器：选择 <div> 元素的直接子元素 <p> */
+        div > p {
+            font-style: italic;
+        }
 
-    /* 相邻兄弟选择器：选择紧跟在 <h2> 元素后面的 <p> 元素 */
-    h2 + p {
-        color: orange;
-    }
+        /* 相邻兄弟选择器：选择紧跟在 <h2> 元素后面的 <p> 元素 */
+        h2 + p {
+            color: orange;
+        }
 
-    /* 通用兄弟选择器：选择 <h2> 元素后面的所有 <p> 元素 */
-    h2 ~ p {
-        text-decoration: underline;
-    }
-  ```
+        /* 通用兄弟选择器：选择 <h2> 元素后面的所有 <p> 元素 */
+        h2 ~ p {
+            text-decoration: underline;
+        }
+      ```
+
+  8.  CSS 选择器的优先级从高到低依次为：important>内联样式 > ID 选择器 > 类选择器 / 属性选择器 / 伪类选择器(后面会覆盖前面) > 元素选择器 / 伪元素选择器 > 通配符选择器。
 
 - CSS 水平垂直居中有哪些方案
 
@@ -158,3 +158,72 @@
   4.  DPR（device pixel ratio），设备像素比，代表设备像素/设备独立像素的比值，在 JavaScript 中可以通过 window.devicePixelRatio 获取，数值越大越清晰。
   5.  PPI （pixel per inch），每英寸像素，表示每英寸所包含的像素点数目，更确切的说法应该是像素密度。数值越高，说明屏幕能以更高密度显示图像。![PPI计算](https://static.vue-js.com/f734adf0-91f2-11eb-ab90-d9ae814b240d.png)
   6.  屏幕分辨率 “320x480” 描述的是屏幕在水平和垂直方向上所具有的物理像素数量
+
+- table
+
+  - [table 基本概念](https://www.runoob.com/html/html-tables.html)
+
+    - 每个表格均有若干行（由 <tr> 标签定义），每行被分割为若干单元格（由 <td> 标签定义），表格可以包含标题行（<th>）用于定义列的标题：
+
+      - tr：tr 是 table row 的缩写，表示表格的一行。
+      - td：td 是 table data 的缩写，表示表格的数据单元格。
+      - th：th 是 table header 的缩写，表示表格的表头单元格。
+
+        ```html
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <style>
+              table.collapsed {
+                border-collapse: collapse;
+              }
+
+              table.collapsed,
+              table.collapsed th,
+              table.collapsed td {
+                border: 1px solid black;
+              }
+            </style>
+          </head>
+
+          <body>
+            <table class="collapsed">
+              <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+              </tr>
+              <tr>
+                <td>张三</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>李四</td>
+                <td>30</td>
+              </tr>
+            </table>
+          </body>
+        </html>
+        ```
+
+  - display:table 与 table 区别
+    1. table：
+       - HTML 结构：使用表格专用标签(table/tr/td 等)
+       - CSS 控制：部分样式受浏览器默认表格样式影响
+       - 响应式适配：响应式适配较困难、浏览器兼容性好
+    2. display:table：
+       - HTML 结构：使用常规 HTML 元素(div/span 等)
+       - CSS 控制：完全通过 CSS 实现
+       - 响应式适配：更灵活、CSS2.1+ (IE8+)
+    3. 适用场景：
+       - table：
+         - 真实表格数据展示：财务报表、数据统计表、价格对比表
+         - 需要表格原生功能的场景：列宽统一控制（<colgroup>）、复杂的表头/表尾（<thead>/<tfoot>）、单元格合并（colspan/rowspan）
+         - 需要严格对齐的复杂数据：日历视图、时间表、多维度数据交叉表
+       - display:table：
+         - 非表格内容的表格布局：表单布局（标签与输入框对齐）、等高列布局、垂直居中实现
+         - 响应式设计需求

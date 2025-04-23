@@ -1,38 +1,63 @@
-<!--
- * @Author: TerryMin
- * @Date: 2024-10-23 14:30:58
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-20 14:13:31
- * @Description: file not
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      [attr-data*="example" i] {
+      .table-container {
+        display: table;
+        width: 300px;
+        height: 200px;
+        border: 1px solid #ccc;
+      }
+      [data-text="test"] {
         color: red;
       }
+      .table-cell {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        color: aqua;
+      }
     </style>
-    <title>Document</title>
   </head>
+
   <body>
-    <div attr-data="test-example">这个元素的属性以 attr 开头</div>
-    <div attr-data="test Example">这个元素的属性不以 attr 开头</div>
-    <div attr-data="example">这个元素的属性也以 attr 开头</div>
-    <div class="important">这个元素的属性也以 attr 开头</div>
+    <div class="table-container">
+      <div data-text="test" class="table-cell">这是要居中的内容</div>
+    </div>
   </body>
   <script>
-    const getMax = (a, b) => {
-      while (b !== 0) {
-        let temp = b;
-        console.log(b);
-        b = a % b;
-        a = temp;
+    const arr1 = [1, 2, 5, 3];
+    let newArray = arr1.map(
+      (currentValue, index, selfArray) => {
+        console.log(this);
+        return { currentValue: currentValue * 2, index };
+      },
+      { a: 9 }
+    );
+    console.log(newArray);
+
+    const arr2 = [1, 2, 5, 3];
+    Array.prototype.customMap = function (callback, thisArg) {
+      const length = this.length;
+      let newArray = new Array(length);
+      for (let index = 0; index < length; index++) {
+        // 利用hasOwnProperty方法检测空值
+        if (this.hasOwnProperty(index)) {
+          newArray[index] = callback.call(thisArg, this[index], index, this);
+        }
       }
-      return a;
+      return newArray;
     };
-    console.log(getMax(4, 6));
+    let newArray2 = arr2.customMap(
+      (currentValue, index, selfArray) => {
+        console.log(this);
+        return { currentValue: currentValue * 2, index };
+      },
+      { a: 9 }
+    );
+    console.log(newArray2);
   </script>
 </html>
