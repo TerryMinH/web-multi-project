@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-23 11:36:53
+ * @LastEditTime: 2025-04-23 13:45:28
  * @Description: file not
 -->
 
@@ -404,38 +404,38 @@
      - Canvas、SVG
      - Echarts、Threejs
      - D3.js、WebGL
-  8. AI 大模型 Agent 与前端结合使用。
-  9. 设计系统与架构思维：
+  8. 设计系统与架构思维：
 
      - 微前端
      - 微内核
      - monorepo 架构
      - 面向切面编程、函数式编程、面向对象编程思想
-     - 低代码平台/无代码
+     - 低代码/无代码
      - 设计模式
      - 算法
 
-  10. 工程化构建和后端开发(全栈)：
+  9. 工程化构建和后端开发(全栈)：
 
-      - 组件库开发、性能监控系统
-      - CI/CD： CI 脚手架命令、CI(docker K8s)、命令行工具
-      - Webpack、Vite 打包工具原理
-      - node（基建/脚手架、BFF 开发）：Cluster、Worker、子进程、process
-      - 前端工具链：基于 Rust(Oxc、Rsbuild)趋势
+     - 组件库开发、性能监控系统
+     - CI/CD： CI 脚手架命令、CI(docker K8s)、命令行工具
+     - Webpack、Vite 打包工具原理
+     - node（基建/脚手架、BFF 开发）：Cluster、Worker、子进程、process
+     - 前端工具链：基于 Rust(Oxc、Rsbuild)趋势
 
-  11. 后端与全栈知识
+  10. 后端与全栈知识
 
       - Node.js：掌握 Node.js 开发，能够搭建 BFF（Backend for Frontend）层。
       - Nodejs 框架：Express、Koa、Nestjs
       - 数据库基础：了解 SQL 和 NoSQL 数据库的基本使用。
       - DevOps 基础：了解容器化（Docker）、云服务（AWS、Azure）等。
 
-  12. 浏览器与网络
+  11. 浏览器与网络
 
       - 浏览器原理：理解浏览器渲染机制、事件循环、V8 引擎等。
       - 网络协议：熟悉 HTTP/HTTPS、WebSocket、TCP/IP 等协议。
       - 安全知识：了解 XSS、CSRF、CORS 等前端安全问题及解决方案。
 
+  12. AI 大模型 Agent 与前端结合使用。
   13. 前沿技术与趋势
 
       - WebAssembly：了解 WebAssembly 的应用场景。
