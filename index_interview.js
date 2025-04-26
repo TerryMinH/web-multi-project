@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2024-10-23 13:44:20
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-22 17:02:32
+ * @LastEditTime: 2025-04-25 16:01:28
  * @Description: file not
  */
 
@@ -249,7 +249,7 @@ const iterableObj = {
   },
 };
 
-// 实现一个Promise.all
+// 拼多多 实现一个Promise.all
 function myPromiseAll(promises) {
   return new Promise((resolve, reject) => {
     let result = [];
@@ -274,4 +274,97 @@ function myPromiseAll(promises) {
   });
 }
 
-// 拼多多 js 实现将菜单一维数组转为树形结构如何实现
+// **拼多多 js 实现将菜单一维数组转为树形结构如何实现((它的作用是将一个 扁平化的数组 转换成 嵌套的树形结构数据))**
+function buildTreeOptimized(flatArray) {
+  const map = {};
+  const tree = [];
+
+  // 首先将所有节点存入映射表
+  flatArray.forEach((item) => {
+    map[item.id] = { ...item, children: [] };
+  });
+
+  // 构建树结构
+  flatArray.forEach((item) => {
+    if (item.parentId === null) {
+      tree.push(map[item.id]);
+    } else {
+      if (map[item.parentId]) {
+        map[item.parentId].children.push(map[item.id]);
+      }
+    }
+  });
+
+  return tree;
+}
+const flatMenu = [
+  { id: 1, name: "首页", parentId: null },
+  { id: 2, name: "产品", parentId: null },
+  { id: 3, name: "产品1", parentId: 2 },
+  { id: 4, name: "产品2", parentId: 2 },
+  { id: 5, name: "关于", parentId: null },
+  { id: 6, name: "联系方式", parentId: 5 },
+  { id: 7, name: "产品1-1", parentId: 3 },
+];
+const menuTree = buildTreeOptimized(flatMenu);
+// console.log(JSON.stringify(menuTree, null, 2));
+
+// 武汉一触即通数码科技(外企)如何将嵌套对象生成指定的字符串(它的作用是将一个 嵌套的树形结构数据 转换成 扁平化的路径数组)
+function generatePaths(data, currentPath = "") {
+  let result = [];
+  for (const item of data) {
+    const newPath = currentPath
+      ? `${currentPath}/${item.name}`
+      : `${item.name}`;
+    if (!item.child) {
+      result.push(newPath);
+    } else {
+      result = result.concat(generatePaths(item.child, newPath));
+    }
+  }
+  return result;
+}
+const nestArr = [
+  {
+    name: "home",
+    child: [
+      {
+        name: "README.md",
+      },
+      {
+        name: "index.html",
+      },
+      {
+        name: "asserts",
+        child: [
+          {
+            name: "logo.png",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "test",
+    child: [
+      {
+        name: "unit-test",
+        child: [
+          {
+            name: "home",
+            child: [
+              {
+                name: "login",
+                child: [
+                  {
+                    name: "test.js",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];

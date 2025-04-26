@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-04-19 10:22:01
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-22 14:00:10
+ * @LastEditTime: 2025-04-25 16:56:43
  * @Description: file not
  */
 // 自定义reduce方法
@@ -34,4 +34,26 @@ Array.prototype.customMap = function (callback, thisArg) {
     }
   }
   return newArray;
+};
+
+Array.prototype.customForEach = function (callback, thisArg) {
+  // 检查this是否为null或undefined
+  if (this == null) {
+    throw new TypeError(
+      "Array.prototype.customForEach called on null or undefined"
+    );
+  }
+  // 检查callback是否为函数
+  if (typeof callback !== "function") {
+    throw new TypeError(callback + ` is not a function`);
+  }
+  // 将this转换为对象
+  const array = Object(this);
+  // 无符号右移确保为整数
+  const length = array.length >>> 0;
+  for (let i = 0; i < length; i++) {
+    if (i in array) {
+      callback.apply(thisArg, array[i], i, array);
+    }
+  }
 };

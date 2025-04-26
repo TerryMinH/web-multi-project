@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-03-20 17:09:49
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-22 11:57:03
+ * @LastEditTime: 2025-04-24 18:03:28
  * @Description: file not
 -->
 
@@ -156,7 +156,7 @@
   2.  设备像素（Device Pixel）：这是物理概念，指的是设备屏幕上的最小物理显示单元，是屏幕上实际存在的像素点。
   3.  设备独立像素（Device Independent Pixel，DIP 即 CSS 像素）：这属于逻辑概念，它是一种抽象的像素单位，用于在代码里定义元素的尺寸和位置。
   4.  DPR（device pixel ratio），设备像素比，代表设备像素/设备独立像素的比值，在 JavaScript 中可以通过 window.devicePixelRatio 获取，数值越大越清晰。
-  5.  PPI （pixel per inch），每英寸像素，表示每英寸所包含的像素点数目，更确切的说法应该是像素密度。数值越高，说明屏幕能以更高密度显示图像。![PPI计算](https://static.vue-js.com/f734adf0-91f2-11eb-ab90-d9ae814b240d.png)
+  5.  PPI （pixel per inch），每英寸像素，表示每英寸所包含的像素点数目，更确切的说法应该是像素密度。数值越高，说明屏幕能以更高密度显示图像。
   6.  屏幕分辨率 “320x480” 描述的是屏幕在水平和垂直方向上所具有的物理像素数量
 
 - table

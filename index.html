@@ -1,3 +1,10 @@
+<!--
+ * @Author: TerryMin
+ * @Date: 2024-10-23 14:30:58
+ * @LastEditors: TerryMin
+ * @LastEditTime: 2025-04-25 15:46:07
+ * @Description: file not
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,35 +36,66 @@
     </div>
   </body>
   <script>
-    const arr1 = [1, 2, 5, 3];
-    let newArray = arr1.map(
-      (currentValue, index, selfArray) => {
-        console.log(this);
-        return { currentValue: currentValue * 2, index };
+    const nestArr = [
+      {
+        name: "home",
+        child: [
+          {
+            name: "README.md",
+          },
+          // {
+          //   name: "index.html",
+          // },
+          {
+            name: "asserts",
+            child: [
+              {
+                name: "logo.png",
+              },
+            ],
+          },
+        ],
       },
-      { a: 9 }
-    );
-    console.log(newArray);
+      {
+        name: "test",
+        child: [
+          {
+            name: "unit-test",
+            // child: [
+            //   {
+            //     name: "home",
+            //     child: [
+            //       {
+            //         name: "login",
+            //         child: [
+            //           {
+            //             name: "test.js",
+            //           },
+            //         ],
+            //       },
+            //     ],
+            //   },
+            // ],
+          },
+        ],
+      },
+    ];
 
-    const arr2 = [1, 2, 5, 3];
-    Array.prototype.customMap = function (callback, thisArg) {
-      const length = this.length;
-      let newArray = new Array(length);
-      for (let index = 0; index < length; index++) {
-        // 利用hasOwnProperty方法检测空值
-        if (this.hasOwnProperty(index)) {
-          newArray[index] = callback.call(thisArg, this[index], index, this);
+    function generatePath(arr, newPath = "") {
+      let result = [];
+      for (item of arr) {
+        const currentPath = newPath
+          ? `${newPath}/${item.name}`
+          : `/${item.name}`;
+        if (item.child) {
+          console.log('result',result);
+          result = result.concat(generatePath(item.child, currentPath));
+        } else {
+          result.push(currentPath);
         }
       }
-      return newArray;
-    };
-    let newArray2 = arr2.customMap(
-      (currentValue, index, selfArray) => {
-        console.log(this);
-        return { currentValue: currentValue * 2, index };
-      },
-      { a: 9 }
-    );
-    console.log(newArray2);
+      return result;
+    }
+    console.log(generatePath(nestArr));
   </script>
 </html>

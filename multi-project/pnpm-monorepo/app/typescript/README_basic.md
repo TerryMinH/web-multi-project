@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2022-08-19 11:02:06
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-24 16:21:32
+ * @LastEditTime: 2025-04-26 07:27:17
  * @Description: file not
 -->
 
@@ -313,40 +313,6 @@
     type Second = Tuple[1]; // number
     type AllElements = Tuple[number]; // string | number | boolean
     ```
-
-- InstanceType<T>(实例类型)
-
-  ```ts
-  class Person {
-    name: string;
-    age: number;
-    weight: number;
-    gender: "man" | "women";
-
-    constructor(name: string, age: number, gender: "man" | "women") {
-      this.name = name;
-      this.age = age;
-      this.gender = gender;
-    }
-  }
-
-  type Instance = InstanceType<typeof Person>; // Person
-
-  const params: Instance = {
-    name: "Jack",
-    age: 20,
-    weight: 120,
-    gender: "man",
-  };
-  ```
-
-- 函数返回值类型(ReturnType<T>)
-
-  ```ts
-  type FunctionType = (name: string, age: number) => boolean | string;
-
-  type FunctionReturnType = ReturnType<FunctionType>; // boolean | string
-  ```
 
 - 类型守卫
 
