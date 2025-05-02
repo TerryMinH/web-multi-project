@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2025-01-07 11:13:52
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-23 13:45:28
+ * @LastEditTime: 2025-04-28 10:26:21
  * @Description: file not
 -->
 
@@ -118,7 +118,7 @@
         return a + b + c;
       }
 
-      // 柯里化版本
+      // 柯里化函数
       function curriedAdd(a) {
         return function (b) {
           return function (c) {
@@ -132,7 +132,7 @@
       const addOneAndTwo = addOne(2);
       addOneAndTwo(3); // 6
 
-      // 高阶函数 + 柯里化
+      // 将高阶函数 转为 柯里化函数
       function curry(fn) {
         return function curried(...args) {
           if (args.length >= fn.length) {

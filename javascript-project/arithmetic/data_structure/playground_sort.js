@@ -2,7 +2,7 @@
  * @Author: TerryMin
  * @Date: 2023-09-18 13:50:26
  * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-20 09:53:25
+ * @LastEditTime: 2025-05-01 13:32:59
  * @Description: file not
  */
 let arr = [2, 9, 6, 7, 4, 3, 1, 7, 0, -1, -2];
@@ -43,6 +43,7 @@ function quickSort(arr) {
 
 // 插入排序
 function insertSort(arr) {
+  console.log(2222);
   var len = arr.length;
   var preIndex, current;
   for (var i = 1; i < len; i++) {
@@ -56,6 +57,8 @@ function insertSort(arr) {
   }
   return arr;
 }
+
+insertSort(arr);
 
 // 希尔排序
 function shellSort(arr) {
