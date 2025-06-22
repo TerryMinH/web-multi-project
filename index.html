@@ -1,101 +1,275 @@
-<!--
- * @Author: TerryMin
- * @Date: 2024-10-23 14:30:58
- * @LastEditors: TerryMin
- * @LastEditTime: 2025-04-25 15:46:07
- * @Description: file not
--->
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文件预览器</title>
     <style>
-      .table-container {
-        display: table;
-        width: 300px;
-        height: 200px;
-        border: 1px solid #ccc;
+      .preview-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
       }
-      [data-text="test"] {
-        color: red;
-      }
-      .table-cell {
-        display: table-cell;
-        text-align: center;
-        vertical-align: middle;
+      canvas {
+        max-width: 100%;
         border: 1px solid #ddd;
-        color: aqua;
+        display: block;
+        margin: 10px 0;
       }
     </style>
   </head>
-
   <body>
-    <div class="table-container">
-      <div data-text="test" class="table-cell">这是要居中的内容</div>
-    </div>
-  </body>
-  <script>
-    const nestArr = [
-      {
-        name: "home",
-        child: [
-          {
-            name: "README.md",
-          },
-          // {
-          //   name: "index.html",
-          // },
-          {
-            name: "asserts",
-            child: [
-              {
-                name: "logo.png",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: "test",
-        child: [
-          {
-            name: "unit-test",
-            // child: [
-            //   {
-            //     name: "home",
-            //     child: [
-            //       {
-            //         name: "login",
-            //         child: [
-            //           {
-            //             name: "test.js",
-            //           },
-            //         ],
-            //       },
-            //     ],
-            //   },
-            // ],
-          },
-        ],
-      },
-    ];
+    <div class="preview-container">
+      <h2>文件预览</h2>
 
-    function generatePath(arr, newPath = "") {
-      let result = [];
-      for (item of arr) {
-        const currentPath = newPath
-          ? `${newPath}/${item.name}`
-          : `/${item.name}`;
-        if (item.child) {
-          console.log('result',result);
-          result = result.concat(generatePath(item.child, currentPath));
-        } else {
-          result.push(currentPath);
+      <div>
+        <label>
+          <input type="radio" name="fileType" value="remotePdf" checked />
+          远程PDF
+          <input
+            type="text"
+            id="remoteUrl"
+            placeholder="输入PDF URL"
+            style="width: 300px"
+          />
+        </label>
+        <button id="loadRemote">加载</button>
+      </div>
+
+      <div>
+        <label>
+          <input type="radio" name="fileType" value="localPdf" /> 本地PDF
+          <input type="file" id="localPdf" accept="application/pdf" />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="radio" name="fileType" value="localImage" /> 本地图片
+          <input type="file" id="localImage" accept="image/*" />
+        </label>
+      </div>
+
+      <div id="previewArea">
+        <canvas id="previewCanvas"></canvas>
+      </div>
+      <div id="pageInfo"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+      // 设置 PDF.js worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js";
+
+      const previewCanvas = document.getElementById("previewCanvas");
+      const pageInfo = document.getElementById("pageInfo");
+      const remoteUrlInput = document.getElementById("remoteUrl");
+      const loadRemoteBtn = document.getElementById("loadRemote");
+      const localPdfInput = document.getElementById("localPdf");
+      const localImageInput = document.getElementById("localImage");
+
+      // 加载远程PDF
+      loadRemoteBtn.addEventListener("click", function () {
+        const url = remoteUrlInput.value.trim();
+        if (!url) return;
+
+        clearPreview();
+        renderRemotePDF(url, previewCanvas)
+          .then((numPages) => {
+            pageInfo.textContent = `PDF 共 ${numPages} 页`;
+          })
+          .catch((error) => {
+            pageInfo.textContent = `错误: ${error.message}`;
+          });
+      });
+
+      // 加载本地PDF
+      localPdfInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        clearPreview();
+        renderLocalPDF(file, previewCanvas)
+          .then((numPages) => {
+            pageInfo.textContent = `PDF 共 ${numPages} 页`;
+          })
+          .catch((error) => {
+            pageInfo.textContent = `错误: ${error.message}`;
+          });
+      });
+
+      // 加载本地图片
+      localImageInput.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        clearPreview();
+        renderImage(file, previewCanvas)
+          .then(() => {
+            pageInfo.textContent = "图片预览";
+          })
+          .catch((error) => {
+            pageInfo.textContent = `错误: ${error.message}`;
+          });
+      });
+
+      function clearPreview() {
+        const ctx = previewCanvas.getContext("2d");
+        ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+        previewCanvas.width = 0;
+        previewCanvas.height = 0;
+        pageInfo.textContent = "";
+      }
+
+      // 之前定义的 renderRemotePDF, renderLocalPDF 和 renderImage 函数
+      async function renderRemotePDF(url, canvasElement) {
+        try {
+          // 加载 PDF 文档
+          const loadingTask = pdfjsLib.getDocument(url);
+          const pdf = await loadingTask.promise;
+
+          // 获取第一页
+          const page = await pdf.getPage(1);
+
+          // 准备 canvas
+          const context = canvasElement.getContext("2d");
+
+          // 设置视图 (根据容器宽度自动缩放)
+          const containerWidth = canvasElement.parentElement.clientWidth;
+          const viewport = page.getViewport({
+            scale: containerWidth / page.getViewport({ scale: 1 }).width,
+          });
+
+          canvasElement.height = viewport.height;
+          canvasElement.width = viewport.width;
+
+          // 渲染页面
+          await page.render({
+            canvasContext: context,
+            viewport: viewport,
+          }).promise;
+
+          return pdf.numPages; // 返回总页数
+        } catch (error) {
+          console.error("PDF 加载或渲染错误:", error);
+          throw error;
         }
       }
-      return result;
-    }
-    console.log(generatePath(nestArr));
-  </script>
+
+      // 使用示例
+      renderRemotePDF(
+        "https://example.com/document.pdf",
+        document.getElementById("pdfCanvas")
+      ).then((numPages) => console.log(`PDF 共 ${numPages} 页`));
+
+      async function renderLocalPDF(file, canvasElement) {
+        return new Promise((resolve, reject) => {
+          if (!file || file.type !== "application/pdf") {
+            reject(new Error("请选择有效的 PDF 文件"));
+            return;
+          }
+
+          const fileReader = new FileReader();
+
+          fileReader.onload = async function () {
+            try {
+              const typedArray = new Uint8Array(this.result);
+
+              // 加载 PDF 文档
+              const loadingTask = pdfjsLib.getDocument(typedArray);
+              const pdf = await loadingTask.promise;
+
+              // 获取第一页
+              const page = await pdf.getPage(1);
+
+              // 准备 canvas
+              const context = canvasElement.getContext("2d");
+
+              // 设置视图
+              const containerWidth = canvasElement.parentElement.clientWidth;
+              const viewport = page.getViewport({
+                scale: containerWidth / page.getViewport({ scale: 1 }).width,
+              });
+
+              canvasElement.height = viewport.height;
+              canvasElement.width = viewport.width;
+
+              // 渲染页面
+              await page.render({
+                canvasContext: context,
+                viewport: viewport,
+              }).promise;
+
+              resolve(pdf.numPages);
+            } catch (error) {
+              reject(error);
+            }
+          };
+
+          fileReader.onerror = reject;
+          fileReader.readAsArrayBuffer(file);
+        });
+      }
+
+      // 使用示例
+      document
+        .getElementById("pdfInput")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          renderLocalPDF(file, document.getElementById("pdfCanvas"))
+            .then((numPages) => console.log(`PDF 共 ${numPages} 页`))
+            .catch((error) => console.error(error.message));
+        });
+
+      function renderImage(file, canvasElement) {
+        return new Promise((resolve, reject) => {
+          if (!file || !file.type.match("image.*")) {
+            reject(new Error("请选择有效的图片文件"));
+            return;
+          }
+
+          const img = new Image();
+          const fileReader = new FileReader();
+
+          fileReader.onload = function (e) {
+            img.onload = function () {
+              // 计算缩放比例以适应容器
+              const container = canvasElement.parentElement;
+              const scale = Math.min(
+                container.clientWidth / img.width,
+                container.clientHeight / img.height
+              );
+
+              canvasElement.width = img.width * scale;
+              canvasElement.height = img.height * scale;
+
+              const ctx = canvasElement.getContext("2d");
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                canvasElement.width,
+                canvasElement.height
+              );
+              resolve();
+            };
+            img.onerror = reject;
+            img.src = e.target.result;
+          };
+
+          fileReader.onerror = reject;
+          fileReader.readAsDataURL(file);
+        });
+      }
+
+      // 使用示例
+      document
+        .getElementById("imageInput")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          renderImage(file, document.getElementById("imageCanvas"))
+            .then(() => console.log("图片渲染完成"))
+            .catch((error) => console.error(error.message));
+        });
+    </script>
+  </body>
 </html>

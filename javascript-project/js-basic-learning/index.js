@@ -35,3 +35,19 @@ setDelay("我是字符串")
   .catch((err) => {
     console.log(11, err); // 输出错误：“参数必须是number类型”
   });
+Array.prototype.customReduce = function (callback, initialValue) {
+  const array = this;
+  let accumulator = initialValue;
+  let startIndex = 0;
+  if (initialValue === undefined) {
+    if (array.length === 0) {
+      return new TypeError("reduce of empty array with no initial value");
+    }
+    accumulator = array[0];
+    startIndex = 1;
+  }
+  for (let i = startIndex; i < array.length; i++) {
+    accumulator = callback(accumulator, array[i], i, array);
+  }
+  return accumulator;
+};
