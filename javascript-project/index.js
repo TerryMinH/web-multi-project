@@ -5,17 +5,15 @@
  * @LastEditTime: 2025-03-11 10:12:03
  * @Description: file not
  */
-const instance1 = new Promise((resolve, reject) => {
-  return setTimeout(() => {
-    resolve("myPromise");
-  }, 1000);
-});
-instance1
-  .then((res) => {
-    return new Promise((resolve, reject) => {
-      resolve(`resolve1 ${res}`);
-    });
-  })
-  .then((res2) => {
-    console.log(res2);
-  });
+const flowerbed = [1, 0, 0, 0, 1],
+  n = 1;
+var canPlaceFlowers = function (flowerbed, n) {
+  const total = flowerbed.reduce((acc, current, index, array) => {
+    if (current === 0 && array[index + 1] === 0 && array[index + 2] === 0) {
+      array[index + 1] = 1;
+      return (acc = acc + 1);
+    }
+  }, 0);
+  console.log(total);
+  return total === n;
+};
